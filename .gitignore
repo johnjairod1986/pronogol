@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+.next/
+.expo/
+dist/
+*.tsbuildinfo
+
+# Entorno
+.env
+.env.*
+!.env.example
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Base de datos
+*.db
+*.sqlite
