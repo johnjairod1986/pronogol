@@ -15,7 +15,7 @@
 | **Backend** | Python / FastAPI | Pendiente |
 | **Frontend Web** | Next.js | Pendiente |
 | **App Móvil** | React Native (Expo) | Pendiente |
-| **Motor IA** | Python (DeepSeek/Groq) | Pendiente |
+| **Motor IA** | DeepSeek (API propia) — ÚNICO modelo autorizado | Pendiente |
 | **Pagos** | Stripe | Pendiente |
 | **Sincronización** | n8n (VPS) | Pendiente |
 | **Monitoreo** | Sentry | Pendiente |
