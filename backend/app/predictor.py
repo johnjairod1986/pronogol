@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 import requests
 
-DATA_DIR = os.environ.get("PRONOGOL_DATA_DIR", "/docker/pronogol/data")
+DATA_DIR = os.environ.get("PRONOGOL_DATA_DIR", "/app/data")
 FOOTYSTATS_KEY = "1abc780710040e043b218e141869d4b664aac69ed8b97ff98dc96da9ca420f72"
 FOOTYSTATS_URL = "https://api.football-data-api.com"
 SEASON_ID = "16494"  # World Cup 2026

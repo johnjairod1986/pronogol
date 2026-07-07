@@ -15,7 +15,7 @@ app = FastAPI(title="PronoGol API", description="API de pronosticos de futbol co
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 supabase: Client | None = None
-DATA_DIR = "/docker/pronogol/data"
+DATA_DIR = os.environ.get("PRONOGOL_DATA_DIR", "/app/data")
 
 # --- Models ---
 class GoogleAuth(BaseModel):
