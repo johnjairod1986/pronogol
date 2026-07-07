@@ -21,8 +21,7 @@ cp backend/Dockerfile /docker/pronogol/Dockerfile
 echo "🐳 Rebuilding backend container..."
 cd /docker/pronogol
 docker build -t pronogol-api:latest .
-docker stop n8n-pronogol-api-1 2>/dev/null || true
-docker rm n8n-pronogol-api-1 2>/dev/null || true
+docker rm -f n8n-pronogol-api-1 2>/dev/null || true
 docker run -d \
   --name n8n-pronogol-api-1 \
   --restart unless-stopped \
@@ -33,8 +32,7 @@ docker run -d \
 echo "🐳 Rebuilding frontend container..."
 cd /docker/pronogol-web
 docker build -t pronogol-web:latest .
-docker stop n8n-pronogol-web-1 2>/dev/null || true
-docker rm n8n-pronogol-web-1 2>/dev/null || true
+docker rm -f n8n-pronogol-web-1 2>/dev/null || true
 docker run -d \
   --name n8n-pronogol-web-1 \
   --restart unless-stopped \
