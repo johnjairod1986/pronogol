@@ -54,9 +54,10 @@ a{color:var(--accent);text-decoration:none}
 
 /* League Group */
 .league-group{margin-bottom:32px}
-.league-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:8px 0}
-.league-logo{width:24px;height:24px;border-radius:4px}
-.league-name{font-size:15px;font-weight:600;color:var(--text2)}
+.league-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:10px 0 4px;position:sticky;top:56px;background:var(--bg);z-index:2}
+.league-flag{font-size:18px;line-height:1}
+.league-name{font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;flex:1}
+.league-count{font-size:11px;color:var(--text2);background:var(--bg3);padding:2px 8px;border-radius:10px}
 
 /* Match Card */
 .match-card{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:4px;transition:all .15s;cursor:pointer;min-height:54px}
@@ -70,6 +71,7 @@ a{color:var(--accent);text-decoration:none}
 .match-teams{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
 .match-team{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .match-team-logo{width:16px;height:16px;border-radius:50%;flex-shrink:0;object-fit:contain}
+.team-initial{width:16px;height:16px;border-radius:50%;background:var(--bg3);display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text2);flex-shrink:0}
 
 /* Prediction pill */
 .match-prediction{display:flex;align-items:center;gap:6px;flex-shrink:0}
@@ -581,10 +583,39 @@ function renderPredictions(predictions) {
   // Group by league
   const groups = {};
   for (const p of predictions) {
-    const key = p.league || 'Otros';
-    if (!groups[key]) groups[key] = {league:key, logo:'', matches:[]};
+    const key = p.league || 'Otra liga';
+    if (!groups[key]) groups[key] = {league:key, league_id:p.league_id, matches:[]};
     groups[key].matches.push(p);
-    if (p.league_logo) groups[key].logo = p.league_logo;
+  }
+  
+  // Emoji flags by league name
+  const leagueFlags = {
+    'world cup': '🏆', 'mundial': '🏆',
+    'premier league': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'premier': '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    'la liga': '🇪🇸', 'laliga': '🇪🇸',
+    'serie a': '🇮🇹',
+    'bundesliga': '🇩🇪',
+    'ligue 1': '🇫🇷',
+    'chile': '🇨🇱', 'copachile': '🇨🇱',
+    'brasil': '🇧🇷', 'brasileirão': '🇧🇷',
+    'argentina': '🇦🇷',
+    'finland': '🇫🇮', 'veikkausliiga': '🇫🇮',
+    'colombia': '🇨🇴',
+    'mexico': '🇲🇽', 'mexican': '🇲🇽',
+    'usa': '🇺🇸', 'mls': '🇺🇸',
+    'portugal': '🇵🇹',
+    'netherlands': '🇳🇱', 'eredivisie': '🇳🇱',
+    'turkey': '🇹🇷',
+    'greece': '🇬🇷',
+    'japan': '🇯🇵', 'jleague': '🇯🇵',
+    'australia': '🇦🇺', 'aleague': '🇦🇺',
+  };
+  function getLeagueFlag(league) {
+    const l = league.toLowerCase().replace(/[^a-z0-9]/g, '');
+    for (const [key, flag] of Object.entries(leagueFlags)) {
+      if (l.includes(key)) return flag;
+    }
+    return '⚽';
   }
   
   let html = '';
@@ -593,7 +624,9 @@ function renderPredictions(predictions) {
   for (const [leagueName, group] of Object.entries(groups)) {
     html += `<div class="league-group">
       <div class="league-header">
+        <span class="league-flag">${getLeagueFlag(leagueName)}</span>
         <span class="league-name">${leagueName}</span>
+        <span class="league-count">${group.matches.length}</span>
       </div>`;
     
     for (const m of group.matches) {
@@ -650,11 +683,11 @@ function renderPredictions(predictions) {
         <div class="match-time ${statusClass}">${statusText}</div>
         <div class="match-teams">
           <div class="match-team">
-            ${m.home_logo ? `<img class="match-team-logo" src="${m.home_logo}" alt="">` : ''}
+            ${m.home_logo ? `<img class="match-team-logo" src="${m.home_logo}" alt="" onerror="this.style.display='none'">` : ''}
             ${m.home_team}
           </div>
           <div class="match-team">
-            ${m.away_logo ? `<img class="match-team-logo" src="${m.away_logo}" alt="">` : ''}
+            ${m.away_logo ? `<img class="match-team-logo" src="${m.away_logo}" alt="" onerror="this.style.display='none'">` : ''}
             ${m.away_team}
           </div>
         </div>
@@ -694,16 +727,16 @@ function filterPredictions(filter, btn) {
   currentFilter = filter;
   
   let filtered = [...predictionsData];
-  if (filter === '1x2') filtered = filtered.filter(m => m.markets?.match_winner?.trust >= 5);
-  else if (filter === 'btts') filtered = filtered.filter(m => m.markets?.btts?.trust >= 4);
+  if (filter === '1x2') filtered = filtered.filter(m => m.markets?.match_winner?.trust >= 3);
+  else if (filter === 'btts') filtered = filtered.filter(m => m.markets?.btts?.trust >= 3);
   else if (filter === 'ou') {
     filtered = filtered.filter(m => 
-      (m.markets?.['over_under_1.5']?.trust >= 5) ||
-      (m.markets?.['over_under_2.5']?.trust >= 5) ||
-      (m.markets?.['over_under_3.5']?.trust >= 5)
+      (m.markets?.['over_under_1.5']?.trust >= 3) ||
+      (m.markets?.['over_under_2.5']?.trust >= 3) ||
+      (m.markets?.['over_under_3.5']?.trust >= 3)
     );
   }
-  else if (filter === 'dc') filtered = filtered.filter(m => m.markets?.double_chance?.trust >= 5);
+  else if (filter === 'dc') filtered = filtered.filter(m => m.markets?.double_chance?.trust >= 3);
   else if (filter === 'top') filtered = filtered.filter(m => (m.best_pick?.confidence || 0) >= 7);
   
   renderPredictions(filtered);

@@ -151,9 +151,9 @@ def generate_predictions():
         over_25_pct = min(round(50 + (total_xg - 2.5) * 25), 88)
         btts_yes_pct = min(round(40 + (total_xg - 2.0) * 20), 80)
         
-        over_15_pct = max(over_15_pct, 30)
-        over_25_pct = max(over_25_pct, 15)
-        btts_yes_pct = max(btts_yes_pct, 20)
+        over_15_pct = max(over_15_pct, 35)
+        over_25_pct = max(over_25_pct, 20)
+        btts_yes_pct = max(btts_yes_pct, 35)
         
         pred = {
             "match_id": str(match.get("id", "")),
@@ -187,19 +187,19 @@ def generate_predictions():
                     "yes_pct": round(btts_yes_pct),
                     "no_pct": round(100 - btts_yes_pct),
                     "prediction": "Si" if btts_yes_pct >= 50 else "No",
-                    "trust": min(max(round(btts_yes_pct / 11), 3), 8),
+                    "trust": min(max(round(btts_yes_pct / 10), 4), 8),
                 },
                 "over_under_1.5": {
                     "over_pct": round(over_15_pct),
                     "under_pct": round(100 - over_15_pct),
                     "prediction": ">1.5" if over_15_pct >= 55 else "<1.5",
-                    "trust": min(max(round(over_15_pct / 13), 3), 9),
+                    "trust": min(max(round(over_15_pct / 12), 4), 9),
                 },
                 "over_under_2.5": {
                     "over_pct": round(over_25_pct),
                     "under_pct": round(100 - over_25_pct),
                     "prediction": ">2.5" if over_25_pct >= 50 else "<2.5",
-                    "trust": min(max(round(over_25_pct / 13), 2), 8),
+                    "trust": min(max(round(over_25_pct / 12), 3), 8),
                 },
             },
             "best_pick": {"market": "", "prediction": "", "confidence": 0},
