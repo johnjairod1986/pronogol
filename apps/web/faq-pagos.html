@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Facturación — PronoGol</title>
+  <link rel="icon" href="/logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:#0b0b1a;color:#e8e8f0;min-height:100vh;line-height:1.7}
+    .wrap{max-width:800px;margin:0 auto;padding:40px 20px 80px}
+    h1{font-size:2rem;font-weight:800;background:linear-gradient(135deg,#00ff87,#60efff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+    .updated{color:#8888bb;font-size:0.85rem;margin-bottom:30px}
+    .faq-item{border-bottom:1px solid rgba(255,255,255,0.06);padding:16px 0}
+    .faq-q{font-size:0.95rem;font-weight:600;color:#e8e8f0;margin-bottom:6px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q::after{content:'+';color:#00ff87;font-size:1.2rem;font-weight:700}
+    .faq-q.open::after{content:'−'}
+    .faq-a{font-size:0.88rem;color:#c8c8e0;line-height:1.6;display:none;padding-top:6px}
+    .faq-a.show{display:block}
+    .back{display:inline-flex;align-items:center;gap:6px;color:#8888bb;text-decoration:none;font-size:0.85rem;margin-bottom:20px}
+    .back:hover{color:#00ff87}
+    hr{border:none;border-top:1px solid rgba(255,255,255,0.06);margin:30px 0}
+    @media(max-width:768px){h1{font-size:1.5rem}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="/" class="back">← Volver a PronoGol</a>
+  <h1>FAQ — Facturación y Pagos</h1>
+  <p class="updated">Última actualización: 6 de julio de 2026</p>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">¿Qué métodos de pago aceptan?</div>
+    <div class="faq-a">Próximamente aceptaremos pagos con tarjeta de crédito/débito (Visa, Mastercard) y posiblemente Nequi o transferencias bancarias en Colombia. Estamos integrando Stripe como procesador de pagos.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">¿En qué moneda se cobra?</div>
+    <div class="faq-a">Todos los cobros se realizan en <strong>pesos colombianos (COP)</strong>. Si tu tarjeta está en otra moneda, tu banco hará la conversión al tipo de cambio que aplique.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">¿Cómo funciona el plan Free?</div>
+    <div class="faq-a">El plan Free no tiene costo. Incluye resultados del día, estadísticas básicas y 3 pronósticos por semana. No requiere registrar tarjeta de crédito. Al registrarte con email, aceptas recibir comunicaciones promocionales (si marcaste la opción).</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">¿Cómo cancelo mi suscripción?</div>
+    <div class="faq-a">Puedes cancelar desde <strong>Perfil → Suscripción → Cancelar</strong>. La cancelación es inmediata y tu acceso premium continúa hasta el final del período ya pagado. No hay reembolsos por cancelación anticipada (ver <a href="/reembolsos.html" style="color:#00ff87">Política de Reembolsos</a>).</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">¿Me pueden reembolsar si los pronósticos fallan?</div>
+    <div class="faq-a"><strong>No.</strong> Los pronósticos son predicciones basadas en inteligencia artificial y datos estadísticos. No garantizamos resultados. No ofrecemos reembolsos basados en el rendimiento de los pronósticos. Al adquirir una suscripción, entiendes y aceptas esto.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">¿Recibiré un comprobante de pago?</div>
+    <div class="faq-a">Sí. Después de cada pago exitoso, recibirás un comprobante en el correo electrónico asociado a tu cuenta.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">¿Puedo cambiar de plan mensual a anual?</div>
+    <div class="faq-a">Sí, puedes cambiar en cualquier momento. El cambio aplicará al finalizar tu período mensual actual. El cobro del plan anual se hará en ese momento.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">¿Qué pasa si no pago?</div>
+    <div class="faq-a">Si tu pago falla (tarjeta vencida, sin fondos), tu cuenta pasará automáticamente al plan Free al finalizar el período pagado. Recibirás un aviso por correo antes de que esto ocurra.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">¿PronoGol es una casa de apuestas?</div>
+    <div class="faq-a"><strong>No.</strong> PronoGol es una plataforma de <strong>contenido informativo y análisis deportivo</strong>. No aceptamos apuestas, no operamos como casa de apuestas, y no procesamos transacciones de juego. Vendemos suscripciones a contenido de pronósticos generados por IA.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFAQ(this)">Tengo un problema con mi pago, ¿cómo los contacto?</div>
+    <div class="faq-a">Escríbenos a <strong>pagos@pronogol.app</strong> con tu nombre de usuario, correo registrado y una descripción del problema. Te responderemos en un plazo máximo de 24 horas.</div>
+  </div>
+
+  <hr>
+  <p style="text-align:center;color:#8888bb;font-size:0.8rem">PronoGol © 2026. Todos los derechos reservados.</p>
+</div>
+<script>
+function toggleFAQ(el) {
+  el.classList.toggle('open');
+  const answer = el.nextElementSibling;
+  answer.classList.toggle('show');
+}
+</script>
+</body>
+</html>

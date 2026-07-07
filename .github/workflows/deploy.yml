@@ -1,0 +1,81 @@
+name: 🚀 Deploy PronoGol
+
+on:
+  push:
+    branches: [main, master]
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔑 Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 🚀 Deploy al VPS
+        run: |
+          ssh root@${{ secrets.VPS_HOST }} << 'ENDSSH'
+            set -e
+            echo "🚀 Iniciando deploy..."
+            
+            # Clonar o actualizar repo
+            REPO_DIR="/docker/pronogol-repo"
+            if [ -d "$REPO_DIR/.git" ]; then
+              cd $REPO_DIR && git pull origin main
+            else
+              mkdir -p $REPO_DIR
+              git clone https://github.com/${{ github.repository }}.git $REPO_DIR
+              cd $REPO_DIR
+            fi
+
+            # Actualizar backend
+            echo "🔨 Reconstruyendo backend..."
+            cp $REPO_DIR/backend/Dockerfile /docker/pronogol/Dockerfile
+            cp $REPO_DIR/backend/requirements.txt /docker/pronogol/requirements.txt
+            cp -r $REPO_DIR/backend/app /docker/pronogol/app
+            cd /docker/pronogol
+            docker build -t pronogol-backend:latest .
+            docker stop pronogol-backend 2>/dev/null || true
+            docker rm pronogol-backend 2>/dev/null || true
+            docker run -d --name pronogol-backend \
+              -v /docker/pronogol/data:/app/data \
+              --restart unless-stopped \
+              -p 127.0.0.1:8000:8000 \
+              pronogol-backend:latest
+
+            # Actualizar frontend
+            echo "🔨 Reconstruyendo frontend..."
+            cp $REPO_DIR/apps/web/Dockerfile /docker/pronogol-web/Dockerfile
+            cp $REPO_DIR/apps/web/nginx.conf /docker/pronogol-web/nginx.conf
+            cp $REPO_DIR/apps/web/index.html /docker/pronogol-web/index.html
+            cp $REPO_DIR/apps/web/*.html /docker/pronogol-web/ 2>/dev/null || true
+            cd /docker/pronogol-web
+            docker build -t pronogol-frontend:latest .
+            docker stop pronogol-frontend 2>/dev/null || true
+            docker rm pronogol-frontend 2>/dev/null || true
+            docker run -d --name pronogol-frontend \
+              --restart unless-stopped \
+              -p 127.0.0.1:3000:3000 \
+              pronogol-frontend:latest
+
+            # Verificar
+            echo ""
+            echo "✅ Deploy completado!"
+            echo "📡 Verificando servicios..."
+            sleep 2
+            echo "Frontend: $(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/)"
+            echo "Backend:  $(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/health || echo 'no health')"
+            echo "Live:     $(curl -s -o /dev/null -w '%{http_code}' https://pronogol.app/)"
+            echo ""
+            echo "📦 Contenedores activos:"
+            docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+          ENDSSH
