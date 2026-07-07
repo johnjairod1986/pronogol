@@ -354,6 +354,7 @@ const GOOGLE_CLIENT_ID = '129696195917-j0pcbo1u0ptnakldpmo68timkn3a387l.apps.goo
 let currentUser = null;
 let token = localStorage.getItem('pg_token');
 let predictionsData = [];
+let currentFilter = 'all';
 
 // === API HELPERS ===
 async function api(method, path, body) {
@@ -614,6 +615,23 @@ function renderPredictions(predictions) {
       const homeScore = m.home_score !== null && m.home_score !== undefined ? m.home_score : '';
       const awayScore = m.away_score !== null && m.away_score !== undefined ? m.away_score : '';
       
+      // Determine which market to show: filtered one or best pick
+      let showMarket = bp.market;
+      let showConfidence = bp.confidence;
+      if (currentFilter !== 'all' && currentFilter !== 'top') {
+        const filterMap = {
+          '1x2': 'match_winner',
+          'dc': 'double_chance',
+          'btts': 'btts',
+          'ou': 'over_under_1.5',
+        };
+        const filterMarket = filterMap[currentFilter];
+        if (filterMarket && m.markets?.[filterMarket]) {
+          showMarket = filterMarket;
+          showConfidence = m.markets[filterMarket].trust;
+        }
+      }
+      
       const marketNames = {
         'match_winner': '1X2',
         'double_chance': 'DC',
@@ -623,9 +641,9 @@ function renderPredictions(predictions) {
         'over_under_3.5': 'O/U 3.5',
       };
       
-      const predLabel = marketNames[bp.market] || bp.market;
-      const predValue = m.markets?.[bp.market]?.prediction || '';
-      const confPct = Math.round((bp.confidence || 0) * 10);
+      const predLabel = marketNames[showMarket] || showMarket;
+      const predValue = m.markets?.[showMarket]?.prediction || '';
+      const confPct = Math.round((showConfidence || 0) * 10);
       const confClass = confPct >= 70 ? 'green' : (confPct >= 50 ? 'orange' : 'red');
       
       html += `<div class="match-card ${isCompleted ? 'completed' : ''}">
@@ -643,7 +661,7 @@ function renderPredictions(predictions) {
         <div class="match-score">${homeScore}:${awayScore}</div>`;
       
       // Prediction pill
-      if (isUnlocked && bp.market && bp.confidence) {
+      if (isUnlocked && showMarket && showConfidence) {
         html += `<div class="match-prediction">
           <span class="pred-pill">
             <span class="pred-type">${predLabel}</span>
@@ -673,11 +691,19 @@ function filterPredictions(filter, btn) {
     return;
   }
   
+  currentFilter = filter;
+  
   let filtered = [...predictionsData];
-  if (filter === '1x2') filtered = filtered.filter(m => m.best_pick?.market === 'match_winner');
-  else if (filter === 'btts') filtered = filtered.filter(m => m.best_pick?.market === 'btts');
-  else if (filter === 'ou') filtered = filtered.filter(m => m.best_pick?.market?.includes('over_under'));
-  else if (filter === 'dc') filtered = filtered.filter(m => m.best_pick?.market === 'double_chance');
+  if (filter === '1x2') filtered = filtered.filter(m => m.markets?.match_winner?.trust >= 5);
+  else if (filter === 'btts') filtered = filtered.filter(m => m.markets?.btts?.trust >= 4);
+  else if (filter === 'ou') {
+    filtered = filtered.filter(m => 
+      (m.markets?.['over_under_1.5']?.trust >= 5) ||
+      (m.markets?.['over_under_2.5']?.trust >= 5) ||
+      (m.markets?.['over_under_3.5']?.trust >= 5)
+    );
+  }
+  else if (filter === 'dc') filtered = filtered.filter(m => m.markets?.double_chance?.trust >= 5);
   else if (filter === 'top') filtered = filtered.filter(m => (m.best_pick?.confidence || 0) >= 7);
   
   renderPredictions(filtered);
