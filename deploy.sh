@@ -18,17 +18,6 @@ cp -r backend/app /docker/pronogol/app
 cp backend/requirements.txt /docker/pronogol/requirements.txt
 cp backend/Dockerfile /docker/pronogol/Dockerfile
 
-echo "🐳 Rebuilding frontend container..."
-cd /docker/pronogol-web
-docker build -t pronogol-web:latest .
-docker stop n8n-pronogol-web-1 2>/dev/null || true
-docker rm n8n-pronogol-web-1 2>/dev/null || true
-docker run -d \
-  --name n8n-pronogol-web-1 \
-  --restart unless-stopped \
-  --network n8n_default \
-  pronogol-web:latest
-
 echo "🐳 Rebuilding backend container..."
 cd /docker/pronogol
 docker build -t pronogol-api:latest .
@@ -41,8 +30,24 @@ docker run -d \
   --network n8n_default \
   pronogol-api:latest
 
+echo "🐳 Rebuilding frontend container..."
+cd /docker/pronogol-web
+docker build -t pronogol-web:latest .
+docker stop n8n-pronogol-web-1 2>/dev/null || true
+docker rm n8n-pronogol-web-1 2>/dev/null || true
+docker run -d \
+  --name n8n-pronogol-web-1 \
+  --restart unless-stopped \
+  --network n8n_default \
+  -l "traefik.enable=true" \
+  -l "traefik.http.routers.pronogol-web.rule=Host(\`pronogol.app\`)" \
+  -l "traefik.http.routers.pronogol-web.tls=true" \
+  -l "traefik.http.routers.pronogol-web.tls.certresolver=letsencrypt" \
+  -l "traefik.http.services.pronogol-web.loadbalancer.server.port=3000" \
+  pronogol-web:latest
+
 echo "✅ Verifying..."
-sleep 2
+sleep 3
 echo "Frontend: $(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/)"
 echo "Backend:  $(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/)"
 echo ""
