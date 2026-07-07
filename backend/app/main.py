@@ -1,5 +1,5 @@
 """PronoGol - Backend API v2"""
-import os, json, uuid, secrets, hashlib, hmac, time
+import os, json, uuid, secrets, hashlib, hmac, time, requests
 from datetime import datetime, timedelta
 from typing import Optional
 from fastapi import FastAPI, HTTPException, Header
@@ -73,7 +73,43 @@ def _user_response(user: dict) -> dict:
         "is_premium": bool(user.get("premium_until") and user["premium_until"] > datetime.utcnow().isoformat()),
         "premium_until": user.get("premium_until"),
         "marketing_opt_in": user.get("marketing_opt_in", False),
+        "role": user.get("role", "user"),
     }
+
+# --- Role helpers ---
+ROLES = {"admin": 100, "analyst": 50, "premium": 30, "user": 10}
+
+def _require_role(authorization: Optional[str], min_role: str = "user"):
+    """Get current user and check minimum role. Returns user dict or raises 401/403."""
+    if not authorization:
+        raise HTTPException(status_code=401, detail="No autorizado")
+    token = authorization.replace("Bearer ", "")
+    sessions_db = _read_db("sessions.json")
+    session = sessions_db["sessions"].get(token)
+    if not session:
+        raise HTTPException(status_code=401, detail="Sesion invalida")
+    exp = session.get("expires_at", "")
+    if exp < datetime.utcnow().isoformat():
+        del sessions_db["sessions"][token]
+        _write_db("sessions.json", sessions_db)
+        raise HTTPException(status_code=401, detail="Sesion expirada")
+    users_db = _read_db("users.json")
+    user = users_db["users"].get(str(session["user_id"]))
+    if not user:
+        raise HTTPException(status_code=401, detail="Usuario no encontrado")
+    user["id"] = user.get("id", session["user_id"])
+    user_role = user.get("role", "user")
+    if ROLES.get(user_role, 0) < ROLES.get(min_role, 0):
+        raise HTTPException(status_code=403, detail="Acceso denegado")
+    return user
+
+def _user_response_full(user: dict) -> dict:
+    resp = _user_response(user)
+    resp["role"] = user.get("role", "user")
+    resp["login_count"] = user.get("login_count", 0)
+    resp["created_at"] = user.get("created_at", "")
+    resp["auth_method"] = user.get("auth_method", "")
+    return resp
 
 # --- File DB helpers ---
 def _db_path(name):
@@ -254,7 +290,10 @@ async def auth_google(data: GoogleAuth):
             "avatar_url": info["picture"],
             "google_id": info["sub"],
             "premium_until": None,
+            "role": "user",
             "created_at": datetime.utcnow().isoformat(),
+            "marketing_opt_in": True,
+            "login_count": 1,
         }
         users[str(uid)] = user
         _write_db("users.json", db)
@@ -348,7 +387,162 @@ async def premium_status():
         ]
     }
 
-# --- Keep legacy v1 endpoints ---
+# --- Admin Endpoints (role: admin required) ---
+
+@app.get("/api/v2/admin/users")
+async def admin_list_users(authorization: Optional[str] = Header(None)):
+    """Admin: List all users with their data."""
+    admin = _require_role(authorization, "admin")
+    db = _read_db("users.json")
+    users_list = []
+    for uid, u in db["users"].items():
+        u["id"] = int(uid)
+        # Remove sensitive fields
+        u.pop("password_salt", None)
+        u.pop("password_hash", None)
+        users_list.append(_user_response_full(u))
+    users_list.sort(key=lambda x: x["id"])
+    return {"users": users_list, "count": len(users_list)}
+
+
+@app.post("/api/v2/admin/users/{user_id}/role")
+async def admin_update_role(user_id: int, role_data: dict, authorization: Optional[str] = Header(None)):
+    """Admin: Update user role (admin/analyst/premium/user)."""
+    admin = _require_role(authorization, "admin")
+    new_role = role_data.get("role", "")
+    if new_role not in ROLES:
+        raise HTTPException(status_code=400, detail=f"Rol invalido: {new_role}. Roles: {', '.join(ROLES.keys())}")
+    db = _read_db("users.json")
+    user = db["users"].get(str(user_id))
+    if not user:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    user["role"] = new_role
+    db["users"][str(user_id)] = user
+    _write_db("users.json", db)
+    user["id"] = user_id
+    return {"ok": True, "user": _user_response_full(user)}
+
+
+@app.post("/api/v2/admin/users/{user_id}/premium")
+async def admin_set_premium(user_id: int, premium_data: dict, authorization: Optional[str] = Header(None)):
+    """Admin: Set premium until date. Send {"days": 30} or {"until": "2099-12-31"}"""
+    admin = _require_role(authorization, "admin")
+    db = _read_db("users.json")
+    user = db["users"].get(str(user_id))
+    if not user:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    days = premium_data.get("days")
+    until = premium_data.get("until")
+    if days:
+        premium_until = (datetime.utcnow() + timedelta(days=int(days))).isoformat()
+    elif until:
+        premium_until = until
+    else:
+        premium_until = (datetime.utcnow() + timedelta(days=30)).isoformat()
+    user["premium_until"] = premium_until
+    db["users"][str(user_id)] = user
+    _write_db("users.json", db)
+    user["id"] = user_id
+    return {"ok": True, "user": _user_response_full(user)}
+
+
+@app.get("/api/v2/admin/marketing-emails")
+async def admin_marketing_emails(authorization: Optional[str] = Header(None)):
+    """Admin: Get list of marketing-opt-in emails for campaigns."""
+    admin = _require_role(authorization, "admin")
+    db = _read_db("users.json")
+    emails = []
+    for u in db["users"].values():
+        if u.get("marketing_opt_in", True):
+            emails.append({
+                "email": u["email"],
+                "name": u.get("name", ""),
+                "is_premium": bool(u.get("premium_until") and u["premium_until"] > datetime.utcnow().isoformat()),
+                "role": u.get("role", "user"),
+                "signup_date": u.get("created_at", "")[:10],
+            })
+    return {"emails": emails, "count": len(emails)}
+
+
+@app.get("/api/v2/admin/stats")
+async def admin_stats(authorization: Optional[str] = Header(None)):
+    """Admin: Get platform statistics."""
+    admin = _require_role(authorization, "admin")
+    db = _read_db("users.json")
+    sessions_db = _read_db("sessions.json")
+    users = db.get("users", {})
+    total = len(users)
+    premium = sum(1 for u in users.values() if u.get("premium_until") and u["premium_until"] > datetime.utcnow().isoformat())
+    active_sessions = sum(1 for s in sessions_db.get("sessions", {}).values() if s.get("expires_at", "") > datetime.utcnow().isoformat())
+    roles = {}
+    for u in users.values():
+        r = u.get("role", "user")
+        roles[r] = roles.get(r, 0) + 1
+    return {
+        "total_users": total,
+        "premium_users": premium,
+        "active_sessions": active_sessions,
+        "users_by_role": roles,
+    }
+
+
+# --- Prediction Endpoints ---
+
+PREDICTION_MARKETS = [
+    {"id": "match_winner", "name": "Ganador", "options": ["1", "X", "2"]},
+    {"id": "double_chance", "name": "Doble Oportunidad", "options": ["1X", "12", "X2"]},
+    {"id": "btts", "name": "Ambos Anotan", "options": ["Si", "No"]},
+    {"id": "over_under_1.5", "name": "Más/Menos 1.5", "options": [">1.5", "<1.5"]},
+    {"id": "over_under_2.5", "name": "Más/Menos 2.5", "options": [">2.5", "<2.5"]},
+    {"id": "over_under_3.5", "name": "Más/Menos 3.5", "options": [">3.5", "<3.5"]},
+]
+
+@app.get("/api/v2/predictions/markets")
+async def get_prediction_markets():
+    return {"markets": PREDICTION_MARKETS}
+
+
+@app.get("/api/v2/predictions/today")
+async def predictions_today(date: Optional[str] = None, market: Optional[str] = None, authorization: Optional[str] = Header(None)):
+    """Get predictions for today's matches."""
+    user = None
+    if authorization:
+        try:
+            user = _require_role(authorization, "user")
+        except:
+            pass
+    
+    is_premium = user and bool(user.get("premium_until") and user["premium_until"] > datetime.utcnow().isoformat())
+    
+    # Mock predictions - in production these come from FootyStats + AI
+    # This will be replaced with real data from the auto_combo_v3.py system
+    
+    today = date or datetime.utcnow().strftime("%Y-%m-%d")
+    
+    # Load from FootyStats cache if available
+    predictions_file = os.path.join(DATA_DIR, "predictions_cache.json")
+    if os.path.exists(predictions_file):
+        with open(predictions_file) as f:
+            cache = json.load(f)
+        return cache
+    
+    return {
+        "date": today,
+        "predictions": [],
+        "message": "No hay predicciones cacheadas. Ejecuta el script de predicciones primero."
+    }
+
+
+@app.post("/api/v2/predictions/generate")
+async def generate_predictions_now(authorization: Optional[str] = Header(None)):
+    """Admin: Generate predictions now."""
+    admin = _require_role(authorization, "admin")
+    try:
+        from app.predictor import generate_predictions
+        result = generate_predictions()
+        return {"ok": True, "message": f"Predicciones generadas: {result['count']} partidos", "count": result["count"]}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generando predicciones: {str(e)}")
 @app.get("/")
 async def root():
     return {"app": "PronoGol", "version": "2.0.0", "status": "ok"}

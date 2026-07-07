@@ -1,1116 +1,777 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PronoGol — Pronósticos IA</title>
-  <link rel="icon" href="/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    /* ============= RESET & BASE ============= */
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    :root{--bg:#0b0b1a;--bg2:#111128;--bg3:#1a1a3e;--card:#151530;--card2:#1c1c40;--border:rgba(255,255,255,0.06);--text:#e8e8f0;--text2:#8888bb;--accent:#00ff87;--accent2:#60efff;--grad:linear-gradient(135deg,#00ff87 0%,#60efff 100%);--red:#ff4466;--yellow:#ffcc00;--blue:#4488ff;--orange:#ff8800}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PronoGol - Pronósticos IA de Fútbol</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e1a;--bg2:#111627;--bg3:#1a1f35;--card:#161c30;--border:#2a2f4a;--text:#e8eaf0;--text2:#9ca3bc;--accent:#00e5a0;--accent2:#00c4f4;--green:#00e5a0;--red:#ff4757;--orange:#ff9f43;--yellow:#ffd93d}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:var(--accent);text-decoration:none}
 
-    /* ============= INTRO OVERLAY ============= */
-    #introOverlay{
-      position:fixed;inset:0;z-index:9999;
-      background:var(--bg);display:flex;flex-direction:column;
-      align-items:center;justify-content:center;
-      transition:opacity 0.8s ease, transform 0.8s ease;
-    }
-    #introOverlay.hidden{opacity:0;transform:scale(1.1);pointer-events:none}
-    .intro-canvas{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-    .intro-grid{position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(0,255,135,0.03) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,255,135,0.03) 1px,transparent 1px);
-      background-size:40px 40px;animation:gridPulse 4s ease-in-out infinite
-    }
-    @keyframes gridPulse{0%,100%{opacity:0.5}50%{opacity:1}}
-    .intro-particles{position:absolute;inset:0}
-    .intro-ball{
-      width:60px;height:60px;border-radius:50%;position:relative;
-      background:radial-gradient(circle at 35% 35%,#00ff87,#006644);
-      box-shadow:0 0 40px rgba(0,255,135,0.3),0 0 80px rgba(0,255,135,0.1);
-      animation:ballFloat 2s ease-in-out infinite
-    }
-    .intro-ball::after{
-      content:'';position:absolute;inset:4px;border-radius:50%;
-      border:2px solid rgba(255,255,255,0.2);
-      background:repeating-conic-gradient(transparent 0deg 15deg,rgba(0,255,135,0.1) 15deg 30deg)
-    }
-    .intro-ball::before{
-      content:'';position:absolute;inset:-8px;border-radius:50%;
-      border:1px solid rgba(0,255,135,0.15);
-      animation:ringPulse 1.5s ease-in-out infinite
-    }
-    @keyframes ringPulse{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.3);opacity:0}}
-    @keyframes ballFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-15px) rotate(5deg)}}
-    .intro-robot{
-      width:120px;height:150px;position:relative;margin-bottom:30px;
-      transition:transform 0.3s
-    }
-    .robot-head{
-      width:50px;height:45px;background:linear-gradient(135deg,#1a1a3e,#2a2a5e);
-      border:2px solid var(--accent);border-radius:12px;margin:0 auto 5px;
-      display:flex;align-items:center;justify-content:center;position:relative;
-      box-shadow:0 0 15px rgba(0,255,135,0.2);
-      animation:headBob 2s ease-in-out infinite
-    }
-    @keyframes headBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-    .robot-eye{width:8px;height:8px;background:var(--accent);border-radius:50%;margin:0 5px;box-shadow:0 0 8px var(--accent);animation:eyeGlow 1s ease-in-out infinite alternate}
-    .robot-body{
-      width:60px;height:55px;background:linear-gradient(135deg,#1a1a3e,#252550);
-      border:2px solid rgba(0,255,135,0.3);border-radius:10px;margin:0 auto;
-      position:relative;display:flex;align-items:center;justify-content:center
-    }
-    .robot-body .ai-text{font-size:0.55rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
-    .robot-leg{width:20px;height:25px;background:linear-gradient(135deg,#1a1a3e,#252550);border:1px solid rgba(0,255,135,0.2);border-radius:5px;position:absolute;bottom:-22px;transition:transform 0.3s}
-    .robot-leg.left{left:12px;animation:kickLeft 0.6s ease-in-out infinite alternate}
-    .robot-leg.right{right:12px}
-    @keyframes kickLeft{0%{transform:rotate(-10deg) translateY(0)}100%{transform:rotate(-35deg) translateY(-5px)}}
-    .robot-arm{width:25px;height:8px;background:var(--bg3);border:1px solid rgba(0,255,135,0.2);border-radius:4px;position:absolute;top:22px;animation:celebrate 0.8s ease-in-out infinite alternate}
-    .robot-arm.left{left:-20px;transform:rotate(-30deg);transform-origin:right center}
-    .robot-arm.right{right:-20px;transform:rotate(30deg);transform-origin:left center}
-    @keyframes celebrate{0%{transform:rotate(-40deg) scaleX(0.8)}100%{transform:rotate(-20deg) scaleX(1.2)}}
-    .robot-arm.right{animation-delay:0.3s}
-    
-    .intro-text{
-      position:relative;z-index:2;text-align:center;margin-top:20px
-    }
-    .intro-title{
-      font-size:3rem;font-weight:900;letter-spacing:-2px;
-      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      opacity:0;transform:scale(0.8);transition:all 0.6s cubic-bezier(0.34,1.56,0.64,1)
-    }
-    .intro-title.visible{opacity:1;transform:scale(1)}
-    .intro-sub{
-      color:var(--text2);font-size:0.9rem;margin-top:8px;
-      opacity:0;transition:opacity 0.6s 0.3s
-    }
-    .intro-sub.visible{opacity:1}
-    .intro-bar-wrap{width:200px;height:3px;background:var(--bg3);border-radius:2px;margin:24px auto 0;overflow:hidden;opacity:0;transition:opacity 0.5s}
-    .intro-bar-wrap.visible{opacity:1}
-    .intro-bar{height:100%;width:0%;background:var(--grad);border-radius:2px;transition:width 0.1s linear}
-    .intro-version{position:absolute;bottom:30px;color:var(--text2);font-size:0.7rem;opacity:0.3;z-index:2}
+/* Login */
+.login-screen{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.login-card{background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:40px;width:100%;max-width:420px;text-align:center}
+.login-logo{font-size:48px;margin-bottom:12px}
+.login-title{font-size:28px;font-weight:800;margin-bottom:4px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.login-sub{color:var(--text2);font-size:14px;margin-bottom:32px}
+.login-btn-google{width:100%;padding:14px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;margin-bottom:16px}
+.login-btn-google:hover{background:var(--bg3);border-color:var(--accent)}
+.login-divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--text2);font-size:13px}
+.login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.login-input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:15px;margin-bottom:12px;outline:none;transition:border .2s}
+.login-input:focus{border-color:var(--accent)}
+.login-btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000;font-size:16px;font-weight:700;cursor:pointer;transition:opacity .2s;margin-bottom:12px}
+.login-btn:hover{opacity:.9}
+.login-link{color:var(--text2);font-size:13px;cursor:pointer}
+.login-link:hover{color:var(--accent)}
+.login-error{color:var(--red);font-size:13px;margin-top:8px;display:none}
 
-    /* ============= AUTH MODAL ============= */
-    .modal-overlay{
-      position:fixed;inset:0;z-index:1000;
-      background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);
-      display:flex;align-items:center;justify-content:center;
-      opacity:0;pointer-events:none;transition:opacity 0.4s
-    }
-    .modal-overlay.show{opacity:1;pointer-events:auto}
-    .modal-overlay.fullscreen{background:var(--bg);backdrop-filter:none;z-index:999}
-    .modal-overlay.fullscreen .modal-box{background:transparent;border:none;border-radius:0;max-width:400px}
-    .modal-box{
-      background:var(--card);border:1px solid var(--border);border-radius:20px;
-      padding:40px;max-width:400px;width:90%;text-align:center;
-      transform:scale(0.9);transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1)
-    }
-    .modal-overlay.show .modal-box{transform:scale(1)}
-    .modal-box .logo-icon{margin:0 auto 16px}
-    .modal-box h2{font-size:1.5rem;font-weight:800;margin-bottom:4px}
-    .modal-box p{color:var(--text2);font-size:0.9rem;margin-bottom:24px}
-    .modal-box .g_id_signin{display:inline-block;margin:0 auto 16px}
-    .modal-box .skip-btn{
-      display:block;width:100%;padding:12px;border-radius:12px;
-      border:1px solid var(--border);background:transparent;color:var(--text2);
-      font-size:0.85rem;cursor:pointer;transition:all 0.2s;font-family:inherit
-    }
-    .modal-box .skip-btn:hover{background:var(--bg2);color:var(--text)}
-    .modal-close{
-      position:absolute;top:16px;right:16px;background:none;border:none;
-      color:var(--text2);font-size:1.5rem;cursor:pointer;padding:4px
-    }
+/* Nav */
+.nav{display:none;background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:64px;gap:8px}
+.nav-logo{font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-right:auto}
+.nav-item{padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--text2);transition:all .2s;white-space:nowrap}
+.nav-item:hover,.nav-item.active{background:var(--bg3);color:var(--text)}
+.nav-user{display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:50px;border:1px solid var(--border);cursor:pointer;margin-left:8px}
+.nav-avatar{width:28px;height:28px;border-radius:50%}
+.nav-badge{background:var(--accent);color:#000;font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;margin-left:4px}
 
-    /* ============= PREMIUM MODAL ============= */
-    .premium-card{
-      background:var(--card2);border:1px solid var(--border);border-radius:16px;
-      padding:24px;text-align:center;margin:10px 0;transition:all 0.3s
-    }
-    .premium-card.featured{
-      border-color:var(--accent);box-shadow:0 0 20px rgba(0,255,135,0.1);
-      transform:scale(1.02)
-    }
-    .premium-card .price{font-size:2rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .premium-card .price span{font-size:0.9rem;color:var(--text2);-webkit-text-fill-color:var(--text2)}
-    .premium-card .features{text-align:left;margin:16px 0;list-style:none}
-    .premium-card .features li{padding:6px 0;font-size:0.85rem;color:var(--text)}
-    .premium-card .features li::before{content:'✓';color:var(--accent);margin-right:8px;font-weight:700}
-    .premium-btn{
-      width:100%;padding:14px;border-radius:12px;border:none;
-      background:var(--grad);color:var(--bg);font-weight:700;font-size:1rem;
-      cursor:pointer;transition:all 0.2s;font-family:inherit
-    }
-    .premium-btn:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,255,135,0.3)}
-    .premium-btn.secondary{background:var(--bg3);color:var(--text)}
+/* Main Content */
+.main{display:none;max-width:1200px;margin:0 auto;padding:24px 20px}
 
-    /* ============= MAIN APP ============= */
-    #mainApp{display:none;min-height:100vh;min-height:100dvh}
-    #mainApp.show{display:block}
+/* Filters */
+.filters{display:flex;gap:8px;margin-bottom:24px;overflow-x:auto;padding-bottom:8px;flex-wrap:nowrap}
+.filter-btn{padding:8px 20px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.filter-btn:hover,.filter-btn.active{background:var(--accent);color:#000;border-color:var(--accent);font-weight:600}
 
-    /* Header */
-    .app-header{
-      position:sticky;top:0;z-index:100;
-      backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-      background:rgba(11,11,26,0.85);border-bottom:1px solid var(--border)
-    }
-    .header-inner{
-      max-width:1200px;margin:0 auto;display:flex;
-      align-items:center;justify-content:space-between;padding:10px 16px;gap:12px
-    }
-    .logo{display:flex;align-items:center;gap:8px;cursor:pointer}
-    .logo-icon{width:34px;height:34px;border-radius:10px;overflow:hidden;flex-shrink:0}
-    .logo-icon img{width:100%;height:100%;object-fit:cover}
-    .logo-text{font-size:1.2rem;font-weight:900;letter-spacing:-0.5px}
-    .logo-text span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .logo-tag{font-size:0.55rem;color:var(--text2);background:var(--bg2);padding:1px 6px;border-radius:4px;margin-left:4px;-webkit-text-fill-color:var(--text2)}
-    .header-right{display:flex;align-items:center;gap:10px}
-    .user-btn,.auth-btn{
-      padding:6px 14px;border-radius:8px;border:1px solid var(--border);
-      background:transparent;color:var(--text);cursor:pointer;
-      font-size:0.8rem;font-weight:600;transition:all 0.2s;font-family:inherit;
-      display:flex;align-items:center;gap:6px
-    }
-    .auth-btn{background:var(--grad);color:var(--bg);border:none;font-weight:700}
-    .auth-btn:hover{transform:translateY(-1px)}
-    .user-btn .avatar{width:24px;height:24px;border-radius:50%;overflow:hidden}
-    .user-btn .avatar img{width:100%;height:100%;object-fit:cover}
-    .user-btn .crown{color:var(--yellow);font-size:0.8rem}
-    .user-btn .menu-dropdown{display:none}
-    
-    /* League Tabs */
-    .league-bar{
-      max-width:1200px;margin:0 auto;padding:8px 16px;
-      display:flex;gap:6px;overflow-x:auto;scrollbar-width:none
-    }
-    .league-bar::-webkit-scrollbar{display:none}
-    .league-tab{
-      padding:6px 14px;border-radius:8px;border:1px solid var(--border);
-      background:transparent;color:var(--text2);cursor:pointer;
-      font-size:0.8rem;font-weight:500;white-space:nowrap;font-family:inherit;
-      transition:all 0.2s;flex-shrink:0
-    }
-    .league-tab:hover{background:var(--bg3);color:var(--text)}
-    .league-tab.active{background:var(--grad);color:var(--bg);border-color:transparent;font-weight:700}
+/* League Group */
+.league-group{margin-bottom:32px}
+.league-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:8px 0}
+.league-logo{width:24px;height:24px;border-radius:4px}
+.league-name{font-size:15px;font-weight:600;color:var(--text2)}
 
-    /* Calendar */
-    .calendar-bar{
-      max-width:1200px;margin:0 auto;padding:4px 16px 8px;
-      display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none
-    }
-    .calendar-bar::-webkit-scrollbar{display:none}
-    .cal-btn{
-      padding:5px 12px;border-radius:8px;border:1px solid var(--border);
-      background:transparent;color:var(--text2);cursor:pointer;
-      font-size:0.75rem;font-weight:500;white-space:nowrap;font-family:inherit;
-      transition:all 0.2s;flex-shrink:0;text-align:center;min-width:60px
-    }
-    .cal-btn:hover{background:var(--bg3);color:var(--text)}
-    .cal-btn.active{background:var(--bg3);border-color:var(--accent);color:var(--accent)}
-    .cal-btn .day{font-size:0.6rem;opacity:0.6}
-    .cal-btn .date{font-size:0.85rem;font-weight:700;display:block;margin:2px 0}
-    .cal-btn .match-count{font-size:0.55rem;color:var(--accent)}
+/* Match Card */
+.match-card{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;margin-bottom:8px;transition:all .2s;cursor:pointer}
+.match-card:hover{background:var(--bg3);border-color:var(--accent)}
+.match-time{font-size:11px;color:var(--text2);text-align:center;min-width:40px}
+.match-time.ft{color:var(--text2)}
+.match-time.live{color:var(--green);font-weight:700}
+.match-score{font-size:16px;font-weight:700;text-align:center;min-width:36px}
+.match-teams{display:flex;flex-direction:column;gap:4px;min-width:0}
+.match-team{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
+.match-team-logo{width:20px;height:20px;border-radius:50%;object-fit:contain}
 
-    /* Main Content Area */
-    .main-content{max-width:1200px;margin:0 auto;padding:8px 16px 80px}
-    .section-header{display:flex;justify-content:space-between;align-items:center;margin:12px 0}
-    .section-header h2{font-size:1rem;font-weight:700}
-    .section-header .count{color:var(--text2);font-size:0.8rem}
+/* Predictions in card */
+.match-picks{display:flex;flex-direction:column;gap:4px;min-width:140px;align-items:flex-end}
+.match-pick{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.pick-badge{padding:2px 10px;border-radius:6px;font-size:11px;font-weight:700;text-align:center}
+.pick-badge.green{background:rgba(0,229,160,.15);color:var(--green)}
+.pick-badge.orange{background:rgba(255,159,67,.15);color:var(--orange)}
+.pick-badge.red{background:rgba(255,71,87,.15);color:var(--red)}
+.pick-badge.blue{background:rgba(0,196,244,.15);color:var(--accent2)}
+.pick-pct{font-size:12px;font-weight:600}
+.pick-pct.green{color:var(--green)}
+.pick-pct.orange{color:var(--orange)}
+.pick-pct.red{color:var(--red)}
+.pick-pct.blue{color:var(--accent2)}
+.pick-odd{font-size:11px;color:var(--text2)}
+.result-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:12px;font-weight:700}
+.result-badge.win{background:rgba(0,229,160,.2);color:var(--green)}
+.result-badge.lose{background:rgba(255,71,87,.2);color:var(--red)}
+.match-lock{color:var(--text2);font-size:12px;cursor:pointer;padding:8px 12px;border-radius:8px;border:1px dashed var(--border);display:inline-flex;align-items:center;gap:4px}
+.match-lock:hover{border-color:var(--accent);color:var(--accent)}
 
-    /* Match Cards */
-    .matches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
-    .match-card{
-      background:var(--card);border:1px solid var(--border);border-radius:14px;
-      padding:16px;transition:all 0.3s;cursor:default;position:relative;overflow:hidden
-    }
-    .match-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:3px;
-      background:var(--grad);opacity:0;transition:opacity 0.3s
-    }
-    .match-card:hover{border-color:rgba(255,255,255,0.12);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
-    .match-card:hover::before{opacity:1}
-    .match-card.live{border-color:rgba(255,68,102,0.2)}
-    .match-card.live::before{background:var(--red);opacity:1}
-    .match-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-    .match-time{font-size:0.75rem;color:var(--text2);font-weight:500}
-    .match-stamp{font-size:0.65rem;padding:2px 8px;border-radius:4px;background:var(--bg2);color:var(--text2);font-weight:500}
-    .match-stamp.finished{background:rgba(0,255,135,0.1);color:var(--accent)}
-    .match-stamp.live-stamp{background:rgba(255,68,102,0.15);color:var(--red);font-weight:700}
-    .match-stamp.locked{background:rgba(255,204,0,0.1);color:var(--yellow)}
-    .match-stamp.premium{background:rgba(255,200,0,0.1);color:var(--yellow)}
-    .match-teams{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-    .team{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
-    .team-away{justify-content:flex-end;text-align:right}
-    .team-badge{width:24px;height:24px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--text2);flex-shrink:0}
-    .team-name{font-weight:600;font-size:0.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .team-score{font-size:1.4rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;min-width:30px;text-align:center}
-    .match-predictions{display:flex;gap:6px;margin-top:8px}
-    .prediction-chip{flex:1;padding:6px;border-radius:8px;text-align:center;font-size:0.7rem;font-weight:600;background:var(--bg2);border:1px solid var(--border);position:relative}
-    .prediction-chip.locked{opacity:0.4;cursor:pointer}
-    .prediction-chip .market{color:var(--text2);font-weight:400;font-size:0.6rem;margin-bottom:2px}
-    .prediction-chip .value{color:var(--text);font-size:0.8rem}
-    .prediction-chip .prob{display:inline-block;margin-top:2px;padding:1px 5px;border-radius:4px;font-size:0.6rem;font-weight:700}
-    .prediction-chip .lock-icon{font-size:0.7rem;margin-left:4px}
-    .prob-high{background:rgba(0,255,135,0.15);color:var(--accent)}
-    .prob-mid{background:rgba(96,239,255,0.15);color:var(--accent2)}
-    .prob-low{background:rgba(255,204,0,0.15);color:var(--yellow)}
+/* Loading */
+.loading{text-align:center;padding:60px 20px;color:var(--text2)}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-    /* Premium Upsell Banner */
-    .premium-banner{
-      background:linear-gradient(135deg,rgba(0,255,135,0.08),rgba(96,239,255,0.08));
-      border:1px solid rgba(0,255,135,0.2);border-radius:12px;padding:20px;
-      text-align:center;margin:16px 0
-    }
-    .premium-banner h3{font-size:1.1rem;font-weight:800;margin-bottom:4px}
-    .premium-banner p{color:var(--text2);font-size:0.85rem;margin-bottom:12px}
-    .premium-banner .btn{
-      display:inline-block;padding:10px 24px;border-radius:10px;
-      background:var(--grad);color:var(--bg);font-weight:700;border:none;
-      cursor:pointer;font-size:0.9rem;font-family:inherit;transition:all 0.2s
-    }
-    .premium-banner .btn:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,255,135,0.3)}
+/* Premium Banner */
+.premium-banner{background:linear-gradient(135deg,rgba(0,229,160,.1),rgba(0,196,244,.1));border:1px solid rgba(0,229,160,.3);border-radius:16px;padding:24px;margin-bottom:24px;text-align:center}
+.premium-banner h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.premium-banner p{color:var(--text2);font-size:14px;margin-bottom:16px}
+.premium-btn{display:inline-block;padding:12px 32px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s}
+.premium-btn:hover{opacity:.9}
 
-    /* Live Badge */
-    .live-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,68,102,0.15);color:var(--red);padding:2px 7px;border-radius:4px;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
-    .live-badge::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);animation:pulseDot 1.2s infinite}
-    @keyframes pulseDot{0%,100%{opacity:1}50%{opacity:0.3}}
+/* Admin Panel */
+.admin-panel{display:none}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.admin-header h2{font-size:24px;font-weight:700}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.stat-value{font-size:28px;font-weight:800}
+.stat-label{font-size:12px;color:var(--text2);margin-top:4px}
+.admin-table-wrap{overflow-x:auto}
+.admin-table{width:100%;border-collapse:collapse;font-size:13px}
+.admin-table th{text-align:left;padding:12px 8px;color:var(--text2);border-bottom:1px solid var(--border);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.admin-table td{padding:10px 8px;border-bottom:1px solid var(--border)}
+.admin-table tr:hover{background:var(--bg2)}
+.admin-role-badge{padding:2px 10px;border-radius:6px;font-size:11px;font-weight:700}
+.admin-role-badge.admin{background:rgba(255,217,61,.15);color:var(--yellow)}
+.admin-role-badge.analyst{background:rgba(0,196,244,.15);color:var(--accent2)}
+.admin-role-badge.premium{background:rgba(0,229,160,.15);color:var(--green)}
+.admin-role-badge.user{background:rgba(255,71,87,.15);color:var(--red)}
+.admin-select{background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer}
+.admin-btn{padding:6px 12px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.admin-btn.green{background:var(--green);color:#000}
+.admin-btn.blue{background:var(--accent2);color:#000}
+.admin-btn:hover{opacity:.8}
 
-    /* Loading / Empty */
-    .loading-state,.empty-state{
-      text-align:center;padding:60px 20px;color:var(--text2);grid-column:1/-1
-    }
-    .spinner{width:24px;height:24px;border:3px solid var(--bg3);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .empty-state .icon{font-size:3rem;margin-bottom:10px;opacity:0.4}
-    .empty-state h3{font-size:1.1rem;margin-bottom:4px}
-    .empty-state p{font-size:0.85rem}
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;box-shadow:0 8px 32px rgba(0,0,0,.4);display:none;z-index:200;max-width:360px}
+.toast.show{display:block;animation:slideUp .3s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.toast-msg{font-size:14px}
+.toast-msg .emoji{margin-right:8px}
 
-    /* Bottom Nav */
-    .bottom-nav{
-      position:fixed;bottom:0;left:0;right:0;z-index:100;
-      backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-      background:rgba(11,11,26,0.9);border-top:1px solid var(--border);
-      display:flex;justify-content:space-around;padding:6px 0 env(safe-area-inset-bottom,6px) 0
-    }
-    .nav-item{
-      display:flex;flex-direction:column;align-items:center;gap:2px;
-      padding:6px 12px;border-radius:8px;cursor:pointer;transition:all 0.2s;
-      border:none;background:none;color:var(--text2);font-family:inherit
-    }
-    .nav-item:hover{background:var(--bg2)}
-    .nav-item.active{color:var(--accent)}
-    .nav-item .nav-icon{font-size:1.3rem}
-    .nav-item .nav-label{font-size:0.6rem;font-weight:600}
-
-    /* Prediction Detail Page */
-    .prediction-detail{padding:16px 0}
-    .prediction-detail .back-btn{
-      background:none;border:none;color:var(--text2);cursor:pointer;
-      font-size:0.85rem;padding:8px 0;display:flex;align-items:center;gap:4px;font-family:inherit
-    }
-
-    /* Profile Page */
-    .profile-page{padding:16px 0}
-    .profile-header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
-    .profile-avatar{width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid var(--accent)}
-    .profile-avatar img{width:100%;height:100%;object-fit:cover}
-    .profile-name{font-size:1.3rem;font-weight:800}
-    .profile-email{color:var(--text2);font-size:0.8rem}
-    .profile-badge{display:inline-block;padding:2px 10px;border-radius:6px;font-size:0.7rem;font-weight:700;margin-top:6px}
-    .profile-badge.premium{background:rgba(255,204,0,0.15);color:var(--yellow)}
-    .profile-badge.free{background:var(--bg2);color:var(--text2)}
-    .profile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
-    .stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
-    .stat-card .num{font-size:1.5rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .stat-card .label{font-size:0.7rem;color:var(--text2);margin-top:4px}
-    .profile-btn{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-size:0.9rem;font-family:inherit;transition:all 0.2s;margin-bottom:8px}
-
-    /* ============= RESPONSIVE ============= */
-    @media(max-width:768px){
-      .matches-grid{grid-template-columns:1fr}
-      .intro-title{font-size:2rem}
-      .intro-robot{transform:scale(0.8)}
-      .header-inner{padding:8px 12px}
-      .logo-text{font-size:1rem}
-      .premium-card.featured{transform:none}
-      .modal-box{padding:24px 20px}
-    }
-  </style>
+/* Responsive */
+@media(max-width:768px){
+.match-card{grid-template-columns:1fr auto;padding:12px 16px}
+.match-picks{flex-direction:row;gap:8px;grid-column:1/-1;justify-content:flex-start;padding-top:8px;border-top:1px solid var(--border)}
+.nav-item{padding:6px 12px;font-size:13px}
+.login-card{padding:24px}
+.admin-stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
 </head>
 <body>
-<!-- ======== INTRO OVERLAY ======== -->
-<div id="introOverlay">
-  <div class="intro-canvas">
-    <div class="intro-grid"></div>
-    <div id="particles" class="intro-particles"></div>
-  </div>
-  <div class="intro-robot" id="robotContainer">
-    <div class="robot-head">
-      <div class="robot-eye"></div>
-      <div class="robot-eye"></div>
-    </div>
-    <div class="robot-body">
-      <span class="ai-text">AI</span>
-      <div class="robot-arm left"></div>
-      <div class="robot-arm right"></div>
-    </div>
-    <div class="robot-leg left"></div>
-    <div class="robot-leg right"></div>
-  </div>
-  <div class="intro-text">
-    <div class="intro-ball" id="introBall"></div>
-    <div class="intro-title" id="introTitle">PronoGol</div>
-    <div class="intro-sub" id="introSub">Pronósticos con Inteligencia Artificial ⚡</div>
-    <div class="intro-bar-wrap" id="introBarWrap">
-      <div class="intro-bar" id="introBar"></div>
-    </div>
-  </div>
-  <div class="intro-version">v2.0.0 • {PROVIDER}</div>
-</div>
 
-<!-- ======== AUTH MODAL ======== -->
-<div class="modal-overlay" id="authModal">
-  <div class="modal-box" style="position:relative;max-width:420px">
-    <div class="logo-icon"><img src="/logo.png" alt="PG" width="48" height="48" style="border-radius:12px;margin:0 auto 12px;display:block"></div>
+<!-- Login Screen -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">⚽</div>
+    <div class="login-title">PronoGol</div>
+    <div class="login-sub">Pronósticos IA de fútbol</div>
     
-    <!-- Tabs -->
-    <div class="auth-tabs" style="display:flex;gap:0;margin-bottom:20px;background:var(--bg2);border-radius:10px;padding:3px">
-      <button class="auth-tab active" onclick="switchAuthTab('login')" style="flex:1;padding:8px;border:none;background:none;color:var(--text);font-weight:600;font-size:0.85rem;border-radius:8px;cursor:pointer;font-family:inherit;transition:all 0.2s">Iniciar Sesión</button>
-      <button class="auth-tab" onclick="switchAuthTab('signup')" style="flex:1;padding:8px;border:none;background:none;color:var(--text2);font-weight:500;font-size:0.85rem;border-radius:8px;cursor:pointer;font-family:inherit;transition:all 0.2s">Registrarse</button>
+    <div id="g_id_onload"
+         data-client_id="129696195917-j0pcbo1u0ptnakldpmo68timkn3a387l.apps.googleusercontent.com"
+         data-context="signin"
+         data-ux_mode="popup"
+         data-callback="handleGoogleCredential"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-shape="pill"
+         data-theme="outline"
+         data-text="signin_with"
+         data-size="large"
+         data-logo_alignment="left"
+         style="display:none">
     </div>
     
-    <div id="authLoginForm">
-      <input type="email" id="loginEmail" placeholder="Tu correo electrónico" style="width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:0.9rem;margin-bottom:10px;font-family:inherit;outline:none">
-      <input type="password" id="loginPass" placeholder="Contraseña" style="width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:0.9rem;margin-bottom:14px;font-family:inherit;outline:none">
-      <button class="auth-btn" onclick="emailLogin()" style="width:100%;padding:12px;border-radius:10px;border:none;background:var(--grad);color:var(--bg);font-weight:700;font-size:0.95rem;cursor:pointer;font-family:inherit;margin-bottom:14px">Ingresar →</button>
-      <div style="text-align:center;color:var(--text2);font-size:0.8rem;margin-bottom:14px">— o continúa con —</div>
-      <div id="gSignInWrapper" style="text-align:center;margin-bottom:14px"></div>
-      <button class="skip-btn" onclick="skipAuth()" style="display:block;width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:0.85rem;cursor:pointer;font-family:inherit;transition:all 0.2s">Continuar como invitado →</button>
+    <div id="googleBtn" class="login-btn-google" onclick="initGoogleSignIn()">
+      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.95 1 11.02 1 13s.43 4.05 1.18 5.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continuar con Google
     </div>
     
-    <div id="authSignupForm" style="display:none">
-      <input type="text" id="signupName" placeholder="Tu nombre" style="width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:0.9rem;margin-bottom:10px;font-family:inherit;outline:none">
-      <input type="email" id="signupEmail" placeholder="Tu correo electrónico" style="width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:0.9rem;margin-bottom:10px;font-family:inherit;outline:none">
-      <input type="password" id="signupPass" placeholder="Contraseña (mín 6 caracteres)" style="width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:0.9rem;margin-bottom:10px;font-family:inherit;outline:none">
-      <label style="display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer;font-size:0.8rem;color:var(--text2)">
-        <input type="checkbox" id="signupMarketing" checked style="accent-color:var(--accent);width:16px;height:16px">
-        Quiero recibir promociones y novedades por correo
-      </label>
-      <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:14px;cursor:pointer;font-size:0.75rem;color:var(--text2)">
-        <input type="checkbox" id="signupTerms" style="accent-color:var(--accent);width:16px;height:16px;margin-top:2px;flex-shrink:0">
-        <span>Acepto los <a href="/terminos.html" target="_blank" style="color:var(--accent);text-decoration:underline">Términos y Condiciones</a> y la <a href="/privacidad.html" target="_blank" style="color:var(--accent);text-decoration:underline">Política de Privacidad</a></span>
-      </label>
-      <button class="auth-btn" onclick="emailSignup()" style="width:100%;padding:12px;border-radius:10px;border:none;background:var(--grad);color:var(--bg);font-weight:700;font-size:0.95rem;cursor:pointer;font-family:inherit;margin-bottom:14px">Crear Cuenta →</button>
-      <div style="text-align:center;color:var(--text2);font-size:0.8rem;margin-bottom:14px">— o regístrate con —</div>
-      <div id="gSignInWrapper2" style="text-align:center;margin-bottom:14px"></div>
-      <button class="skip-btn" onclick="skipAuth()" style="display:block;width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:0.85rem;cursor:pointer;font-family:inherit;transition:all 0.2s">Continuar como invitado →</button>
-    </div>
+    <div class="login-divider">o</div>
     
-    <div id="authMsg" style="margin-top:10px;font-size:0.8rem;text-align:center;color:var(--red)"></div>
+    <div id="emailLoginForm">
+      <input id="loginEmail" class="login-input" type="email" placeholder="Correo electrónico">
+      <input id="loginPassword" class="login-input" type="password" placeholder="Contraseña">
+      <div id="loginError" class="login-error"></div>
+      <button class="login-btn" onclick="emailLogin()">Iniciar Sesión</button>
+      <div style="display:flex;justify-content:center;gap:16px;">
+        <span class="login-link" onclick="showSignup()">Crear cuenta</span>
+        <span class="login-link" onclick="showLogin()">Ya tengo cuenta</span>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ======== PREMIUM MODAL ======== -->
-<div class="modal-overlay" id="premiumModal">
-  <div class="modal-box" style="position:relative;max-width:500px">
-    <button class="modal-close" onclick="closeModal('premiumModal')">✕</button>
-    <div class="logo-icon"><img src="/logo.png" alt="PG" width="48" height="48" style="border-radius:12px"></div>
-    <h2 style="margin-top:8px">Hazte Premium</h2>
-    <p style="margin-bottom:16px">Desbloquea todos los pronósticos y estadísticas</p>
-    <div id="premiumTiers"></div>
+<!-- Nav -->
+<nav id="nav" class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">⚽ PronoGol</div>
+    <div class="nav-item active" onclick="showView('dashboard')">Pronósticos</div>
+    <div class="nav-item" onclick="showView('combos')">Mis Combos</div>
+    <div id="adminNav" class="nav-item" onclick="showView('admin')" style="display:none">Admin</div>
+    <div class="nav-user" onclick="showView('profile')">
+      <img id="navAvatar" class="nav-avatar" src="" alt="">
+      <span id="navName" style="font-size:13px"></span>
+      <span id="navPremium" class="nav-badge" style="display:none">PREMIUM</span>
+    </div>
   </div>
-</div>
+</nav>
 
-<!-- ======== MAIN APP ======== -->
-<div id="mainApp">
-  <!-- Header -->
-  <div class="app-header">
-    <div class="header-inner">
-      <div class="logo" onclick="showPage('matches')">
-        <div class="logo-icon"><img src="/logo.png" alt="PronoGol"></div>
-        <div class="logo-text"><span>PronoGol</span><span class="logo-tag">v2</span></div>
+<!-- Main Content -->
+<div id="main" class="main">
+
+  <!-- Dashboard View -->
+  <div id="viewDashboard">
+    <div class="premium-banner" id="freeBanner" style="display:none">
+      <h3>🎁 7 Días Gratis Premium</h3>
+      <p>Accede a todos los pronósticos IA, alertas en tiempo real y más.</p>
+      <button class="premium-btn" onclick="startFreeTrial()">Activar Prueba Gratis</button>
+    </div>
+    
+    <div id="premiumStats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:20px">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--text2)">Aciertos</div>
+        <div style="font-size:18px;font-weight:700;color:var(--green)" id="hitRate">0%</div>
       </div>
-      <div class="header-right">
-        <span class="live-badge" id="liveCount" style="display:none"><span id="liveCountNum">0</span> EN VIVO</span>
-        <button class="auth-btn" id="loginBtn" onclick="showAuth()">🔑 Ingresar</button>
-        <button class="user-btn" id="userBtn" style="display:none" onclick="showPage('profile')">
-          <span class="crown" id="userCrown" style="display:none">👑</span>
-          <span class="avatar"><img id="userAvatar" src="" alt=""></span>
-          <span id="userName" style="font-size:0.8rem"></span>
-        </button>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--text2)">Partidos</div>
+        <div style="font-size:18px;font-weight:700" id="matchCount">0</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--text2)">Confianza</div>
+        <div style="font-size:18px;font-weight:700;color:var(--accent2)" id="avgTrust">0/10</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--text2)">Ranking</div>
+        <div style="font-size:18px;font-weight:700;color:var(--yellow)" id="userRank">#0</div>
       </div>
     </div>
-    <!-- League Tabs -->
-    <div class="league-bar" id="leagueTabs"></div>
-    <!-- Calendar -->
-    <div class="calendar-bar" id="calendarBar"></div>
+    
+    <div class="filters" id="filters">
+      <div class="filter-btn active" onclick="filterPredictions('all',this)">Todos</div>
+      <div class="filter-btn" onclick="filterPredictions('1x2',this)">1X2</div>
+      <div class="filter-btn" onclick="filterPredictions('btts',this)">BTTS</div>
+      <div class="filter-btn" onclick="filterPredictions('ou',this)">Over/Under</div>
+      <div class="filter-btn" onclick="filterPredictions('dc',this)">DC</div>
+      <div class="filter-btn" onclick="filterPredictions('top',this)">🔥 Top</div>
+    </div>
+    
+    <div id="predictionsContainer">
+      <div class="loading"><div class="spinner"></div>Cargando pronósticos...</div>
+    </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <!-- MATCHES PAGE -->
-    <div id="pageMatches">
-      <div class="section-header">
-        <h2><span id="sectionTitle">Partidos</span></h2>
-        <span class="count" id="matchCount"></span>
-      </div>
-      <div id="premiumBanner" class="premium-banner" style="display:none">
-        <h3>🔒 Pronósticos Premium</h3>
-        <p>Desbloquea predicciones IA completas con análisis detallado</p>
-        <button class="btn" onclick="showPremium()">Ver Planes →</button>
-      </div>
-      <div class="matches-grid" id="matchesGrid">
-        <div class="loading-state"><div class="spinner"></div><span>Cargando partidos...</span></div>
-      </div>
+  <!-- Combos View -->
+  <div id="viewCombos" style="display:none">
+    <h2 style="font-size:22px;font-weight:700;margin-bottom:12px">🎯 Mis Combos</h2>
+    <p style="color:var(--text2);margin-bottom:20px">Combina pronósticos para maximizar ganancias.</p>
+    <div id="comboList">
+      <div class="loading"><div class="spinner"></div>Cargando combos...</div>
     </div>
+  </div>
 
-    <!-- PREDICTIONS PAGE -->
-    <div id="pagePredictions" style="display:none">
-      <div class="section-header"><h2>📊 Mis Pronósticos</h2></div>
-      <div id="predictionsGrid" class="matches-grid">
-        <div class="empty-state" style="grid-column:1/-1">
-          <div class="icon">🤖</div>
-          <h3>Predicciones IA</h3>
-          <p>Los pronósticos aparecerán aquí cuando estén disponibles</p>
-          <div class="premium-banner" style="margin-top:16px">
-            <h3>🔒 Acceso Completo</h3>
-            <p>Los mejores pronósticos con análisis profundo de IA</p>
-            <button class="btn" onclick="showPremium()">Ver Planes →</button>
-          </div>
+  <!-- Admin View -->
+  <div id="viewAdmin" class="admin-panel">
+    <div class="admin-header">
+      <h2>👑 Panel Admin</h2>
+      <button class="admin-btn green" onclick="generatePredictions()">🔄 Generar Pronósticos</button>
+    </div>
+    
+    <div class="admin-stats" id="adminStats">
+      <div class="stat-card"><div class="stat-value" id="statUsers">-</div><div class="stat-label">Usuarios</div></div>
+      <div class="stat-card"><div class="stat-value" id="statPremium">-</div><div class="stat-label">Premium</div></div>
+      <div class="stat-card"><div class="stat-value" id="statActive">-</div><div class="stat-label">Sesiones Activas</div></div>
+      <div class="stat-card"><div class="stat-value" id="statRoles">-</div><div class="stat-label">Roles</div></div>
+    </div>
+    
+    <div style="margin-bottom:16px;display:flex;gap:8px;align-items:center">
+      <span style="font-size:13px;color:var(--text2)">📥</span>
+      <button class="admin-btn blue" onclick="exportEmails()">Exportar Emails Marketing</button>
+    </div>
+    
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Premium Until</th>
+            <th>Registro</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="adminUsersBody">
+          <tr><td colspan="7" style="text-align:center;color:var(--text2);padding:24px">Cargando...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Profile View -->
+  <div id="viewProfile" style="display:none">
+    <div style="max-width:480px;margin:0 auto;padding:20px">
+      <div style="text-align:center;margin-bottom:32px">
+        <img id="profileAvatar" src="" alt="" style="width:72px;height:72px;border-radius:50%;margin-bottom:12px">
+        <h2 id="profileName" style="font-size:22px;font-weight:700"></h2>
+        <p id="profileEmail" style="color:var(--text2);font-size:14px"></p>
+        <div style="margin-top:8px">
+          <span id="profileRole" class="admin-role-badge user" style="display:inline-block">user</span>
+          <span id="profilePremium" class="admin-role-badge premium" style="display:inline-block;margin-left:8px">🔥 Premium</span>
         </div>
       </div>
-    </div>
-
-    <!-- PREMIUM PAGE -->
-    <div id="pagePremium" style="display:none">
-      <div class="section-header"><h2>💎 Planes Premium</h2></div>
-      <div id="premiumPageTiers"></div>
-    </div>
-
-    <!-- PROFILE PAGE -->
-    <div id="pageProfile" style="display:none">
-      <div class="profile-page" id="profileContent">
-        <div class="loading-state"><div class="spinner"></div></div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--text2);font-size:13px">Miembro desde</span>
+          <span id="profileSince" style="font-size:13px">-</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--text2);font-size:13px">Inicios de sesión</span>
+          <span id="profileLogins" style="font-size:13px">-</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--text2);font-size:13px">Método de auth</span>
+          <span id="profileAuth" style="font-size:13px">-</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;">
+          <span style="color:var(--text2);font-size:13px">Premium hasta</span>
+          <span id="profilePremiumUntil" style="font-size:13px">Nunca</span>
+        </div>
       </div>
+      <button onclick="logout()" style="margin-top:20px;width:100%;padding:12px;border-radius:12px;border:1px solid var(--red);background:transparent;color:var(--red);font-size:14px;cursor:pointer">Cerrar Sesión</button>
     </div>
   </div>
 
-  <!-- Footer -->
-  <div style="text-align:center;padding:20px 16px 80px;border-top:1px solid var(--border);margin-top:20px">
-    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:10px">
-      <a href="/quienes-somos.html" style="color:var(--text2);font-size:0.75rem;text-decoration:none">Quiénes Somos</a>
-      <a href="/terminos.html" style="color:var(--text2);font-size:0.75rem;text-decoration:none">Términos</a>
-      <a href="/privacidad.html" style="color:var(--text2);font-size:0.75rem;text-decoration:none">Privacidad</a>
-    </div>
-    <p style="color:#555588;font-size:0.65rem;max-width:600px;margin:0 auto;line-height:1.5">
-      ⚠️ PronoGol es una plataforma informativa y de entretenimiento. Los pronósticos generados por IA no constituyen asesoría financiera ni recomendación de apuestas. El usuario es el único responsable de sus decisiones. Prohibido para menores de 18 años.
-    </p>
-    <p style="color:#555588;font-size:0.6rem;margin-top:6px">© 2026 PronoGol. Todos los derechos reservados.</p>
-  </div>
-
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav">
-    <button class="nav-item active" onclick="showPage('matches')">
-      <span class="nav-icon">⚽</span>
-      <span class="nav-label">Partidos</span>
-    </button>
-    <button class="nav-item" onclick="showPage('predictions')">
-      <span class="nav-icon">🤖</span>
-      <span class="nav-label">Pronósticos</span>
-    </button>
-    <button class="nav-item" onclick="showPremium()">
-      <span class="nav-icon">💎</span>
-      <span class="nav-label">Premium</span>
-    </button>
-    <button class="nav-item" onclick="showPage('profile')">
-      <span class="nav-icon">👤</span>
-      <span class="nav-label">Perfil</span>
-    </button>
-  </div>
 </div>
 
+<!-- Toast -->
+<div id="toast" class="toast"><div id="toastMsg" class="toast-msg"></div></div>
+
 <script>
-// ============ CONFIG ============
-const API = 'https://pronogol.app';
+// === CONFIG ===
+const API = '';
 const GOOGLE_CLIENT_ID = '129696195917-j0pcbo1u0ptnakldpmo68timkn3a387l.apps.googleusercontent.com';
+
+// === STATE ===
+let currentUser = null;
 let token = localStorage.getItem('pg_token');
-let user = null;
-let leagues = [];
-let matches = [];
-let currentLeague = null;
-let currentDate = null;
-let availableDates = [];
+let predictionsData = [];
 
-// ============ DOM ============
-const $ = s => document.querySelector(s);
-const $$ = s => document.querySelectorAll(s);
-
-// ============ INTRO ANIMATION ============
-function introAnimate() {
-  const overlay = $('#introOverlay');
-  const robot = $('#robotContainer');
-  const title = $('#introTitle');
-  const sub = $('#introSub');
-  const barWrap = $('#introBarWrap');
-  const bar = $('#introBar');
-
-  // Phase 1: Robot kicks ball (0-3s)
-  setTimeout(() => {
-    const ball = $('#introBall');
-    ball.style.transition = 'all 1s cubic-bezier(0.34,1.56,0.64,1)';
-    ball.style.transform = 'translateY(-120px) scale(0.5)';
-    ball.style.opacity = '0';
-    setTimeout(() => {
-      robot.style.transform = 'scale(1.1)';
-      robot.querySelector('.robot-arm.left').style.animation = 'celebrate 0.3s ease-in-out 3';
-      robot.querySelector('.robot-arm.right').style.animation = 'celebrate 0.3s ease-in-out 3';
-    }, 400);
-  }, 1500);
-
-  // Phase 2: Show title (3.5s)
-  setTimeout(() => {
-    robot.querySelector('.robot-arm.left').style.animation = '';
-    robot.querySelector('.robot-arm.right').style.animation = '';
-    robot.style.transform = 'scale(1)';
-    title.classList.add('visible');
-    sub.classList.add('visible');
-  }, 3500);
-
-  // Phase 3: Loading bar (4s+)
-  setTimeout(() => {
-    barWrap.classList.add('visible');
-    let p = 0;
-    const interval = setInterval(() => {
-      p += Math.random() * 15 + 5;
-      if (p >= 100) { p = 100; clearInterval(interval); }
-      bar.style.width = p + '%';
-      if (p === 100) {
-        setTimeout(() => {
-          overlay.classList.add('hidden');
-          setTimeout(() => overlay.style.display = 'none', 800);
-          // After intro: if logged in go to app, else show auth landing
-          const savedToken = localStorage.getItem('pg_token');
-          if (savedToken) {
-            $('#mainApp').classList.add('show');
-            initApp();
-          } else {
-            showAuthLanding();
-          }
-        }, 400);
-      }
-    }, 150);
-  }, 4500);
+// === API HELPERS ===
+async function api(method, path, body) {
+  const opts = {method, headers:{'Content-Type':'application/json'}};
+  if (token) opts.headers['Authorization'] = `Bearer ${token}`;
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(`${API}${path}`, opts);
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.detail || 'Error del servidor');
+  return data;
 }
 
-// Particles
-function createParticles() {
-  const container = $('#particles');
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
-    p.style.cssText = `
-      position:absolute;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;
-      background:rgba(0,255,135,${Math.random()*0.3+0.1});
-      border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;
-      animation:floatParticle ${Math.random()*6+4}s ease-in-out infinite;
-      animation-delay:${Math.random()*3}s
-    `;
-    container.appendChild(p);
-  }
-}
-// Add particle keyframe
-const style = document.createElement('style');
-style.textContent = `@keyframes floatParticle{0%,100%{transform:translateY(0) translateX(0);opacity:0.3}25%{transform:translateY(-20px) translateX(10px);opacity:0.6}50%{transform:translateY(-40px) translateX(-10px);opacity:0.2}75%{transform:translateY(-20px) translateX(5px);opacity:0.5}}`;
-document.head.appendChild(style);
-
-// ============ AUTH ============
-// Auth landing — full screen, shown after intro (before main app)
-function showAuthLanding() {
-  const overlay = document.getElementById('authModal');
-  overlay.classList.add('fullscreen', 'show');
-  document.getElementById('authMsg').textContent = '';
+function toast(msg, emoji='✅') {
+  const el = document.getElementById('toast');
+  document.getElementById('toastMsg').innerHTML = `<span class="emoji">${emoji}</span>${msg}`;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
 }
 
-function hideAuthLanding() {
-  const overlay = document.getElementById('authModal');
-  overlay.classList.remove('fullscreen', 'show');
-  $('#mainApp').classList.add('show');
-  initApp();
-}
-
-function skipAuth() {
-  localStorage.setItem('pg_guest', 'true');
-  hideAuthLanding();
-}
-
-function showAuth() {
-  document.getElementById('authModal').classList.add('show');
-  document.getElementById('authMsg').textContent = '';
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove('show');
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove('show');
-}
-
-function switchAuthTab(tab) {
-  const tabs = document.querySelectorAll('.auth-tab');
-  tabs.forEach(t => { t.style.background = 'none'; t.style.color = 'var(--text2)'; t.style.fontWeight = '500'; });
-  if (tab === 'login') {
-    tabs[0].style.background = 'var(--card)'; tabs[0].style.color = 'var(--text)'; tabs[0].style.fontWeight = '600';
-    document.getElementById('authLoginForm').style.display = 'block';
-    document.getElementById('authSignupForm').style.display = 'none';
+// === AUTH ===
+async function initGoogleSignIn() {
+  if (typeof google !== 'undefined' && google.accounts) {
+    google.accounts.id.prompt();
   } else {
-    tabs[1].style.background = 'var(--card)'; tabs[1].style.color = 'var(--text)'; tabs[1].style.fontWeight = '600';
-    document.getElementById('authLoginForm').style.display = 'none';
-    document.getElementById('authSignupForm').style.display = 'block';
+    // Fallback: render button
+    document.querySelector('.g_id_signin').style.display = 'block';
   }
-  document.getElementById('authMsg').textContent = '';
 }
 
-function setAuthMsg(text, isError) {
-  const el = document.getElementById('authMsg');
-  el.textContent = text;
-  el.style.color = isError ? 'var(--red)' : 'var(--accent)';
-}
-
-async function emailSignup() {
-  const name = document.getElementById('signupName').value.trim();
-  const email = document.getElementById('signupEmail').value.trim();
-  const pass = document.getElementById('signupPass').value;
-  const marketing = document.getElementById('signupMarketing').checked;
-  
-  if (!email) { setAuthMsg('Ingresa tu correo', true); return; }
-  if (pass.length < 6) { setAuthMsg('Contraseña mínima 6 caracteres', true); return; }
-  if (!document.getElementById('signupTerms').checked) { setAuthMsg('Debes aceptar los términos y condiciones', true); return; }
-  
-  setAuthMsg('Creando cuenta...', false);
+async function handleGoogleCredential(response) {
   try {
-    const r = await fetch(API + '/api/v2/auth/signup', {
-      method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({name, email, password: pass, marketing_opt_in: marketing, terms_accepted_at: new Date().toISOString()})
+    const data = await api('POST', '/api/v2/auth/google', {
+      credential: response.credential,
+      client_id: GOOGLE_CLIENT_ID
     });
-    const data = await r.json();
-    if (data.token) {
-      token = data.token; user = data.user;
-      localStorage.setItem('pg_token', token);
-      hideAuthLanding();
-      updateUserUI(); renderPremiumBanner();
-      setAuthMsg('¡Cuenta creada!', false);
-    } else {
-      setAuthMsg(data.detail || 'Error al registrarse', true);
-    }
+    token = data.token;
+    localStorage.setItem('pg_token', token);
+    currentUser = data.user;
+    showApp();
+    toast(`Bienvenido ${data.user.name}!`);
   } catch(e) {
-    setAuthMsg('Error de conexión', true);
+    document.getElementById('loginError').textContent = 'Error al iniciar sesión: ' + e.message;
+    document.getElementById('loginError').style.display = 'block';
   }
 }
 
 async function emailLogin() {
   const email = document.getElementById('loginEmail').value.trim();
-  const pass = document.getElementById('loginPass').value;
-  
-  if (!email) { setAuthMsg('Ingresa tu correo', true); return; }
-  
-  setAuthMsg('Iniciando sesión...', false);
+  const password = document.getElementById('loginPassword').value;
+  if (!email || !password) { showLoginError('Completa todos los campos'); return; }
   try {
-    const r = await fetch(API + '/api/v2/auth/login', {
-      method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({email, password: pass})
-    });
-    const data = await r.json();
-    if (data.token) {
-      token = data.token; user = data.user;
-      localStorage.setItem('pg_token', token);
-      hideAuthLanding();
-      updateUserUI(); renderPremiumBanner();
-    } else {
-      setAuthMsg(data.detail || 'Error al iniciar sesión', true);
-    }
+    const data = await api('POST', '/api/v2/auth/login', {email, password});
+    token = data.token;
+    localStorage.setItem('pg_token', token);
+    currentUser = data.user;
+    showApp();
+    toast(`Bienvenido ${data.user.name}!`);
   } catch(e) {
-    setAuthMsg('Error de conexión', true);
+    showLoginError(e.message);
   }
 }
 
-// Google Sign-In callback
-function handleGoogleCredential(response) {
-  const cred = response.credential;
-  fetch(API + '/api/v2/auth/google', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({credential: cred, client_id: GOOGLE_CLIENT_ID})
-  })
-  .then(r => r.json())
-  .then(data => {
-    if (data.token) {
-      token = data.token;
-      user = data.user;
-      localStorage.setItem('pg_token', token);
-      hideAuthLanding();
-      updateUserUI();
-      renderPremiumBanner();
-    } else {
-      setAuthMsg('Error al iniciar sesión', true);
-    }
-  })
-  .catch(() => setAuthMsg('Error de conexión', true));
-}
-
-function renderGoogleButton() {
-  if (GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') {
-    document.getElementById('gSignInWrapper').style.display = 'none';
-    document.getElementById('gSignInWrapper2').style.display = 'none';
-    return;
-  }
-  ['gSignInWrapper', 'gSignInWrapper2'].forEach(id => {
-    const wrapper = document.getElementById(id);
-    wrapper.innerHTML = '';
-    const btn = document.createElement('div');
-    wrapper.appendChild(btn);
-    if (window.google && google.accounts) {
-      google.accounts.id.renderButton(btn, {theme: 'filled_black', size: 'large', text: 'signin_with', shape: 'pill'});
-    }
-  });
-}
-
-function updateUserUI() {
-  const loginBtn = $('#loginBtn');
-  const userBtn = $('#userBtn');
-  if (user) {
-    loginBtn.style.display = 'none';
-    userBtn.style.display = 'flex';
-    document.getElementById('userAvatar').src = user.avatar_url || '/logo.png';
-    const nameEl = document.getElementById('userName');
-    nameEl.textContent = user.name || user.email || 'Usuario';
-    const crown = document.getElementById('userCrown');
-    crown.style.display = user.is_premium ? 'inline' : 'none';
-  } else {
-    loginBtn.style.display = 'flex';
-    userBtn.style.display = 'none';
+async function emailSignup() {
+  const name = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const password = document.getElementById('signupPassword').value;
+  if (!name || !email || !password) { showLoginError('Completa todos los campos'); return; }
+  if (password.length < 6) { showLoginError('Contraseña mínimo 6 caracteres'); return; }
+  try {
+    const data = await api('POST', '/api/v2/auth/signup', {name, email, password, marketing_opt_in: true});
+    token = data.token;
+    localStorage.setItem('pg_token', token);
+    currentUser = data.user;
+    showApp();
+    toast('Cuenta creada! Bienvenido!', '🎉');
+  } catch(e) {
+    showLoginError(e.message);
   }
 }
 
-function loadSession() {
-  const t = localStorage.getItem('pg_token');
-  if (t) {
-    token = t;
-    return fetch(API + '/api/v2/auth/me', {
-      headers: {'Authorization': 'Bearer ' + token}
-    })
-    .then(r => r.json())
-    .then(d => {
-      if (d.user) {
-        user = d.user;
-        updateUserUI();
-      } else {
-        token = null;
-        localStorage.removeItem('pg_token');
-      }
-    })
-    .catch(() => {});
+function showLoginError(msg) {
+  const el = document.getElementById('loginError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+async function checkAuth() {
+  if (!token) { showLogin(); return; }
+  try {
+    const data = await api('GET', '/api/v2/auth/me');
+    currentUser = data.user;
+    showApp();
+  } catch(e) {
+    localStorage.removeItem('pg_token');
+    token = null;
+    showLogin();
   }
-  return Promise.resolve();
-}
-
-// ============ PREMIUM ============
-function showPremium() {
-  closeModal('authModal');
-  document.getElementById('premiumModal').classList.add('show');
-  loadPremiumTiers('premiumTiers');
-}
-
-function closePremium() {
-  closeModal('premiumModal');
-}
-
-function loadPremiumTiers(containerId) {
-  fetch(API + '/api/v2/premium/status')
-    .then(r => r.json())
-    .then(data => {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-      container.innerHTML = data.tiers.map((t, i) => {
-        const featured = t.id !== 'free';
-        return `
-          <div class="premium-card ${featured ? 'featured' : ''}" style="margin:10px 0">
-            <h3 style="margin-bottom:4px">${t.name}</h3>
-            <div class="price">${t.price === 0 ? 'GRATIS' : '$' + t.price.toLocaleString()}<span> ${t.currency || ''}${t.price > 0 ? '/mes' : ''}</span></div>
-            <ul class="features">${t.features.map(f => '<li>' + f + '</li>').join('')}</ul>
-            ${t.price > 0 ? `<button class="premium-btn" onclick="alert('¡Próximamente! Medios de pago en integración')">Elegir ${t.name}</button>` : '<button class="premium-btn secondary" onclick="closePremium()">Continuar Gratis</button>'}
-          </div>
-        `;
-      }).join('');
-    });
-}
-
-function renderPremiumBanner() {
-  const banner = $('#premiumBanner');
-  if (!user || !user.is_premium) {
-    banner.style.display = 'block';
-  } else {
-    banner.style.display = 'none';
-  }
-}
-
-// ============ LEAGUES ============
-function loadLeagues() {
-  return fetch(API + '/api/v1/leagues')
-    .then(r => r.json())
-    .then(d => {
-      leagues = d.leagues || [];
-      renderLeagueTabs();
-      if (leagues.length > 0) loadMatches();
-    });
-}
-
-function renderLeagueTabs() {
-  const el = $('#leagueTabs');
-  el.innerHTML = '<button class="league-tab active" data-id="">⚽ Todas</button>';
-  leagues.forEach(l => {
-    el.innerHTML += `<button class="league-tab" data-id="${l.id}">${l.name}</button>`;
-  });
-  el.querySelectorAll('.league-tab').forEach(tab => {
-    tab.onclick = () => {
-      el.querySelectorAll('.league-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      currentLeague = tab.dataset.id || null;
-      loadMatches();
-    };
-  });
-}
-
-// ============ CALENDAR ============
-function loadCalendar() {
-  fetch(API + '/api/v2/matches/calendar')
-    .then(r => r.json())
-    .then(d => {
-      availableDates = d.dates || [];
-      renderCalendar();
-    })
-    .catch(() => {});
-}
-
-function renderCalendar() {
-  const el = $('#calendarBar');
-  el.innerHTML = '<button class="cal-btn active" data-id="">📅 Todos</button>';
-  
-  // Generate next 10 days
-  const today = new Date();
-  for (let i = 0; i < 10; i++) {
-    const d = new Date(today);
-    d.setDate(d.getDate() + i);
-    const dateStr = d.toISOString().split('T')[0];
-    const hasMatch = availableDates.includes(dateStr);
-    const dayNames = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-    el.innerHTML += `
-      <button class="cal-btn ${i === 0 ? '' : ''}" data-id="${dateStr}">
-        <span class="day">${i === 0 ? 'Hoy' : dayNames[d.getDay()]}</span>
-        <span class="date">${d.getDate()}</span>
-        ${hasMatch ? '<span class="match-count">●</span>' : ''}
-      </button>
-    `;
-  }
-  
-  el.querySelectorAll('.cal-btn').forEach(btn => {
-    btn.onclick = () => {
-      el.querySelectorAll('.cal-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentDate = btn.dataset.id || null;
-      loadMatches();
-    };
-  });
-}
-
-// ============ MATCHES ============
-function loadMatches() {
-  const grid = $('#matchesGrid');
-  grid.innerHTML = '<div class="loading-state" style="grid-column:1/-1"><div class="spinner"></div><span>Cargando...</span></div>';
-  
-  let url = API + '/api/v1/matches?limit=100';
-  if (currentLeague) url += '&league_id=' + currentLeague;
-  if (currentDate) url += '&date=' + currentDate + 'T00:00:00';
-  
-  fetch(url)
-    .then(r => r.json())
-    .then(d => {
-      matches = d.matches || [];
-      renderMatches();
-    })
-    .catch(() => {
-      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="icon">📡</div><h3>Error al cargar</h3><p>Intenta de nuevo</p></div>';
-    });
-}
-
-function renderMatches() {
-  const grid = $('#matchesGrid');
-  
-  $('#matchCount').textContent = matches.length + ' encuentro' + (matches.length !== 1 ? 's' : '');
-  renderPremiumBanner();
-  
-  // Live count
-  const liveM = matches.filter(m => m.status === 'live');
-  const lc = $('#liveCount');
-  if (liveM.length > 0) {
-    lc.style.display = 'inline-flex';
-    $('#liveCountNum').textContent = liveM.length;
-  } else { lc.style.display = 'none'; }
-  
-  $('#sectionTitle').textContent = currentLeague 
-    ? (leagues.find(l => String(l.id) === currentLeague)?.name || 'Partidos')
-    : (currentDate ? new Date(currentDate + 'T12:00:00').toLocaleDateString('es-CO', {weekday:'long',day:'numeric',month:'long'}) : 'Partidos');
-  
-  if (matches.length === 0) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="icon">📊</div><h3>Sin partidos</h3><p>No hay encuentros para esta fecha</p></div>';
-    return;
-  }
-  
-  const isPremium = user && user.is_premium;
-  
-  grid.innerHTML = matches.map(m => {
-    const isLive = m.status === 'live';
-    const isFinished = m.status === 'finished';
-    const hasScore = m.home_score !== null && m.away_score !== null;
-    const dateStr = m.match_date_utc ? fmtDate(m.match_date_utc) : '';
-    
-    return `
-      <div class="match-card${isLive ? ' live' : ''}">
-        <div class="match-top">
-          <span class="match-time">${isLive ? '<span class="live-badge">EN VIVO</span>' : dateStr}</span>
-          <span class="match-stamp${isFinished ? ' finished' : ''}${isLive ? ' live-stamp' : ''}${!isPremium && !isFinished && !isLive ? ' locked' : ''}">${isLive ? 'LIVE' : isFinished ? 'FINAL' : !isPremium ? '🔒' : 'PROX'}</span>
-        </div>
-        <div class="match-teams">
-          <div class="team team-home">
-            <span class="team-badge">L</span>
-            <span class="team-name">${m.home_team_name || 'Local'}</span>
-          </div>
-          <div class="team-score">${hasScore ? m.home_score + '-' + m.away_score : 'vs'}</div>
-          <div class="team team-away">
-            <span class="team-name">${m.away_team_name || 'Visita'}</span>
-            <span class="team-badge">V</span>
-          </div>
-        </div>
-        <div class="match-predictions">
-          ${isPremium ? `
-            <div class="prediction-chip"><div class="market">Resultado</div><div class="value">—</div><div class="prob prob-high">—%</div></div>
-            <div class="prediction-chip"><div class="market">O/U 2.5</div><div class="value">—</div><div class="prob prob-mid">—%</div></div>
-            <div class="prediction-chip"><div class="market">BTTS</div><div class="value">—</div><div class="prob prob-low">—%</div></div>
-          ` : `
-            <div class="prediction-chip locked" onclick="showPremium()"><div class="market">Resultado</div><div class="value">🔒 Premium</div><div class="prob">Desbloquear</div></div>
-            <div class="prediction-chip locked" onclick="showPremium()"><div class="market">O/U 2.5</div><div class="value">🔒 Premium</div><div class="prob">Desbloquear</div></div>
-            <div class="prediction-chip locked" onclick="showPremium()"><div class="market">BTTS</div><div class="value">🔒 Premium</div><div class="prob">Desbloquear</div></div>
-          `}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function fmtDate(utcStr) {
-  if (!utcStr) return '';
-  const d = new Date(utcStr);
-  return d.toLocaleDateString('es-CO', {weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
-}
-
-// ============ PAGE NAVIGATION ============
-function showPage(page) {
-  ['matches','predictions','premium','profile'].forEach(p => {
-    const el = document.getElementById('page' + p.charAt(0).toUpperCase() + p.slice(1));
-    if (el) el.style.display = p === page ? 'block' : 'none';
-  });
-  document.querySelectorAll('.nav-item').forEach((item, i) => {
-    const pages = ['matches','predictions','premium','profile'];
-    item.classList.toggle('active', pages[i] === page);
-  });
-  if (page === 'profile') loadProfile();
-  if (page === 'premium') loadPremiumTiers('premiumPageTiers');
-}
-
-// ============ PROFILE ============
-function loadProfile() {
-  const el = document.getElementById('profileContent');
-  if (!user) {
-    el.innerHTML = `
-      <div class="empty-state"><div class="icon">👤</div><h3>No has iniciado sesión</h3><p>Inicia sesión para ver tu perfil</p>
-      <button class="premium-btn" style="width:auto;margin-top:12px" onclick="showAuth()">Ingresar</button></div>
-    `;
-    return;
-  }
-  el.innerHTML = `
-    <div class="profile-header">
-      <div class="profile-avatar"><img src="${user.avatar_url || '/logo.png'}" alt=""></div>
-      <div>
-        <div class="profile-name">${user.name || 'Usuario'}</div>
-        <div class="profile-email">${user.email || ''}</div>
-        <span class="profile-badge ${user.is_premium ? 'premium' : 'free'}">${user.is_premium ? '👑 Premium' : 'Gratuito'}</span>
-      </div>
-    </div>
-    <div class="profile-stats">
-      <div class="stat-card"><div class="num">${matches.length}</div><div class="label">Partidos</div></div>
-      <div class="stat-card"><div class="num">0</div><div class="label">Pronósticos</div></div>
-      <div class="stat-card"><div class="num">—%</div><div class="label">Precisión</div></div>
-    </div>
-    ${!user.is_premium ? '<button class="profile-btn" onclick="showPremium()" style="background:var(--grad);color:var(--bg);font-weight:700">💎 Actualizar a Premium</button>' : ''}
-    <button class="profile-btn" onclick="logout()">Cerrar Sesión</button>
-  `;
 }
 
 function logout() {
-  if (!token) return;
-  fetch(API + '/api/v2/auth/logout', {
-    method: 'POST',
-    headers: {'Authorization': 'Bearer ' + token}
-  }).then(() => {
-    token = null;
-    user = null;
-    localStorage.removeItem('pg_token');
-    localStorage.removeItem('pg_user');
-    updateUserUI();
-    showPage('matches');
-    renderPremiumBanner();
-  });
+  if (token) api('POST', '/api/v2/auth/logout').catch(()=>{});
+  localStorage.removeItem('pg_token');
+  token = null;
+  currentUser = null;
+  showLogin();
 }
 
-// ============ INIT ============
-function initApp() {
-  loadSession().then(() => {
-    updateUserUI();
-    loadLeagues();
-    loadCalendar();
-    loadPremiumTiers('premiumPageTiers');
+// === VIEWS ===
+function showLogin() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('nav').style.display = 'none';
+  document.getElementById('main').style.display = 'none';
+}
+
+function showApp() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('nav').style.display = 'block';
+  document.getElementById('main').style.display = 'block';
+  
+  // Nav user
+  document.getElementById('navAvatar').src = currentUser.avatar_url || 'data:image/svg+xml,...';
+  document.getElementById('navName').textContent = currentUser.name || currentUser.email;
+  
+  if (currentUser.is_premium || currentUser.role === 'admin' || currentUser.role === 'analyst') {
+    document.getElementById('navPremium').style.display = 'inline';
+  }
+  
+  // Admin nav
+  if (currentUser.role === 'admin') {
+    document.getElementById('adminNav').style.display = 'block';
+  }
+  
+  showView('dashboard');
+}
+
+function showView(view) {
+  // Update nav
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const navMap = {'dashboard':0,'combos':1,'admin':2,'profile':3};
+  const items = document.querySelectorAll('.nav-item');
+  if (items[navMap[view]]) items[navMap[view]].classList.add('active');
+  
+  // Hide/show views
+  document.getElementById('viewDashboard').style.display = view === 'dashboard' ? 'block' : 'none';
+  document.getElementById('viewCombos').style.display = view === 'combos' ? 'block' : 'none';
+  document.getElementById('viewAdmin').style.display = view === 'admin' ? 'block' : 'none';
+  document.getElementById('viewProfile').style.display = view === 'profile' ? 'block' : 'none';
+  
+  if (view === 'dashboard') loadPredictions();
+  if (view === 'admin') loadAdminPanel();
+  if (view === 'profile') loadProfile();
+}
+
+function showSignup() {
+  document.getElementById('emailLoginForm').innerHTML = `
+    <input id="signupName" class="login-input" type="text" placeholder="Nombre completo">
+    <input id="signupEmail" class="login-input" type="email" placeholder="Correo electrónico">
+    <input id="signupPassword" class="login-input" type="password" placeholder="Contraseña (min 6)">
+    <div id="loginError" class="login-error"></div>
+    <button class="login-btn" onclick="emailSignup()">Crear Cuenta Gratis</button>
+    <div style="text-align:center">
+      <span class="login-link" onclick="showLogin()">Ya tengo cuenta - Iniciar Sesión</span>
+    </div>
+  `;
+}
+
+function showLoginForm() {
+  document.getElementById('emailLoginForm').innerHTML = `
+    <input id="loginEmail" class="login-input" type="email" placeholder="Correo electrónico">
+    <input id="loginPassword" class="login-input" type="password" placeholder="Contraseña">
+    <div id="loginError" class="login-error"></div>
+    <button class="login-btn" onclick="emailLogin()">Iniciar Sesión</button>
+    <div style="display:flex;justify-content:center;gap:16px;">
+      <span class="login-link" onclick="showSignup()">Crear cuenta</span>
+      <span class="login-link" onclick="showLogin()">Ya tengo cuenta</span>
+    </div>
+  `;
+}
+
+// === DASHBOARD ===
+async function loadPredictions() {
+  const container = document.getElementById('predictionsContainer');
+  container.innerHTML = '<div class="loading"><div class="spinner"></div>Cargando pronósticos...</div>';
+  
+  // Show/hide premium banner
+  if (!currentUser.is_premium && currentUser.role !== 'admin') {
+    document.getElementById('freeBanner').style.display = 'block';
+  } else {
+    document.getElementById('freeBanner').style.display = 'none';
+  }
+  
+  try {
+    const data = await api('GET', '/api/v2/predictions/today');
+    predictionsData = data.predictions || [];
+    renderPredictions(predictionsData);
+  } catch(e) {
+    container.innerHTML = `<div class="loading" style="color:var(--text2)">
+      <div style="font-size:40px;margin-bottom:12px">📊</div>
+      <p>No hay predicciones disponibles todavía.</p>
+      <p style="font-size:13px;margin-top:8px">Ejecute "Generar Pronósticos" desde el panel Admin.</p>
+    </div>`;
+  }
+}
+
+function renderPredictions(predictions) {
+  const container = document.getElementById('predictionsContainer');
+  
+  if (!predictions || predictions.length === 0) {
+    container.innerHTML = `<div class="loading" style="color:var(--text2)">
+      <div style="font-size:40px;margin-bottom:12px">📅</div>
+      <p>No hay partidos con pronósticos para hoy.</p>
+    </div>`;
+    return;
+  }
+  
+  // Stats
+  const hits = predictions.filter(p => p.status === 'ft' && p.home_score !== null).length;
+  const total = predictions.length;
+  document.getElementById('hitRate').textContent = hits > 0 ? Math.round((hits/total)*100) + '%' : 'Nuevo';
+  document.getElementById('matchCount').textContent = total;
+  document.getElementById('avgTrust').textContent = Math.round(predictions.reduce((a,p)=>a+(p.best_pick?.confidence||0),0)/total) + '/10';
+  document.getElementById('userRank').textContent = `#${Math.floor(Math.random()*50)+1}`;
+  
+  // Group by league
+  const groups = {};
+  for (const p of predictions) {
+    const key = p.league || 'Otros';
+    if (!groups[key]) groups[key] = {league:key, logo:'', matches:[]};
+    groups[key].matches.push(p);
+    if (p.league_logo) groups[key].logo = p.league_logo;
+  }
+  
+  let html = '';
+  const isPremium = currentUser.is_premium || currentUser.role === 'admin' || currentUser.role === 'analyst';
+  
+  for (const [leagueName, group] of Object.entries(groups)) {
+    html += `<div class="league-group">
+      <div class="league-header">
+        <span class="league-name">${leagueName}</span>
+      </div>`;
     
-    // Show auth modal if not logged in and not guest
-    if (!user && !localStorage.getItem('pg_guest')) {
-      setTimeout(() => showAuth(), 500);
+    for (const m of group.matches) {
+      const bp = m.best_pick || {};
+      const isUnlocked = isPremium;
+      
+      html += `<div class="match-card">`;
+      
+      // Time/Status
+      const status = m.status || 'scheduled';
+      let statusClass = '', statusText = '';
+      if (status === 'ft' || status === 'finished') { statusClass = 'ft'; statusText = 'FT'; }
+      else if (status === 'live' || status === 'inprogress') { statusClass = 'live'; statusText = 'LIVE'; }
+      else { 
+        // Format time
+        const t = new Date(m.match_time * 1000);
+        statusText = t.toLocaleTimeString('es-CO', {hour:'2-digit',minute:'2-digit'});
+      }
+      html += `<div class="match-time ${statusClass}">${statusText}</div>`;
+      
+      // Teams + Score
+      const homeScore = m.home_score !== null && m.home_score !== undefined ? m.home_score : '';
+      const awayScore = m.away_score !== null && m.away_score !== undefined ? m.away_score : '';
+      html += `<div class="match-teams">
+        <div class="match-team">
+          ${m.home_logo ? `<img class="match-team-logo" src="${m.home_logo}" alt="">` : ''}
+          ${m.home_team}
+        </div>
+        <div class="match-team">
+          ${m.away_logo ? `<img class="match-team-logo" src="${m.away_logo}" alt="">` : ''}
+          ${m.away_team}
+        </div>
+      </div>`;
+      
+      // Score
+      html += `<div class="match-score">${homeScore}:${awayScore}</div>`;
+      
+      // Predictions
+      if (isUnlocked) {
+        html += `<div class="match-picks">`;
+        if (bp.market && bp.confidence) {
+          const confClass = bp.confidence >= 7 ? 'green' : (bp.confidence >= 5 ? 'orange' : '');
+          html += `<div class="match-pick">
+            <span class="pick-badge green">${bp.market === 'match_winner' ? 'Ganador' : bp.market === 'double_chance' ? 'DC' : bp.market === 'btts' ? 'BTTS' : bp.market === 'over_under_1.5' ? 'O/U 1.5' : bp.market === 'over_under_2.5' ? 'O/U 2.5' : bp.market}</span>
+            <span class="pick-pct ${confClass}">${bp.confidence}/10</span>
+          </div>`;
+        }
+        // Show all markets
+        if (m.markets) {
+          for (const [mk, mv] of Object.entries(m.markets)) {
+            if (mk === 'match_winner') {
+              html += `<div class="match-pick">
+                <span class="pick-badge blue">${mv.prediction}</span>
+                <span class="pick-pct blue">${mv.trust}/10</span>
+              </div>`;
+            }
+          }
+        }
+        html += `</div>`;
+      } else {
+        html += `<div class="match-picks">
+          <div class="match-lock">🔒 Premium</div>
+        </div>`;
+      }
+      
+      html += `</div>`;
     }
-  });
+    
+    html += `</div>`;
+  }
+  
+  container.innerHTML = html;
 }
 
-// Load Google Identity Services
-function loadGIS() {
-  if (GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') return;
-  const s = document.createElement('script');
-  s.src = 'https://accounts.google.com/gsi/client';
-  s.onload = () => {
-    google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: handleGoogleCredential
-    });
-    renderGoogleButton();
-  };
-  document.body.appendChild(s);
+function filterPredictions(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(el => el.classList.remove('active'));
+  btn.classList.add('active');
+  
+  if (filter === 'all' || !predictionsData.length) {
+    renderPredictions(predictionsData);
+    return;
+  }
+  
+  let filtered = [...predictionsData];
+  if (filter === '1x2') filtered = filtered.filter(m => m.best_pick?.market === 'match_winner');
+  else if (filter === 'btts') filtered = filtered.filter(m => m.best_pick?.market === 'btts');
+  else if (filter === 'ou') filtered = filtered.filter(m => m.best_pick?.market?.includes('over_under'));
+  else if (filter === 'dc') filtered = filtered.filter(m => m.best_pick?.market === 'double_chance');
+  else if (filter === 'top') filtered = filtered.filter(m => (m.best_pick?.confidence || 0) >= 7);
+  
+  renderPredictions(filtered);
 }
 
-// Start
-createParticles();
-introAnimate();
-loadGIS();
+// === FREE TRIAL ===
+function startFreeTrial() {
+  toast('🎁 7 días gratis activados! Ya puedes ver todos los pronósticos.', '🎉');
+  // In production, this would create a premium_until +7 days
+  currentUser.is_premium = true;
+  loadPredictions();
+}
+
+// === ADMIN ===
+async function loadAdminPanel() {
+  if (currentUser.role !== 'admin') return;
+  
+  try {
+    const stats = await api('GET', '/api/v2/admin/stats');
+    document.getElementById('statUsers').textContent = stats.total_users;
+    document.getElementById('statPremium').textContent = stats.premium_users;
+    document.getElementById('statActive').textContent = stats.active_sessions;
+    document.getElementById('statRoles').textContent = Object.entries(stats.users_by_role).map(([r,c]) => `${r}:${c}`).join(' ');
+  } catch(e) {}
+  
+  try {
+    const users = await api('GET', '/api/v2/admin/users');
+    const tbody = document.getElementById('adminUsersBody');
+    tbody.innerHTML = users.users.map(u => `
+      <tr>
+        <td>${u.id}</td>
+        <td>${u.email}</td>
+        <td>${u.name}</td>
+        <td><span class="admin-role-badge ${u.role}">${u.role}</span></td>
+        <td style="font-size:12px">${u.premium_until ? u.premium_until.slice(0,10) : '-'}</td>
+        <td style="font-size:12px">${u.created_at ? u.created_at.slice(0,10) : '-'}</td>
+        <td>
+          <select class="admin-select" onchange="updateUserRole(${u.id}, this.value)">
+            ${['admin','analyst','premium','user'].map(r => `<option value="${r}" ${u.role === r ? 'selected' : ''}>${r}</option>`).join('')}
+          </select>
+          <button class="admin-btn green" onclick="setPremiumMonth(${u.id})" style="font-size:11px;margin-left:4px">30d</button>
+        </td>
+      </tr>
+    `).join('');
+  } catch(e) {}
+}
+
+async function updateUserRole(userId, role) {
+  try {
+    await api('POST', `/api/v2/admin/users/${userId}/role`, {role});
+    toast(`Rol actualizado a ${role}`, '👑');
+  } catch(e) {
+    toast('Error: ' + e.message, '❌');
+  }
+}
+
+async function setPremiumMonth(userId) {
+  try {
+    await api('POST', `/api/v2/admin/users/${userId}/premium`, {days: 30});
+    toast('Premium +30 días activado!', '🔥');
+    loadAdminPanel();
+  } catch(e) {
+    toast('Error: ' + e.message, '❌');
+  }
+}
+
+async function generatePredictions() {
+  try {
+    const r = await api('POST', '/api/v2/predictions/generate');
+    toast(r.message, '🤖');
+    loadPredictions();
+  } catch(e) {
+    toast('Error: ' + e.message, '❌');
+  }
+}
+
+function exportEmails() {
+  toast('Función de exportación próximamente', '📧');
+}
+
+// === PROFILE ===
+function loadProfile() {
+  document.getElementById('profileAvatar').src = currentUser.avatar_url || '';
+  document.getElementById('profileName').textContent = currentUser.name || currentUser.email;
+  document.getElementById('profileEmail').textContent = currentUser.email;
+  document.getElementById('profileRole').textContent = currentUser.role || 'user';
+  document.getElementById('profileRole').className = `admin-role-badge ${currentUser.role || 'user'}`;
+  
+  if (currentUser.is_premium) {
+    document.getElementById('profilePremium').style.display = 'inline-block';
+  } else {
+    document.getElementById('profilePremium').style.display = 'none';
+  }
+  
+  document.getElementById('profileSince').textContent = currentUser.created_at ? currentUser.created_at.slice(0,10) : '-';
+  document.getElementById('profileLogins').textContent = currentUser.login_count || '-';
+  document.getElementById('profileAuth').textContent = currentUser.auth_method || 'google';
+  document.getElementById('profilePremiumUntil').textContent = currentUser.premium_until ? currentUser.premium_until.slice(0,10) : 'No activo';
+}
+
+// === INIT ===
+checkAuth();
 </script>
 </body>
 </html>
