@@ -138,7 +138,20 @@ def generate_predictions_for_date(date_str=None):
         
         # Probabilities
         rank_diff = home_rank - away_rank
-        if rank_diff <= -15:
+        both_default = (home_rank == 30 and away_rank == 30)
+        
+        if both_default:
+            # No ranking data: use xG ratio for probs, default home advantage
+            xg_ratio = xg_home / max(xg_away, 0.1)
+            if xg_ratio >= 1.8:
+                home_win_pct = 55; draw_pct = 25; away_win_pct = 20
+            elif xg_ratio >= 1.3:
+                home_win_pct = 48; draw_pct = 28; away_win_pct = 24
+            elif xg_ratio >= 0.8:
+                home_win_pct = 42; draw_pct = 28; away_win_pct = 30
+            else:
+                home_win_pct = 35; draw_pct = 25; away_win_pct = 40
+        elif rank_diff <= -15:
             home_win_pct = 65; draw_pct = 20; away_win_pct = 15
         elif rank_diff <= -8:
             home_win_pct = 55; draw_pct = 25; away_win_pct = 20
