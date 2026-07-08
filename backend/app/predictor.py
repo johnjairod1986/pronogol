@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 import requests
 
 DATA_DIR = os.environ.get("PRONOGOL_DATA_DIR", "/app/data")
-FOOTYSTATS_KEY = "1abc78…0f72"
+FOOTYSTATS_KEY = "1abc780710040e043b218e141869d4b664aac69ed8b97ff98dc96da9ca420f72"
 FOOTYSTATS_URL = "https://api.football-data-api.com"
 SEASON_IDS = {16494: 16494}  # comp_id: season_id
 
@@ -17,7 +17,10 @@ LEAGUES = {
     16494: "Mundial 2026",
     16718: "Chile Copa Chile",
     16572: "Finland Veikkausliiga",
-    17128: "UEFA CL - Qualifiers",
+    17128: "UEFA Champions League - Clasificación",
+    17130: "UEFA Conference League - Clasificación",
+    16927: "Bolivia - Liga Profesional",
+    16783: "Brasil - Serie B",
 }
 
 # Team logo CDN
@@ -26,7 +29,7 @@ LOGO_CDN = "https://media.api-sports.io/football/teams"
 def api_get(endpoint, timeout=10):
     """Call FootyStats API"""
     sep = "&" if "?" in endpoint else "?"
-    url = f"{FOOTYSTATS_URL}{endpoint}{sep}key=***"
+    url = f"{FOOTYSTATS_URL}{endpoint}{sep}key={FOOTYSTATS_KEY}"
     r = requests.get(url, timeout=timeout)
     return r.json()
 
@@ -158,11 +161,11 @@ def generate_predictions():
             home_score = None; away_score = None
         
         # League name
-        league_name = LEAGUES.get(comp_id, match.get("league_name", "") or match.get("name", "Otra liga"))
+        league_name = LEAGUES.get(comp_id, match.get("name", match.get("league_name", "Otra liga")))
         
         # Fetch detail for xG (skip if too many matches to avoid rate limits)
         detail = {}
-        if len(matches) <= 20:
+        if len(matches) <= 25:
             detail = get_match_detail(mid)
         
         xg_home = float(detail.get("team_a_xg_prematch") or detail.get("team_a_xg", 0) or 0)
@@ -280,10 +283,12 @@ def generate_predictions():
     }
     
     os.makedirs(DATA_DIR, exist_ok=True)
-    with open(os.path.join(DATA_DIR, "predictions_cache.json"), "w") as f:
+    cache_path = os.path.join(DATA_DIR, "predictions_cache.json")
+    with open(cache_path, "w") as f:
         json.dump(cache, f, indent=2)
     
     print(f"✅ Generated {len(predictions)} predictions for {len(set(p['league'] for p in predictions))} leagues")
+    print(f"📁 Saved to {cache_path}")
     return cache
 
 if __name__ == "__main__":
