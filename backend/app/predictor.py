@@ -14,12 +14,19 @@ DAYS_AHEAD = 5  # Generate predictions for today + 5 more days
 
 LEAGUES = {
     16494: "Mundial 2026",
-    16718: "Chile Copa Chile",
-    16572: "Finland Veikkausliiga",
+    16537: "Irlanda - Premier Division",
+    16558: "Noruega - Eliteserien",
+    16572: "Finlandia - Veikkausliiga",
+    16576: "Suecia - Superettan",
+    16580: "Argentina - Liga Profesional",
+    16714: "Ecuador - Serie A",
+    16718: "Chile - Copa Chile",
+    16783: "Brasil - Serie B",
+    16844: "China - League One",
+    16927: "Bolivia - Liga Profesional",
+    17127: "UEFA Europa League - Clasificaci\u00f3n",
     17128: "UEFA Champions League - Clasificaci\u00f3n",
     17130: "UEFA Conference League - Clasificaci\u00f3n",
-    16927: "Bolivia - Liga Profesional",
-    16783: "Brasil - Serie B",
 }
 
 LOGO_CDN = "https://media.api-sports.io/football/teams"
@@ -114,7 +121,9 @@ def generate_predictions_for_date(date_str=None):
         else:
             home_score = None; away_score = None
         
-        league_name = LEAGUES.get(comp_id, match.get("name", match.get("league_name", "Otra liga")))
+        # League name: prefer our mapping, fallback to API name
+        api_name = match.get("name", match.get("league_name", ""))
+        league_name = LEAGUES.get(comp_id, api_name if api_name else "Otra liga")
         
         # Fetch detail for xG
         detail = get_match_detail(mid) if len(matches) <= 25 else {}
