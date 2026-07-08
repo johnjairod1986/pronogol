@@ -1,0 +1,105 @@
+PRONOGOL — 8 Jul 2026
+10 partidos analizados
+==============================
+
+[19:00] Bolivia - Liga Profesional
+Real Potosí vs ABB
+xG:3.81
+  TOP: Si (conf:8)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: >2.5 | BTTS: Si
+
+[17:00] Bolivia - Liga Profesional
+Real Oruro vs Universitario de Vinto
+xG:3.06
+  TOP: >1.5 (conf:7)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: >2.5 | BTTS: Si
+
+[10:00] UEFA Champions League - Clasificación
+Kairat vs Sutjeska
+xG:2.2
+  Pick: 1X (conf:6)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: <2.5 | BTTS: No
+
+[11:00] UEFA Champions League - Clasificación
+Tallinna FC Flora vs Saburtalo
+xG:2.2
+  Pick: 1X (conf:6)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: <2.5 | BTTS: No
+
+[11:00] UEFA Conference League - Clasificación
+Zira vs Torpedo Kutaisi
+xG:2.2
+  Pick: 1X (conf:6)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: <2.5 | BTTS: No
+
+[12:00] UEFA Champions League - Clasificación
+ML Vitebsk vs CS U Craiova
+xG:2.2
+  Pick: 1X (conf:6)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: <2.5 | BTTS: No
+
+[12:00] UEFA Champions League - Clasificación
+Petrocub vs Egnatia Rrogozhinë
+xG:2.2
+  Pick: 1X (conf:6)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: <2.5 | BTTS: No
+
+[12:30] UEFA Conference League - Clasificación
+Differdange 03 vs Ilves
+xG:2.2
+  Pick: 1X (conf:6)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: <2.5 | BTTS: No
+
+[12:30] UEFA Conference League - Clasificación
+Connah's Quay vs Ballkani
+xG:2.2
+  Pick: 1X (conf:6)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: <2.5 | BTTS: No
+
+[18:00] Brasil - Serie B
+Ponte Preta vs Criciúma
+xG:2.54
+  Pick: 1X (conf:6)
+1X2: 40/30/30 | DC: 1X
+O/U2.5: >2.5 | BTTS: Si
+
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+pronogol.app (local: puerto 8000)

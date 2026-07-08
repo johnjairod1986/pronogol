@@ -1,0 +1,11 @@
+Date: 2026-07-08 | Predictions: 10
+[8507107] 00:00 | Bolivia - Liga Profesional | Real Potosí vs ABB | xG:3.81 | best:btts->Si(8)
+[8505118] 22:00 | Bolivia - Liga Profesional | Real Oruro vs Universitario de Vinto | xG:3.06 | best:over_under_1.5->>1.5(7)
+[8554440] 15:00 | UEFA Champions League - Clasificación | Kairat vs Sutjeska | xG:2.2 | best:double_chance->1X(6)
+[8554434] 16:00 | UEFA Champions League - Clasificación | Tallinna FC Flora vs Saburtalo | xG:2.2 | best:double_chance->1X(6)
+[8554577] 16:00 | UEFA Conference League - Clasificación | Zira vs Torpedo Kutaisi | xG:2.2 | best:double_chance->1X(6)
+[8554417] 17:00 | UEFA Champions League - Clasificación | ML Vitebsk vs CS U Craiova | xG:2.2 | best:double_chance->1X(6)
+[8554438] 17:00 | UEFA Champions League - Clasificación | Petrocub vs Egnatia Rrogozhinë | xG:2.2 | best:double_chance->1X(6)
+[8554598] 17:30 | UEFA Conference League - Clasificación | Differdange 03 vs Ilves | xG:2.2 | best:double_chance->1X(6)
+[8554627] 17:30 | UEFA Conference League - Clasificación | Connah's Quay vs Ballkani | xG:2.2 | best:double_chance->1X(6)
+[8469754] 23:00 | Brasil - Serie B | Ponte Preta vs Criciúma | xG:2.54 | best:double_chance->1X(6)

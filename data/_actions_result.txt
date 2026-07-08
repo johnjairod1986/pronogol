@@ -1,0 +1,3 @@
+Job: deploy | Conclusion: failure
+  * FAILED: [lock] Setup SSH
+  * Log: https://api.github.com/repos/johnjairod1986/pronogol/actions/jobs/85879968592/logs

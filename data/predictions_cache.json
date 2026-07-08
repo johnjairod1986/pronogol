@@ -1,0 +1,6717 @@
+{
+  "generated_at": "2026-07-08T13:35:28.978301+00:00",
+  "dates": {
+    "2026-07-08": {
+      "count": 11,
+      "leagues": [
+        "Ecuador - Serie A",
+        "Brasil - Serie B",
+        "UEFA Conference League - Clasificación",
+        "UEFA Champions League - Clasificación",
+        "Bolivia - Liga Profesional"
+      ]
+    },
+    "2026-07-09": {
+      "count": 30,
+      "leagues": [
+        "UEFA Conference League - Clasificación",
+        "Mundial 2026",
+        "Bolivia - Liga Profesional",
+        "UEFA Europa League - Clasificación"
+      ]
+    },
+    "2026-07-10": {
+      "count": 8,
+      "leagues": [
+        "Mundial 2026",
+        "Ecuador - Serie A",
+        "Brasil - Serie B",
+        "Irlanda - Premier Division",
+        "Finlandia - Veikkausliiga",
+        "Bolivia - Liga Profesional"
+      ]
+    },
+    "2026-07-11": {
+      "count": 32,
+      "leagues": [
+        "Mundial 2026",
+        "China - League One",
+        "Argentina - Liga Profesional",
+        "Ecuador - Serie A",
+        "Irlanda - Premier Division",
+        "Chile - Copa Chile",
+        "Noruega - Eliteserien",
+        "Finlandia - Veikkausliiga",
+        "Suecia - Superettan",
+        "Bolivia - Liga Profesional"
+      ]
+    },
+    "2026-07-12": {
+      "count": 39,
+      "leagues": [
+        "Mundial 2026",
+        "China - League One",
+        "Argentina - Liga Profesional",
+        "Ecuador - Serie A",
+        "Brasil - Serie B",
+        "Chile - Copa Chile",
+        "Noruega - Eliteserien",
+        "Suecia - Superettan",
+        "Bolivia - Liga Profesional"
+      ]
+    },
+    "2026-07-13": {
+      "count": 3,
+      "leagues": [
+        "Brasil - Serie B",
+        "Suecia - Superettan"
+      ]
+    }
+  },
+  "predictions": [
+    {
+      "match_id": "8507107",
+      "match_time": 1783555200,
+      "date": "2026-07-08",
+      "league": "Bolivia - Liga Profesional",
+      "league_id": 16927,
+      "home_team": "Real Potosí",
+      "home_logo": "https://media.api-sports.io/football/teams/2263.png",
+      "away_team": "ABB",
+      "away_logo": "https://media.api-sports.io/football/teams/2306.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 3.81,
+      "markets": {
+        "match_winner": {
+          "prediction": "1",
+          "home_pct": 48,
+          "draw_pct": 28,
+          "away_pct": 24,
+          "trust": 5
+        },
+        "double_chance": {
+          "1X_pct": 76,
+          "12_pct": 72,
+          "X2_pct": 52,
+          "prediction": "1X",
+          "trust": 7
+        },
+        "btts": {
+          "yes_pct": 76,
+          "no_pct": 24,
+          "prediction": "Si",
+          "trust": 8
+        },
+        "over_under_1.5": {
+          "over_pct": 92,
+          "under_pct": 8,
+          "prediction": ">1.5",
+          "trust": 8
+        },
+        "over_under_2.5": {
+          "over_pct": 83,
+          "under_pct": 17,
+          "prediction": ">2.5",
+          "trust": 7
+        }
+      },
+      "best_pick": {
+        "market": "btts",
+        "prediction": "Si",
+        "confidence": 8
+      }
+    },
+    {
+      "match_id": "8457536",
+      "match_time": 1783468800,
+      "date": "2026-07-08",
+      "league": "Ecuador - Serie A",
+      "league_id": 16714,
+      "home_team": "SD Aucas",
+      "home_logo": "https://media.api-sports.io/football/teams/4331.png",
+      "away_team": "Guayaquil City FC",
+      "away_logo": "https://media.api-sports.io/football/teams/4320.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "complete",
+      "total_xg": 2.61,
+      "markets": {
+        "match_winner": {
+          "prediction": "1",
+          "home_pct": 55,
+          "draw_pct": 25,
+          "away_pct": 20,
+          "trust": 6
+        },
+        "double_chance": {
+          "1X_pct": 80,
+          "12_pct": 75,
+          "X2_pct": 45,
+          "prediction": "1X",
+          "trust": 7
+        },
+        "btts": {
+          "yes_pct": 52,
+          "no_pct": 48,
+          "prediction": "Si",
+          "trust": 5
+        },
+        "over_under_1.5": {
+          "over_pct": 78,
+          "under_pct": 22,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 53,
+          "under_pct": 47,
+          "prediction": ">2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8505118",
+      "match_time": 1783548000,
+      "date": "2026-07-08",
+      "league": "Bolivia - Liga Profesional",
+      "league_id": 16927,
+      "home_team": "Real Oruro",
+      "home_logo": "https://media.api-sports.io/football/teams/873502.png",
+      "away_team": "Universitario de Vinto",
+      "away_logo": "https://media.api-sports.io/football/teams/2282.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 3.06,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 35,
+          "draw_pct": 25,
+          "away_pct": 40,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 60,
+          "12_pct": 75,
+          "X2_pct": 65,
+          "prediction": "X2",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 61,
+          "no_pct": 39,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 89,
+          "under_pct": 11,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 64,
+          "under_pct": 36,
+          "prediction": ">2.5",
+          "trust": 5
+        }
+      },
+      "best_pick": {
+        "market": "over_under_1.5",
+        "prediction": ">1.5",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8554440",
+      "match_time": 1783522800,
+      "date": "2026-07-08",
+      "league": "UEFA Champions League - Clasificación",
+      "league_id": 17128,
+      "home_team": "Kairat",
+      "home_logo": "https://media.api-sports.io/football/teams/5408.png",
+      "away_team": "Sutjeska",
+      "away_logo": "https://media.api-sports.io/football/teams/977.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554434",
+      "match_time": 1783526400,
+      "date": "2026-07-08",
+      "league": "UEFA Champions League - Clasificación",
+      "league_id": 17128,
+      "home_team": "Tallinna FC Flora",
+      "home_logo": "https://media.api-sports.io/football/teams/88.png",
+      "away_team": "Saburtalo",
+      "away_logo": "https://media.api-sports.io/football/teams/6498.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554577",
+      "match_time": 1783526400,
+      "date": "2026-07-08",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Zira",
+      "home_logo": "https://media.api-sports.io/football/teams/910.png",
+      "away_team": "Torpedo Kutaisi",
+      "away_logo": "https://media.api-sports.io/football/teams/5413.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554417",
+      "match_time": 1783530000,
+      "date": "2026-07-08",
+      "league": "UEFA Champions League - Clasificación",
+      "league_id": 17128,
+      "home_team": "ML Vitebsk",
+      "home_logo": "https://media.api-sports.io/football/teams/3520.png",
+      "away_team": "CS U Craiova",
+      "away_logo": "https://media.api-sports.io/football/teams/12956.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554438",
+      "match_time": 1783530000,
+      "date": "2026-07-08",
+      "league": "UEFA Champions League - Clasificación",
+      "league_id": 17128,
+      "home_team": "Petrocub",
+      "home_logo": "https://media.api-sports.io/football/teams/9976.png",
+      "away_team": "Egnatia Rrogozhinë",
+      "away_logo": "https://media.api-sports.io/football/teams/1789.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554598",
+      "match_time": 1783531800,
+      "date": "2026-07-08",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Differdange 03",
+      "home_logo": "https://media.api-sports.io/football/teams/3956.png",
+      "away_team": "Ilves",
+      "away_logo": "https://media.api-sports.io/football/teams/407.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554627",
+      "match_time": 1783531800,
+      "date": "2026-07-08",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Connah's Quay",
+      "home_logo": "https://media.api-sports.io/football/teams/2116.png",
+      "away_team": "Ballkani",
+      "away_logo": "https://media.api-sports.io/football/teams/10867.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8469754",
+      "match_time": 1783551600,
+      "date": "2026-07-08",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "Ponte Preta",
+      "home_logo": "https://media.api-sports.io/football/teams/628.png",
+      "away_team": "Criciúma",
+      "away_logo": "https://media.api-sports.io/football/teams/691.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.54,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 51,
+          "no_pct": 49,
+          "prediction": "Si",
+          "trust": 5
+        },
+        "over_under_1.5": {
+          "over_pct": 76,
+          "under_pct": 24,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 51,
+          "under_pct": 49,
+          "prediction": ">2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8573531",
+      "match_time": 1783627200,
+      "date": "2026-07-09",
+      "league": "Mundial 2026",
+      "league_id": 16494,
+      "home_team": "France",
+      "home_logo": "https://media.api-sports.io/football/teams/7998.png",
+      "away_team": "Morocco",
+      "away_logo": "https://media.api-sports.io/football/teams/8682.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 3.0,
+      "markets": {
+        "match_winner": {
+          "prediction": "1",
+          "home_pct": 48,
+          "draw_pct": 28,
+          "away_pct": 24,
+          "trust": 5
+        },
+        "double_chance": {
+          "1X_pct": 76,
+          "12_pct": 72,
+          "X2_pct": 52,
+          "prediction": "1X",
+          "trust": 7
+        },
+        "btts": {
+          "yes_pct": 60,
+          "no_pct": 40,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 88,
+          "under_pct": 12,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 62,
+          "under_pct": 38,
+          "prediction": ">2.5",
+          "trust": 5
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8507107",
+      "match_time": 1783555200,
+      "date": "2026-07-09",
+      "league": "Bolivia - Liga Profesional",
+      "league_id": 16927,
+      "home_team": "Real Potosí",
+      "home_logo": "https://media.api-sports.io/football/teams/2263.png",
+      "away_team": "ABB",
+      "away_logo": "https://media.api-sports.io/football/teams/2306.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554615",
+      "match_time": 1783605600,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Atlètic Club d'Escaldes",
+      "home_logo": "https://media.api-sports.io/football/teams/3299.png",
+      "away_team": "Mornar",
+      "away_logo": "https://media.api-sports.io/football/teams/6749.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554415",
+      "match_time": 1783612800,
+      "date": "2026-07-09",
+      "league": "UEFA Europa League - Clasificación",
+      "league_id": 17127,
+      "home_team": "Qarabağ",
+      "home_logo": "https://media.api-sports.io/football/teams/75.png",
+      "away_team": "Vestri",
+      "away_logo": "https://media.api-sports.io/football/teams/9440.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554582",
+      "match_time": 1783612800,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Hegelmann Litauen",
+      "home_logo": "https://media.api-sports.io/football/teams/1254.png",
+      "away_team": "Paide",
+      "away_logo": "https://media.api-sports.io/football/teams/1635.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554608",
+      "match_time": 1783612800,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Alashkert",
+      "home_logo": "https://media.api-sports.io/football/teams/96.png",
+      "away_team": "Yelimay Semey",
+      "away_logo": "https://media.api-sports.io/football/teams/959929.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554613",
+      "match_time": 1783612800,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Dila",
+      "home_logo": "https://media.api-sports.io/football/teams/958.png",
+      "away_team": "Virtus",
+      "away_logo": "https://media.api-sports.io/football/teams/673942.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554623",
+      "match_time": 1783612800,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Liepāja",
+      "home_logo": "https://media.api-sports.io/football/teams/63.png",
+      "away_team": "Dečić",
+      "away_logo": "https://media.api-sports.io/football/teams/6743.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554626",
+      "match_time": 1783612800,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Nõmme Kalju",
+      "home_logo": "https://media.api-sports.io/football/teams/988.png",
+      "away_team": "Linfield",
+      "away_logo": "https://media.api-sports.io/football/teams/1208.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554409",
+      "match_time": 1783616400,
+      "date": "2026-07-09",
+      "league": "UEFA Europa League - Clasificación",
+      "league_id": 17127,
+      "home_team": "Sheriff",
+      "home_logo": "https://media.api-sports.io/football/teams/60.png",
+      "away_team": "Aluminij",
+      "away_logo": "https://media.api-sports.io/football/teams/1971.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554414",
+      "match_time": 1783616400,
+      "date": "2026-07-09",
+      "league": "UEFA Europa League - Clasificación",
+      "league_id": 17127,
+      "home_team": "Dynamo Kyiv",
+      "home_logo": "https://media.api-sports.io/football/teams/123.png",
+      "away_team": "Universitatea Cluj",
+      "away_logo": "https://media.api-sports.io/football/teams/10306.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554583",
+      "match_time": 1783616400,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Velež",
+      "home_logo": "https://media.api-sports.io/football/teams/3552.png",
+      "away_team": "Milsami",
+      "away_logo": "https://media.api-sports.io/football/teams/964.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554584",
+      "match_time": 1783616400,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Marsaxlokk",
+      "home_logo": "https://media.api-sports.io/football/teams/13374.png",
+      "away_team": "Pyunik",
+      "away_logo": "https://media.api-sports.io/football/teams/882.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554622",
+      "match_time": 1783616400,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Dinamo Minsk",
+      "home_logo": "https://media.api-sports.io/football/teams/825.png",
+      "away_team": "Sileks",
+      "away_logo": "https://media.api-sports.io/football/teams/6904.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554625",
+      "match_time": 1783616400,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Bohemians",
+      "home_logo": "https://media.api-sports.io/football/teams/2050.png",
+      "away_team": "St Joseph's",
+      "away_logo": "https://media.api-sports.io/football/teams/5291.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554597",
+      "match_time": 1783617300,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Mondorf-les-Bains",
+      "home_logo": "https://media.api-sports.io/football/teams/3959.png",
+      "away_team": "Dinamo Tbilisi",
+      "away_logo": "https://media.api-sports.io/football/teams/89.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554580",
+      "match_time": 1783618200,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Caernarfon Town",
+      "home_logo": "https://media.api-sports.io/football/teams/10061.png",
+      "away_team": "Tallinna FC Levadia",
+      "away_logo": "https://media.api-sports.io/football/teams/965.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554599",
+      "match_time": 1783618200,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Europa",
+      "home_logo": "https://media.api-sports.io/football/teams/1206.png",
+      "away_team": "Shkendija",
+      "away_logo": "https://media.api-sports.io/football/teams/5411.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554404",
+      "match_time": 1783620000,
+      "date": "2026-07-09",
+      "league": "UEFA Europa League - Clasificación",
+      "league_id": 17127,
+      "home_team": "Hajduk Split",
+      "home_logo": "https://media.api-sports.io/football/teams/1863.png",
+      "away_team": "Žilina",
+      "away_logo": "https://media.api-sports.io/football/teams/1217.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554405",
+      "match_time": 1783620000,
+      "date": "2026-07-09",
+      "league": "UEFA Europa League - Clasificación",
+      "league_id": 17127,
+      "home_team": "CSKA Sofia",
+      "home_logo": "https://media.api-sports.io/football/teams/3604.png",
+      "away_team": "Derry City",
+      "away_logo": "https://media.api-sports.io/football/teams/2051.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554413",
+      "match_time": 1783620000,
+      "date": "2026-07-09",
+      "league": "UEFA Europa League - Clasificación",
+      "league_id": 17127,
+      "home_team": "Vojvodina",
+      "home_logo": "https://media.api-sports.io/football/teams/1933.png",
+      "away_team": "Ferencváros",
+      "away_logo": "https://media.api-sports.io/football/teams/119.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554617",
+      "match_time": 1783620000,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Vllaznia Shkodër",
+      "home_logo": "https://media.api-sports.io/football/teams/1380.png",
+      "away_team": "Malisheva",
+      "away_logo": "https://media.api-sports.io/football/teams/689378.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554624",
+      "match_time": 1783621800,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Glentoran",
+      "home_logo": "https://media.api-sports.io/football/teams/2073.png",
+      "away_team": "Rīgas FS",
+      "away_logo": "https://media.api-sports.io/football/teams/1090.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554578",
+      "match_time": 1783622700,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Petrovac",
+      "home_logo": "https://media.api-sports.io/football/teams/6741.png",
+      "away_team": "Žalgiris",
+      "away_logo": "https://media.api-sports.io/football/teams/85.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554606",
+      "match_time": 1783622700,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "NSÍ",
+      "home_logo": "https://media.api-sports.io/football/teams/5415.png",
+      "away_team": "Hamrun Spartans",
+      "away_logo": "https://media.api-sports.io/football/teams/2484.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554616",
+      "match_time": 1783622700,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Penybont",
+      "home_logo": "https://media.api-sports.io/football/teams/668313.png",
+      "away_team": "FC Santa Coloma",
+      "away_logo": "https://media.api-sports.io/football/teams/64.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554607",
+      "match_time": 1783623600,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Dinamo Tirana",
+      "home_logo": "https://media.api-sports.io/football/teams/1785.png",
+      "away_team": "Astana",
+      "away_logo": "https://media.api-sports.io/football/teams/81.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554609",
+      "match_time": 1783623600,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Stjarnan",
+      "home_logo": "https://media.api-sports.io/football/teams/971.png",
+      "away_team": "Víkingur",
+      "away_logo": "https://media.api-sports.io/football/teams/1211.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8554618",
+      "match_time": 1783623600,
+      "date": "2026-07-09",
+      "league": "UEFA Conference League - Clasificación",
+      "league_id": 17130,
+      "home_team": "Sarajevo",
+      "home_logo": "https://media.api-sports.io/football/teams/967.png",
+      "away_team": "Inter Turku",
+      "away_logo": "https://media.api-sports.io/football/teams/406.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8505097",
+      "match_time": 1783641600,
+      "date": "2026-07-09",
+      "league": "Bolivia - Liga Profesional",
+      "league_id": 16927,
+      "home_team": "Nacional Potosí",
+      "home_logo": "https://media.api-sports.io/football/teams/2256.png",
+      "away_team": "Aurora",
+      "away_logo": "https://media.api-sports.io/football/teams/2270.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8575875",
+      "match_time": 1783710000,
+      "date": "2026-07-10",
+      "league": "Mundial 2026",
+      "league_id": 16494,
+      "home_team": "Spain",
+      "home_logo": "https://media.api-sports.io/football/teams/7967.png",
+      "away_team": "Belgium",
+      "away_logo": "https://media.api-sports.io/football/teams/7990.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 4.47,
+      "markets": {
+        "match_winner": {
+          "prediction": "1",
+          "home_pct": 48,
+          "draw_pct": 28,
+          "away_pct": 24,
+          "trust": 5
+        },
+        "double_chance": {
+          "1X_pct": 76,
+          "12_pct": 72,
+          "X2_pct": 52,
+          "prediction": "1X",
+          "trust": 7
+        },
+        "btts": {
+          "yes_pct": 80,
+          "no_pct": 20,
+          "prediction": "Si",
+          "trust": 8
+        },
+        "over_under_1.5": {
+          "over_pct": 92,
+          "under_pct": 8,
+          "prediction": ">1.5",
+          "trust": 8
+        },
+        "over_under_2.5": {
+          "over_pct": 88,
+          "under_pct": 12,
+          "prediction": ">2.5",
+          "trust": 7
+        }
+      },
+      "best_pick": {
+        "market": "btts",
+        "prediction": "Si",
+        "confidence": 8
+      }
+    },
+    {
+      "match_id": "8505097",
+      "match_time": 1783641600,
+      "date": "2026-07-10",
+      "league": "Bolivia - Liga Profesional",
+      "league_id": 16927,
+      "home_team": "Nacional Potosí",
+      "home_logo": "https://media.api-sports.io/football/teams/2256.png",
+      "away_team": "Aurora",
+      "away_logo": "https://media.api-sports.io/football/teams/2270.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.17,
+      "markets": {
+        "match_winner": {
+          "prediction": "1",
+          "home_pct": 48,
+          "draw_pct": 28,
+          "away_pct": 24,
+          "trust": 5
+        },
+        "double_chance": {
+          "1X_pct": 76,
+          "12_pct": 72,
+          "X2_pct": 52,
+          "prediction": "1X",
+          "trust": 7
+        },
+        "btts": {
+          "yes_pct": 43,
+          "no_pct": 57,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 67,
+          "under_pct": 33,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 42,
+          "under_pct": 58,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8419862",
+      "match_time": 1783699200,
+      "date": "2026-07-10",
+      "league": "Finlandia - Veikkausliiga",
+      "league_id": 16572,
+      "home_team": "VPS",
+      "home_logo": "https://media.api-sports.io/football/teams/408.png",
+      "away_team": "SJK",
+      "away_logo": "https://media.api-sports.io/football/teams/102.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.84,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 57,
+          "no_pct": 43,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 84,
+          "under_pct": 16,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 58,
+          "under_pct": 42,
+          "prediction": ">2.5",
+          "trust": 5
+        }
+      },
+      "best_pick": {
+        "market": "over_under_1.5",
+        "prediction": ">1.5",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8408052",
+      "match_time": 1783709100,
+      "date": "2026-07-10",
+      "league": "Irlanda - Premier Division",
+      "league_id": 16537,
+      "home_team": "Dundalk",
+      "home_logo": "https://media.api-sports.io/football/teams/73.png",
+      "away_team": "Drogheda United",
+      "away_logo": "https://media.api-sports.io/football/teams/2053.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.78,
+      "markets": {
+        "match_winner": {
+          "prediction": "1",
+          "home_pct": 48,
+          "draw_pct": 28,
+          "away_pct": 24,
+          "trust": 5
+        },
+        "double_chance": {
+          "1X_pct": 76,
+          "12_pct": 72,
+          "X2_pct": 52,
+          "prediction": "1X",
+          "trust": 7
+        },
+        "btts": {
+          "yes_pct": 56,
+          "no_pct": 44,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 82,
+          "under_pct": 18,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 57,
+          "under_pct": 43,
+          "prediction": ">2.5",
+          "trust": 5
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8408059",
+      "match_time": 1783710000,
+      "date": "2026-07-10",
+      "league": "Irlanda - Premier Division",
+      "league_id": 16537,
+      "home_team": "Waterford",
+      "home_logo": "https://media.api-sports.io/football/teams/2064.png",
+      "away_team": "St Patrick's Athl.",
+      "away_logo": "https://media.api-sports.io/football/teams/981.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.96,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 59,
+          "no_pct": 41,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 86,
+          "under_pct": 14,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 62,
+          "under_pct": 38,
+          "prediction": ">2.5",
+          "trust": 5
+        }
+      },
+      "best_pick": {
+        "market": "over_under_1.5",
+        "prediction": ">1.5",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8469699",
+      "match_time": 1783720800,
+      "date": "2026-07-10",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "Juventude",
+      "home_logo": "https://media.api-sports.io/football/teams/1053.png",
+      "away_team": "Vila Nova",
+      "away_logo": "https://media.api-sports.io/football/teams/645.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.97,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 59,
+          "no_pct": 41,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 87,
+          "under_pct": 13,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 62,
+          "under_pct": 38,
+          "prediction": ">2.5",
+          "trust": 5
+        }
+      },
+      "best_pick": {
+        "market": "over_under_1.5",
+        "prediction": ">1.5",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8469698",
+      "match_time": 1783724400,
+      "date": "2026-07-10",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "Sport Recife",
+      "home_logo": "https://media.api-sports.io/football/teams/614.png",
+      "away_team": "Botafogo SP",
+      "away_logo": "https://media.api-sports.io/football/teams/2598.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.73,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 55,
+          "no_pct": 45,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 81,
+          "under_pct": 19,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 56,
+          "under_pct": 44,
+          "prediction": ">2.5",
+          "trust": 5
+        }
+      },
+      "best_pick": {
+        "market": "over_under_1.5",
+        "prediction": ">1.5",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8457493",
+      "match_time": 1783720800,
+      "date": "2026-07-10",
+      "league": "Ecuador - Serie A",
+      "league_id": 16714,
+      "home_team": "Leones del Norte",
+      "home_logo": "https://media.api-sports.io/football/teams/744881.png",
+      "away_team": "CD Universidad Católica",
+      "away_logo": "https://media.api-sports.io/football/teams/4328.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.29,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 46,
+          "no_pct": 54,
+          "prediction": "No",
+          "trust": 5
+        },
+        "over_under_1.5": {
+          "over_pct": 70,
+          "under_pct": 30,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 45,
+          "under_pct": 55,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8575298",
+      "match_time": 1783803600,
+      "date": "2026-07-11",
+      "league": "Mundial 2026",
+      "league_id": 16494,
+      "home_team": "Norway",
+      "home_logo": "https://media.api-sports.io/football/teams/7970.png",
+      "away_team": "England",
+      "away_logo": "https://media.api-sports.io/football/teams/7981.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 3.0,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 40,
+          "draw_pct": 30,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 70,
+          "X2_pct": 60,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 60,
+          "no_pct": 40,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 88,
+          "under_pct": 12,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 62,
+          "under_pct": 38,
+          "prediction": ">2.5",
+          "trust": 5
+        }
+      },
+      "best_pick": {
+        "market": "over_under_1.5",
+        "prediction": ">1.5",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8457369",
+      "match_time": 1783728900,
+      "date": "2026-07-11",
+      "league": "Ecuador - Serie A",
+      "league_id": 16714,
+      "home_team": "Técnico Universitario",
+      "home_logo": "https://media.api-sports.io/football/teams/4340.png",
+      "away_team": "Macará",
+      "away_logo": "https://media.api-sports.io/football/teams/4323.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8483584",
+      "match_time": 1783764000,
+      "date": "2026-07-11",
+      "league": "China - League One",
+      "league_id": 16844,
+      "home_team": "Yanbian Longding",
+      "home_logo": "https://media.api-sports.io/football/teams/703932.png",
+      "away_team": "Suzhou Dongwu",
+      "away_logo": "https://media.api-sports.io/football/teams/672285.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8483549",
+      "match_time": 1783767600,
+      "date": "2026-07-11",
+      "league": "China - League One",
+      "league_id": 16844,
+      "home_team": "Wuxi Wugou",
+      "home_logo": "https://media.api-sports.io/football/teams/703936.png",
+      "away_team": "Guangxi Hengchen",
+      "away_logo": "https://media.api-sports.io/football/teams/1149732.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8483587",
+      "match_time": 1783767600,
+      "date": "2026-07-11",
+      "league": "China - League One",
+      "league_id": 16844,
+      "home_team": "Dalian Huayi",
+      "home_logo": "https://media.api-sports.io/football/teams/672281.png",
+      "away_team": "Nanjing City",
+      "away_logo": "https://media.api-sports.io/football/teams/698805.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8483641",
+      "match_time": 1783767600,
+      "date": "2026-07-11",
+      "league": "China - League One",
+      "league_id": 16844,
+      "home_team": "Shaanxi Union",
+      "home_logo": "https://media.api-sports.io/football/teams/1149733.png",
+      "away_team": "Meizhou Hakka",
+      "away_logo": "https://media.api-sports.io/football/teams/943.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8483583",
+      "match_time": 1783769400,
+      "date": "2026-07-11",
+      "league": "China - League One",
+      "league_id": 16844,
+      "home_team": "Guangzhou E-Power",
+      "home_logo": "https://media.api-sports.io/football/teams/1148704.png",
+      "away_team": "Hebei Kungfu",
+      "away_logo": "https://media.api-sports.io/football/teams/703939.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8411875",
+      "match_time": 1783771200,
+      "date": "2026-07-11",
+      "league": "Noruega - Eliteserien",
+      "league_id": 16558,
+      "home_team": "Fredrikstad",
+      "home_logo": "https://media.api-sports.io/football/teams/1471.png",
+      "away_team": "Lillestrøm",
+      "away_logo": "https://media.api-sports.io/football/teams/339.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8419955",
+      "match_time": 1783771200,
+      "date": "2026-07-11",
+      "league": "Finlandia - Veikkausliiga",
+      "league_id": 16572,
+      "home_team": "Lahti",
+      "home_logo": "https://media.api-sports.io/football/teams/413.png",
+      "away_team": "HJK",
+      "away_logo": "https://media.api-sports.io/football/teams/412.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8420398",
+      "match_time": 1783774800,
+      "date": "2026-07-11",
+      "league": "Suecia - Superettan",
+      "league_id": 16576,
+      "home_team": "Mjällby",
+      "home_logo": "https://media.api-sports.io/football/teams/671.png",
+      "away_team": "AIK",
+      "away_logo": "https://media.api-sports.io/football/teams/661.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8411877",
+      "match_time": 1783778400,
+      "date": "2026-07-11",
+      "league": "Noruega - Eliteserien",
+      "league_id": 16558,
+      "home_team": "Aalesund",
+      "home_logo": "https://media.api-sports.io/football/teams/328.png",
+      "away_team": "Molde",
+      "away_logo": "https://media.api-sports.io/football/teams/333.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8419732",
+      "match_time": 1783778400,
+      "date": "2026-07-11",
+      "league": "Finlandia - Veikkausliiga",
+      "league_id": 16572,
+      "home_team": "TPS",
+      "home_logo": "https://media.api-sports.io/football/teams/415.png",
+      "away_team": "Oulu",
+      "away_logo": "https://media.api-sports.io/football/teams/425.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8419932",
+      "match_time": 1783778400,
+      "date": "2026-07-11",
+      "league": "Finlandia - Veikkausliiga",
+      "league_id": 16572,
+      "home_team": "Gnistan",
+      "home_logo": "https://media.api-sports.io/football/teams/419.png",
+      "away_team": "Mariehamn",
+      "away_logo": "https://media.api-sports.io/football/teams/410.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8420462",
+      "match_time": 1783783800,
+      "date": "2026-07-11",
+      "league": "Suecia - Superettan",
+      "league_id": 16576,
+      "home_team": "Örgryte",
+      "home_logo": "https://media.api-sports.io/football/teams/677.png",
+      "away_team": "Häcken",
+      "away_logo": "https://media.api-sports.io/football/teams/664.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8408005",
+      "match_time": 1783785600,
+      "date": "2026-07-11",
+      "league": "Irlanda - Premier Division",
+      "league_id": 16537,
+      "home_team": "Galway United",
+      "home_logo": "https://media.api-sports.io/football/teams/2052.png",
+      "away_team": "Sligo Rovers",
+      "away_logo": "https://media.api-sports.io/football/teams/989.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8411878",
+      "match_time": 1783785600,
+      "date": "2026-07-11",
+      "league": "Noruega - Eliteserien",
+      "league_id": 16558,
+      "home_team": "Tromsø",
+      "home_logo": "https://media.api-sports.io/football/teams/331.png",
+      "away_team": "Vålerenga",
+      "away_logo": "https://media.api-sports.io/football/teams/327.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8457366",
+      "match_time": 1783789200,
+      "date": "2026-07-11",
+      "league": "Ecuador - Serie A",
+      "league_id": 16714,
+      "home_team": "Manta FC",
+      "home_logo": "https://media.api-sports.io/football/teams/4334.png",
+      "away_team": "Orense SC",
+      "away_logo": "https://media.api-sports.io/football/teams/6660.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421965",
+      "match_time": 1783792800,
+      "date": "2026-07-11",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "All Boys",
+      "home_logo": "https://media.api-sports.io/football/teams/747.png",
+      "away_team": "Almirante Brown",
+      "away_logo": "https://media.api-sports.io/football/teams/752.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421966",
+      "match_time": 1783792800,
+      "date": "2026-07-11",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "San Miguel",
+      "home_logo": "https://media.api-sports.io/football/teams/1063.png",
+      "away_team": "Ferro Carril Oeste",
+      "away_logo": "https://media.api-sports.io/football/teams/733.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421981",
+      "match_time": 1783792800,
+      "date": "2026-07-11",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Atlético Rafaela",
+      "home_logo": "https://media.api-sports.io/football/teams/715.png",
+      "away_team": "Deportivo Maipú",
+      "away_logo": "https://media.api-sports.io/football/teams/5463.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421984",
+      "match_time": 1783792800,
+      "date": "2026-07-11",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Tristán Suárez",
+      "home_logo": "https://media.api-sports.io/football/teams/761.png",
+      "away_team": "Nueva Chicago",
+      "away_logo": "https://media.api-sports.io/football/teams/726.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8422243",
+      "match_time": 1783792800,
+      "date": "2026-07-11",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Estudiantes Caseros",
+      "home_logo": "https://media.api-sports.io/football/teams/765.png",
+      "away_team": "Club Atlético Mitre",
+      "away_logo": "https://media.api-sports.io/football/teams/1061.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8422297",
+      "match_time": 1783792800,
+      "date": "2026-07-11",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "San Telmo",
+      "home_logo": "https://media.api-sports.io/football/teams/762.png",
+      "away_team": "Chaco For Ever",
+      "away_logo": "https://media.api-sports.io/football/teams/5459.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8422308",
+      "match_time": 1783792800,
+      "date": "2026-07-11",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Deportivo Morón",
+      "home_logo": "https://media.api-sports.io/football/teams/751.png",
+      "away_team": "Deportivo Madryn",
+      "away_logo": "https://media.api-sports.io/football/teams/5447.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8422319",
+      "match_time": 1783792800,
+      "date": "2026-07-11",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Los Andes",
+      "home_logo": "https://media.api-sports.io/football/teams/741.png",
+      "away_team": "Ciudad de Bolívar",
+      "away_logo": "https://media.api-sports.io/football/teams/698210.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8507124",
+      "match_time": 1783796400,
+      "date": "2026-07-11",
+      "league": "Bolivia - Liga Profesional",
+      "league_id": 16927,
+      "home_team": "Real Oruro",
+      "home_logo": "https://media.api-sports.io/football/teams/873502.png",
+      "away_team": "Gualberto Villarroel SJ",
+      "away_logo": "https://media.api-sports.io/football/teams/1021784.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8567383",
+      "match_time": 1783796400,
+      "date": "2026-07-11",
+      "league": "Chile - Copa Chile",
+      "league_id": 16718,
+      "home_team": "Palestino",
+      "home_logo": "https://media.api-sports.io/football/teams/2193.png",
+      "away_team": "Deportes Santa Cruz",
+      "away_logo": "https://media.api-sports.io/football/teams/2216.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8567385",
+      "match_time": 1783796400,
+      "date": "2026-07-11",
+      "league": "Chile - Copa Chile",
+      "league_id": 16718,
+      "home_team": "Magallanes",
+      "home_logo": "https://media.api-sports.io/football/teams/2205.png",
+      "away_team": "Audax Italiano",
+      "away_logo": "https://media.api-sports.io/football/teams/2186.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8457368",
+      "match_time": 1783797000,
+      "date": "2026-07-11",
+      "league": "Ecuador - Serie A",
+      "league_id": 16714,
+      "home_team": "Mushuc Runa SC",
+      "home_logo": "https://media.api-sports.io/football/teams/4330.png",
+      "away_team": "CSD Independiente del Valle",
+      "away_logo": "https://media.api-sports.io/football/teams/4321.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8567382",
+      "match_time": 1783805400,
+      "date": "2026-07-11",
+      "league": "Chile - Copa Chile",
+      "league_id": 16718,
+      "home_team": "San Luis",
+      "home_logo": "https://media.api-sports.io/football/teams/2182.png",
+      "away_team": "Universidad Católica",
+      "away_logo": "https://media.api-sports.io/football/teams/2194.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8567391",
+      "match_time": 1783805400,
+      "date": "2026-07-11",
+      "league": "Chile - Copa Chile",
+      "league_id": 16718,
+      "home_team": "Copiapó",
+      "home_logo": "https://media.api-sports.io/football/teams/2207.png",
+      "away_team": "Everton",
+      "away_logo": "https://media.api-sports.io/football/teams/2187.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8457367",
+      "match_time": 1783810800,
+      "date": "2026-07-11",
+      "league": "Ecuador - Serie A",
+      "league_id": 16714,
+      "home_team": "Guayaquil City FC",
+      "home_logo": "https://media.api-sports.io/football/teams/4320.png",
+      "away_team": "Delfin SC",
+      "away_logo": "https://media.api-sports.io/football/teams/4324.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8578841",
+      "match_time": 1783818000,
+      "date": "2026-07-12",
+      "league": "Mundial 2026",
+      "league_id": 16494,
+      "home_team": "Argentina",
+      "home_logo": "https://media.api-sports.io/football/teams/8625.png",
+      "away_team": "Switzerland",
+      "away_logo": "https://media.api-sports.io/football/teams/7960.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 3.0,
+      "markets": {
+        "match_winner": {
+          "prediction": "1",
+          "home_pct": 55,
+          "draw_pct": 25,
+          "away_pct": 20,
+          "trust": 6
+        },
+        "double_chance": {
+          "1X_pct": 80,
+          "12_pct": 75,
+          "X2_pct": 45,
+          "prediction": "1X",
+          "trust": 7
+        },
+        "btts": {
+          "yes_pct": 60,
+          "no_pct": 40,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 88,
+          "under_pct": 12,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 62,
+          "under_pct": 38,
+          "prediction": ">2.5",
+          "trust": 5
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8483548",
+      "match_time": 1783854000,
+      "date": "2026-07-12",
+      "league": "China - League One",
+      "league_id": 16844,
+      "home_team": "Shanghai Jiading",
+      "home_logo": "https://media.api-sports.io/football/teams/672282.png",
+      "away_team": "Dongguan United",
+      "away_logo": "https://media.api-sports.io/football/teams/703931.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8483562",
+      "match_time": 1783854000,
+      "date": "2026-07-12",
+      "league": "China - League One",
+      "league_id": 16844,
+      "home_team": "Shenzhen Juniors",
+      "home_logo": "https://media.api-sports.io/football/teams/1147461.png",
+      "away_team": "Heilongjiang Lava Spring",
+      "away_logo": "https://media.api-sports.io/football/teams/6949.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8483586",
+      "match_time": 1783855800,
+      "date": "2026-07-12",
+      "league": "China - League One",
+      "league_id": 16844,
+      "home_team": "Nantong Zhiyun",
+      "home_logo": "https://media.api-sports.io/football/teams/11538.png",
+      "away_team": "Changchun Yatai",
+      "away_logo": "https://media.api-sports.io/football/teams/843.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8420329",
+      "match_time": 1783857600,
+      "date": "2026-07-12",
+      "league": "Suecia - Superettan",
+      "league_id": 16576,
+      "home_team": "Västerås SK",
+      "home_logo": "https://media.api-sports.io/football/teams/2911.png",
+      "away_team": "Degerfors",
+      "away_logo": "https://media.api-sports.io/football/teams/680.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8420428",
+      "match_time": 1783857600,
+      "date": "2026-07-12",
+      "league": "Suecia - Superettan",
+      "league_id": 16576,
+      "home_team": "Hammarby",
+      "home_logo": "https://media.api-sports.io/football/teams/655.png",
+      "away_team": "Kalmar",
+      "away_logo": "https://media.api-sports.io/football/teams/666.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8420450",
+      "match_time": 1783857600,
+      "date": "2026-07-12",
+      "league": "Suecia - Superettan",
+      "league_id": 16576,
+      "home_team": "Malmö FF",
+      "home_logo": "https://media.api-sports.io/football/teams/656.png",
+      "away_team": "IFK Göteborg",
+      "away_logo": "https://media.api-sports.io/football/teams/665.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8411881",
+      "match_time": 1783859400,
+      "date": "2026-07-12",
+      "league": "Noruega - Eliteserien",
+      "league_id": 16558,
+      "home_team": "KFUM",
+      "home_logo": "https://media.api-sports.io/football/teams/1524.png",
+      "away_team": "FK Bodo - Glimt",
+      "away_logo": "https://media.api-sports.io/football/teams/332.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8469713",
+      "match_time": 1783864800,
+      "date": "2026-07-12",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "Operário PR",
+      "home_logo": "https://media.api-sports.io/football/teams/2662.png",
+      "away_team": "Novorizontino",
+      "away_logo": "https://media.api-sports.io/football/teams/2712.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8420275",
+      "match_time": 1783866600,
+      "date": "2026-07-12",
+      "league": "Suecia - Superettan",
+      "league_id": 16576,
+      "home_team": "Brommapojkarna",
+      "home_logo": "https://media.api-sports.io/football/teams/672.png",
+      "away_team": "Sirius",
+      "away_logo": "https://media.api-sports.io/football/teams/662.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8420427",
+      "match_time": 1783866600,
+      "date": "2026-07-12",
+      "league": "Suecia - Superettan",
+      "league_id": 16576,
+      "home_team": "GAIS",
+      "home_logo": "https://media.api-sports.io/football/teams/679.png",
+      "away_team": "Elfsborg",
+      "away_logo": "https://media.api-sports.io/football/teams/663.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8411871",
+      "match_time": 1783868400,
+      "date": "2026-07-12",
+      "league": "Noruega - Eliteserien",
+      "league_id": 16558,
+      "home_team": "Rosenborg",
+      "home_logo": "https://media.api-sports.io/football/teams/72.png",
+      "away_team": "Kristiansund",
+      "away_logo": "https://media.api-sports.io/football/teams/344.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8411876",
+      "match_time": 1783868400,
+      "date": "2026-07-12",
+      "league": "Noruega - Eliteserien",
+      "league_id": 16558,
+      "home_team": "Brann",
+      "home_logo": "https://media.api-sports.io/football/teams/336.png",
+      "away_team": "Start",
+      "away_logo": "https://media.api-sports.io/football/teams/341.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8411879",
+      "match_time": 1783868400,
+      "date": "2026-07-12",
+      "league": "Noruega - Eliteserien",
+      "league_id": 16558,
+      "home_team": "Sandefjord",
+      "home_logo": "https://media.api-sports.io/football/teams/342.png",
+      "away_team": "HamKam",
+      "away_logo": "https://media.api-sports.io/football/teams/1475.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8567395",
+      "match_time": 1783873800,
+      "date": "2026-07-12",
+      "league": "Chile - Copa Chile",
+      "league_id": 16718,
+      "home_team": "Cobreloa",
+      "home_logo": "https://media.api-sports.io/football/teams/2202.png",
+      "away_team": "La Serena",
+      "away_logo": "https://media.api-sports.io/football/teams/2209.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8567396",
+      "match_time": 1783873800,
+      "date": "2026-07-12",
+      "league": "Chile - Copa Chile",
+      "league_id": 16718,
+      "home_team": "Antofagasta",
+      "home_logo": "https://media.api-sports.io/football/teams/2183.png",
+      "away_team": "Cobresal",
+      "away_logo": "https://media.api-sports.io/football/teams/2197.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421978",
+      "match_time": 1783875600,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Atlanta",
+      "home_logo": "https://media.api-sports.io/football/teams/758.png",
+      "away_team": "Colegiales",
+      "away_logo": "https://media.api-sports.io/football/teams/755.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8457496",
+      "match_time": 1783875600,
+      "date": "2026-07-12",
+      "league": "Ecuador - Serie A",
+      "league_id": 16714,
+      "home_team": "LDU Quito",
+      "home_logo": "https://media.api-sports.io/football/teams/4319.png",
+      "away_team": "Libertad",
+      "away_logo": "https://media.api-sports.io/football/teams/722415.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8411874",
+      "match_time": 1783876500,
+      "date": "2026-07-12",
+      "league": "Noruega - Eliteserien",
+      "league_id": 16558,
+      "home_team": "Sarpsborg 08",
+      "home_logo": "https://media.api-sports.io/football/teams/340.png",
+      "away_team": "Viking",
+      "away_logo": "https://media.api-sports.io/football/teams/335.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421980",
+      "match_time": 1783882800,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "San Martín Tucumán",
+      "home_logo": "https://media.api-sports.io/football/teams/728.png",
+      "away_team": "Almagro",
+      "away_logo": "https://media.api-sports.io/football/teams/730.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421983",
+      "match_time": 1783882800,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Club Atlético Güemes",
+      "home_logo": "https://media.api-sports.io/football/teams/5474.png",
+      "away_team": "San Martín San Juan",
+      "away_logo": "https://media.api-sports.io/football/teams/714.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8422186",
+      "match_time": 1783882800,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Midland",
+      "home_logo": "https://media.api-sports.io/football/teams/5373.png",
+      "away_team": "Quilmes",
+      "away_logo": "https://media.api-sports.io/football/teams/720.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8422307",
+      "match_time": 1783882800,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Gimnasia Jujuy",
+      "home_logo": "https://media.api-sports.io/football/teams/739.png",
+      "away_team": "Chacarita Juniors",
+      "away_logo": "https://media.api-sports.io/football/teams/744.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8469735",
+      "match_time": 1783882800,
+      "date": "2026-07-12",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "Avaí",
+      "home_logo": "https://media.api-sports.io/football/teams/621.png",
+      "away_team": "Náutico",
+      "away_logo": "https://media.api-sports.io/football/teams/644.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8469749",
+      "match_time": 1783882800,
+      "date": "2026-07-12",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "São Bernardo",
+      "home_logo": "https://media.api-sports.io/football/teams/2677.png",
+      "away_team": "Cuiabá",
+      "away_logo": "https://media.api-sports.io/football/teams/2592.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8507111",
+      "match_time": 1783882800,
+      "date": "2026-07-12",
+      "league": "Bolivia - Liga Profesional",
+      "league_id": 16927,
+      "home_team": "Real Potosí",
+      "home_logo": "https://media.api-sports.io/football/teams/2263.png",
+      "away_team": "Nacional Potosí",
+      "away_logo": "https://media.api-sports.io/football/teams/2256.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8457530",
+      "match_time": 1783883700,
+      "date": "2026-07-12",
+      "league": "Ecuador - Serie A",
+      "league_id": 16714,
+      "home_team": "Deportivo Cuenca",
+      "home_logo": "https://media.api-sports.io/football/teams/4325.png",
+      "away_team": "SD Aucas",
+      "away_logo": "https://media.api-sports.io/football/teams/4331.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421979",
+      "match_time": 1783884600,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Colón",
+      "home_logo": "https://media.api-sports.io/football/teams/707.png",
+      "away_team": "Central Norte",
+      "away_logo": "https://media.api-sports.io/football/teams/10356.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8422162",
+      "match_time": 1783884600,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Godoy Cruz",
+      "home_logo": "https://media.api-sports.io/football/teams/723.png",
+      "away_team": "Defensores de Belgrano",
+      "away_logo": "https://media.api-sports.io/football/teams/760.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421912",
+      "match_time": 1783886400,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Gimnasia y Tiro",
+      "home_logo": "https://media.api-sports.io/football/teams/5438.png",
+      "away_team": "Patronato",
+      "away_logo": "https://media.api-sports.io/football/teams/703.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8421982",
+      "match_time": 1783890000,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Agropecuario",
+      "home_logo": "https://media.api-sports.io/football/teams/1060.png",
+      "away_team": "Temperley",
+      "away_logo": "https://media.api-sports.io/football/teams/712.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8422244",
+      "match_time": 1783890000,
+      "date": "2026-07-12",
+      "league": "Argentina - Liga Profesional",
+      "league_id": 16580,
+      "home_team": "Racing Córdoba",
+      "home_logo": "https://media.api-sports.io/football/teams/10348.png",
+      "away_team": "Acassuso",
+      "away_logo": "https://media.api-sports.io/football/teams/764.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8469528",
+      "match_time": 1783890000,
+      "date": "2026-07-12",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "Atlético GO",
+      "home_logo": "https://media.api-sports.io/football/teams/629.png",
+      "away_team": "Fortaleza",
+      "away_logo": "https://media.api-sports.io/football/teams/2601.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8507112",
+      "match_time": 1783890900,
+      "date": "2026-07-12",
+      "league": "Bolivia - Liga Profesional",
+      "league_id": 16927,
+      "home_team": "The Strongest",
+      "home_logo": "https://media.api-sports.io/football/teams/2257.png",
+      "away_team": "Bolívar",
+      "away_logo": "https://media.api-sports.io/football/teams/2267.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8567381",
+      "match_time": 1783891800,
+      "date": "2026-07-12",
+      "league": "Chile - Copa Chile",
+      "league_id": 16718,
+      "home_team": "Deportes Temuco",
+      "home_logo": "https://media.api-sports.io/football/teams/2184.png",
+      "away_team": "Huachipato",
+      "away_logo": "https://media.api-sports.io/football/teams/2195.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8567390",
+      "match_time": 1783891800,
+      "date": "2026-07-12",
+      "league": "Chile - Copa Chile",
+      "league_id": 16718,
+      "home_team": "Concepción",
+      "home_logo": "https://media.api-sports.io/football/teams/2213.png",
+      "away_team": "Puerto Montt",
+      "away_logo": "https://media.api-sports.io/football/teams/2211.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8469725",
+      "match_time": 1783893600,
+      "date": "2026-07-12",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "CRB",
+      "home_logo": "https://media.api-sports.io/football/teams/694.png",
+      "away_team": "Goiás",
+      "away_logo": "https://media.api-sports.io/football/teams/1056.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8457495",
+      "match_time": 1783897800,
+      "date": "2026-07-12",
+      "league": "Ecuador - Serie A",
+      "league_id": 16714,
+      "home_team": "CS Emelec",
+      "home_logo": "https://media.api-sports.io/football/teams/4326.png",
+      "away_team": "Barcelona",
+      "away_logo": "https://media.api-sports.io/football/teams/4322.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8507133",
+      "match_time": 1783899000,
+      "date": "2026-07-12",
+      "league": "Bolivia - Liga Profesional",
+      "league_id": 16927,
+      "home_team": "Real Tomayapo",
+      "home_logo": "https://media.api-sports.io/football/teams/668933.png",
+      "away_team": "Independiente Petrolero",
+      "away_logo": "https://media.api-sports.io/football/teams/11173.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.2,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 44,
+          "no_pct": 56,
+          "prediction": "No",
+          "trust": 4
+        },
+        "over_under_1.5": {
+          "over_pct": 68,
+          "under_pct": 32,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 43,
+          "under_pct": 57,
+          "prediction": "<2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    },
+    {
+      "match_id": "8420306",
+      "match_time": 1783962000,
+      "date": "2026-07-13",
+      "league": "Suecia - Superettan",
+      "league_id": 16576,
+      "home_team": "Djurgården",
+      "home_logo": "https://media.api-sports.io/football/teams/659.png",
+      "away_team": "Halmstad",
+      "away_logo": "https://media.api-sports.io/football/teams/657.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 3.16,
+      "markets": {
+        "match_winner": {
+          "prediction": "1",
+          "home_pct": 48,
+          "draw_pct": 28,
+          "away_pct": 24,
+          "trust": 5
+        },
+        "double_chance": {
+          "1X_pct": 76,
+          "12_pct": 72,
+          "X2_pct": 52,
+          "prediction": "1X",
+          "trust": 7
+        },
+        "btts": {
+          "yes_pct": 63,
+          "no_pct": 37,
+          "prediction": "Si",
+          "trust": 6
+        },
+        "over_under_1.5": {
+          "over_pct": 92,
+          "under_pct": 8,
+          "prediction": ">1.5",
+          "trust": 8
+        },
+        "over_under_2.5": {
+          "over_pct": 66,
+          "under_pct": 34,
+          "prediction": ">2.5",
+          "trust": 6
+        }
+      },
+      "best_pick": {
+        "market": "over_under_1.5",
+        "prediction": ">1.5",
+        "confidence": 8
+      }
+    },
+    {
+      "match_id": "8469747",
+      "match_time": 1783985400,
+      "date": "2026-07-13",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "Ceará",
+      "home_logo": "https://media.api-sports.io/football/teams/642.png",
+      "away_team": "Athletic Club",
+      "away_logo": "https://media.api-sports.io/football/teams/677199.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.68,
+      "markets": {
+        "match_winner": {
+          "prediction": "1",
+          "home_pct": 55,
+          "draw_pct": 25,
+          "away_pct": 20,
+          "trust": 6
+        },
+        "double_chance": {
+          "1X_pct": 80,
+          "12_pct": 75,
+          "X2_pct": 45,
+          "prediction": "1X",
+          "trust": 7
+        },
+        "btts": {
+          "yes_pct": 54,
+          "no_pct": 46,
+          "prediction": "Si",
+          "trust": 5
+        },
+        "over_under_1.5": {
+          "over_pct": 80,
+          "under_pct": 20,
+          "prediction": ">1.5",
+          "trust": 7
+        },
+        "over_under_2.5": {
+          "over_pct": 54,
+          "under_pct": 46,
+          "prediction": ">2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 7
+      }
+    },
+    {
+      "match_id": "8469748",
+      "match_time": 1783980000,
+      "date": "2026-07-13",
+      "league": "Brasil - Serie B",
+      "league_id": 16783,
+      "home_team": "América Mineiro",
+      "home_logo": "https://media.api-sports.io/football/teams/633.png",
+      "away_team": "Londrina",
+      "away_logo": "https://media.api-sports.io/football/teams/1055.png",
+      "home_score": null,
+      "away_score": null,
+      "status": "incomplete",
+      "total_xg": 2.48,
+      "markets": {
+        "match_winner": {
+          "prediction": "X",
+          "home_pct": 42,
+          "draw_pct": 28,
+          "away_pct": 30,
+          "trust": 4
+        },
+        "double_chance": {
+          "1X_pct": 70,
+          "12_pct": 72,
+          "X2_pct": 58,
+          "prediction": "1X",
+          "trust": 6
+        },
+        "btts": {
+          "yes_pct": 50,
+          "no_pct": 50,
+          "prediction": "Si",
+          "trust": 5
+        },
+        "over_under_1.5": {
+          "over_pct": 74,
+          "under_pct": 26,
+          "prediction": ">1.5",
+          "trust": 6
+        },
+        "over_under_2.5": {
+          "over_pct": 50,
+          "under_pct": 50,
+          "prediction": ">2.5",
+          "trust": 4
+        }
+      },
+      "best_pick": {
+        "market": "double_chance",
+        "prediction": "1X",
+        "confidence": 6
+      }
+    }
+  ],
+  "count": 123,
+  "total_matches_fetched": 123
+}

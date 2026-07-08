@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 from fastapi import FastAPI, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from supabase import create_client, Client
 from dotenv import load_dotenv
@@ -15,7 +16,7 @@ app = FastAPI(title="PronoGol API", description="API de pronosticos de futbol co
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 supabase: Client | None = None
-DATA_DIR = os.environ.get("PRONOGOL_DATA_DIR", "/app/data")
+DATA_DIR = os.environ.get("PRONOGOL_DATA_DIR", os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "..", "data"))
 
 # --- Models ---
 class GoogleAuth(BaseModel):
@@ -522,7 +523,7 @@ async def predictions_today(date: Optional[str] = None, market: Optional[str] = 
     # Load from FootyStats cache if available
     predictions_file = os.path.join(DATA_DIR, "predictions_cache.json")
     if os.path.exists(predictions_file):
-        with open(predictions_file) as f:
+        with open(predictions_file, encoding='utf-8') as f:
             cache = json.load(f)
         return cache
     
@@ -543,8 +544,16 @@ async def generate_predictions_now(authorization: Optional[str] = Header(None)):
         return {"ok": True, "message": f"Predicciones generadas: {result['count']} partidos", "count": result["count"]}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generando predicciones: {str(e)}")
+
+# Serve frontend static files
+WEB_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "apps", "web")
+
 @app.get("/")
 async def root():
+    from fastapi.responses import FileResponse
+    index_path = os.path.join(WEB_DIR, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
     return {"app": "PronoGol", "version": "2.0.0", "status": "ok"}
 
 @app.get("/health")
