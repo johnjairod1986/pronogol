@@ -1,29 +1,27 @@
 """
 PronoGol - AI Predictor
-Generates predictions from real FootyStats data.
-Uses proper FootyStats field names (competition_id, date_unix, home_name, etc.)
+Generates predictions from real FootyStats data, for today + next 5 days.
 """
 import os, json, time, re
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import requests
 
 DATA_DIR = os.environ.get("PRONOGOL_DATA_DIR", "/app/data")
 FOOTYSTATS_KEY = "1abc780710040e043b218e141869d4b664aac69ed8b97ff98dc96da9ca420f72"
 FOOTYSTATS_URL = "https://api.football-data-api.com"
-SEASON_IDS = {16494: 16494}  # comp_id: season_id
+SEASON_IDS = {16494: 16494}
+DAYS_AHEAD = 5  # Generate predictions for today + 5 more days
 
-# League names mapped from competition_id
 LEAGUES = {
     16494: "Mundial 2026",
     16718: "Chile Copa Chile",
     16572: "Finland Veikkausliiga",
-    17128: "UEFA Champions League - Clasificación",
-    17130: "UEFA Conference League - Clasificación",
+    17128: "UEFA Champions League - Clasificaci\u00f3n",
+    17130: "UEFA Conference League - Clasificaci\u00f3n",
     16927: "Bolivia - Liga Profesional",
     16783: "Brasil - Serie B",
 }
 
-# Team logo CDN
 LOGO_CDN = "https://media.api-sports.io/football/teams"
 
 def api_get(endpoint, timeout=10):
@@ -34,7 +32,7 @@ def api_get(endpoint, timeout=10):
     return r.json()
 
 def load_teams(season_id=16494):
-    """Load team rankings from FootyStats for the World Cup."""
+    """Load team rankings from FootyStats for a season."""
     try:
         data = api_get(f"/league-teams?season_id={season_id}")
         if data.get("success", 0) == 1:
@@ -43,7 +41,6 @@ def load_teams(season_id=16494):
                 tid = t.get("team_id") or t.get("id")
                 if tid:
                     teams[tid] = t
-                # Also index by name for matching
                 name = (t.get("cleanName") or t.get("name") or "").lower().strip()
                 if name:
                     teams[name] = t
@@ -51,43 +48,6 @@ def load_teams(season_id=16494):
     except Exception as e:
         print(f"Error loading teams: {e}")
     return {}
-
-def resolve_team_info(match, teams_dict):
-    """Get team info by trying ID first, then name matching."""
-    result = {"name": "", "id": 0, "rank": 30, "risk": 100, "logo": ""}
-    
-    for side in ["home", "away"]:
-        name = match.get(f"{side}_name", "")
-        tid = match.get(f"{side}ID") or match.get(f"{side}_id") or 0
-        
-        # Try by numeric ID first
-        info = teams_dict.get(tid, {}) if tid else {}
-        if not info:
-            # Try by name
-            key = name.lower().replace("national team", "").replace(" men", "").strip()
-            info = teams_dict.get(key, {})
-        
-        rank = info.get("performance_rank", 30)
-        risk = info.get("risk", 100)
-        
-        if side == "home":
-            result = {
-                "name": name,
-                "id": tid or info.get("team_id") or info.get("id", 0),
-                "rank": rank,
-                "risk": risk,
-                "logo": f"{LOGO_CDN}/{tid}.png" if tid else "",
-            }
-        else:
-            result_away = {
-                "name": name,
-                "id": tid or info.get("team_id") or info.get("id", 0),
-                "rank": rank,
-                "risk": risk,
-                "logo": f"{LOGO_CDN}/{tid}.png" if tid else "",
-            }
-    
-    return result, result_away
 
 def get_match_detail(mid):
     """Fetch match stats (xG, H2H, PPG)."""
@@ -99,59 +59,53 @@ def get_match_detail(mid):
         pass
     return {}
 
-def generate_predictions():
-    """Main prediction generator."""
-    print(f"🤖 PronoGol Predictor running at {datetime.utcnow().isoformat()}")
+def generate_predictions_for_date(date_str=None):
+    """Generate predictions for a specific date, or today if None."""
+    bogota = timezone(timedelta(hours=-5))
+    now = datetime.now(bogota)
     
-    # Load team rankings
+    if date_str is None:
+        date_str = now.strftime("%Y-%m-%d")
+    
+    print(f"Generating predictions for {date_str}...")
+    
+    # Load team rankings (once)
     all_teams = {}
     for comp_id, season_id in SEASON_IDS.items():
         teams = load_teams(season_id)
         all_teams[comp_id] = teams
-        print(f"📊 {LEAGUES.get(comp_id, '?')}: loaded {len(teams)} teams")
     
-    # Fetch today's matches (include=all gives more fields)
+    # Fetch matches for this date
     try:
-        data = api_get("/todays-matches?include=all")
+        data = api_get(f"/todays-matches?date={date_str}&include=all")
         matches = data.get("data", []) if data.get("success", 0) == 1 else []
-        print(f"📅 Found {len(matches)} matches today")
     except Exception as e:
-        print(f"Error fetching matches: {e}")
+        print(f"Error fetching matches for {date_str}: {e}")
         matches = []
     
     predictions = []
-    
     for match in matches[:50]:
         comp_id = match.get("competition_id", 0)
         mid = match.get("id", "")
         
-        # Resolve team info
         home_name = match.get("home_name", "")
         away_name = match.get("away_name", "")
         home_id = match.get("homeID") or match.get("home_id") or 0
         away_id = match.get("awayID") or match.get("away_id") or 0
         
         team_pool = all_teams.get(comp_id, {})
-        
-        # Home team
         ht = team_pool.get(home_id, team_pool.get(home_name.lower().strip(), {}))
-        if not ht:
-            ht = team_pool.get('anything', {})
+        at = team_pool.get(away_id, team_pool.get(away_name.lower().strip(), {}))
         
         home_rank = ht.get("performance_rank", 30) if ht else 30
         home_risk = ht.get("risk", 100) if ht else 100
-        
-        # Away team
-        at = team_pool.get(away_id, team_pool.get(away_name.lower().strip(), {}))
         away_rank = at.get("performance_rank", 30) if at else 30
         away_risk = at.get("risk", 100) if at else 100
         
-        # Match time
         match_time = match.get("date_unix", 0)
         if not match_time:
             match_time = match.get("date", {}).get("startTimestamp", 0)
         
-        # Status & scores
         status = match.get("status", "scheduled")
         scores = match.get("scores", {})
         if isinstance(scores, dict):
@@ -160,13 +114,10 @@ def generate_predictions():
         else:
             home_score = None; away_score = None
         
-        # League name
         league_name = LEAGUES.get(comp_id, match.get("name", match.get("league_name", "Otra liga")))
         
-        # Fetch detail for xG (skip if too many matches to avoid rate limits)
-        detail = {}
-        if len(matches) <= 25:
-            detail = get_match_detail(mid)
+        # Fetch detail for xG
+        detail = get_match_detail(mid) if len(matches) <= 25 else {}
         
         xg_home = float(detail.get("team_a_xg_prematch") or detail.get("team_a_xg", 0) or 0)
         xg_away = float(detail.get("team_b_xg_prematch") or detail.get("team_b_xg", 0) or 0)
@@ -176,9 +127,8 @@ def generate_predictions():
         
         total_xg = round(xg_home + xg_away, 2)
         
-        # ---- Probability calculations ----
+        # Probabilities
         rank_diff = home_rank - away_rank
-        
         if rank_diff <= -15:
             home_win_pct = 65; draw_pct = 20; away_win_pct = 15
         elif rank_diff <= -8:
@@ -194,21 +144,13 @@ def generate_predictions():
         else:
             home_win_pct = 40; draw_pct = 30; away_win_pct = 30
         
-        trust_penalty = 0
-        if home_win_pct >= 45 and (home_risk > 150 or away_risk > 150):
-            trust_penalty = 1
-        if away_win_pct >= 45 and (away_risk > 150 or home_risk > 150):
-            trust_penalty = 1
-        
-        # Winner
         if home_win_pct >= 45:
-            winner_pred = "1"; winner_trust = max(min(round(home_win_pct / 9), 10) - trust_penalty, 3)
+            winner_pred = "1"; winner_trust = max(min(round(home_win_pct / 9), 10) - (1 if home_risk > 150 else 0), 3)
         elif away_win_pct >= 45:
-            winner_pred = "2"; winner_trust = max(min(round(away_win_pct / 9), 10) - trust_penalty, 3)
+            winner_pred = "2"; winner_trust = max(min(round(away_win_pct / 9), 10) - (1 if away_risk > 150 else 0), 3)
         else:
             winner_pred = "X"; winner_trust = 4
         
-        # DC
         if home_win_pct >= 40:
             dc_pred = "1X"; dc_trust = min(round((home_win_pct + draw_pct) / 11), 9)
         elif away_win_pct >= 40:
@@ -216,15 +158,14 @@ def generate_predictions():
         else:
             dc_pred = "12"; dc_trust = 6
         
-        # O/U & BTTS
         over_15_pct = max(min(round(50 + (total_xg - 1.5) * 25), 92), 35)
         over_25_pct = max(min(round(50 + (total_xg - 2.5) * 25), 88), 20)
         btts_yes_pct = max(min(round(40 + (total_xg - 2.0) * 20), 80), 30)
         
-        # Build prediction object
         pred = {
             "match_id": str(mid),
             "match_time": match_time,
+            "date": date_str,
             "league": league_name,
             "league_id": comp_id,
             "home_team": home_name,
@@ -265,30 +206,61 @@ def generate_predictions():
             "best_pick": {"market": "", "prediction": "", "confidence": 0},
         }
         
-        # Best pick: highest trust >= 6
         best = max(pred["markets"].items(), key=lambda kv: kv[1]["trust"])
         if best[1]["trust"] >= 6:
             pred["best_pick"] = {"market": best[0], "prediction": best[1]["prediction"], "confidence": best[1]["trust"]}
         
         predictions.append(pred)
     
-    # Sort: best picks first
     predictions.sort(key=lambda x: x["best_pick"]["confidence"], reverse=True)
+    return predictions, len(matches)
+
+def generate_predictions():
+    """Main generator: fetches today + next 5 days."""
+    bogota = timezone(timedelta(hours=-5))
+    now = datetime.now(bogota)
+    print(f"PronoGol Predictor running at {now.isoformat()}")
     
+    all_predictions = []
+    total_fetched = 0
+    
+    for day_offset in range(DAYS_AHEAD + 1):
+        dt = now + timedelta(days=day_offset)
+        date_str = dt.strftime("%Y-%m-%d")
+        preds, fetched = generate_predictions_for_date(date_str)
+        all_predictions.extend(preds)
+        total_fetched += fetched
+        print(f"  {date_str} ({dt.strftime('%A')}): {len(preds)} predictions from {fetched} matches")
+    
+    # Cache structure with dates index
     cache = {
-        "generated_at": datetime.utcnow().isoformat(),
-        "date": datetime.utcnow().strftime("%Y-%m-%d"),
-        "predictions": predictions,
-        "count": len(predictions),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "dates": {},
+        "predictions": all_predictions,
+        "count": len(all_predictions),
+        "total_matches_fetched": total_fetched,
     }
+    
+    # Build dates index
+    for p in all_predictions:
+        d = p.get("date", "")
+        if d:
+            cache["dates"].setdefault(d, {"count": 0, "leagues": set()})
+            cache["dates"][d]["count"] += 1
+            cache["dates"][d]["leagues"].add(p["league"])
+    
+    # Convert sets to lists for JSON
+    for d in cache["dates"]:
+        cache["dates"][d]["leagues"] = list(cache["dates"][d]["leagues"])
     
     os.makedirs(DATA_DIR, exist_ok=True)
     cache_path = os.path.join(DATA_DIR, "predictions_cache.json")
-    with open(cache_path, "w") as f:
-        json.dump(cache, f, indent=2)
+    with open(cache_path, "w", encoding="utf-8") as f:
+        json.dump(cache, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Generated {len(predictions)} predictions for {len(set(p['league'] for p in predictions))} leagues")
-    print(f"📁 Saved to {cache_path}")
+    leagues_count = len(set(p["league"] for p in all_predictions))
+    print(f"Done: {len(all_predictions)} predictions, {leagues_count} leagues, {len(cache['dates'])} dates")
+    print(f"Saved to {cache_path}")
     return cache
 
 if __name__ == "__main__":
