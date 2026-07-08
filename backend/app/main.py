@@ -1,6 +1,6 @@
 """PronoGol - Backend API v2"""
 import os, json, uuid, secrets, hashlib, hmac, time, requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 from fastapi import FastAPI, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
@@ -131,6 +131,45 @@ def _write_db(name, data):
 def _gen_token():
     return secrets.token_urlsafe(48)
 
+def _ensure_predictions_cache():
+    """Download predictions from GitHub if cache is missing."""
+    cache_path = os.path.join(DATA_DIR, "predictions_cache.json")
+    if os.path.exists(cache_path):
+        print(f"Predictions cache already exists at {cache_path}")
+        return True
+    
+    urls = [
+        "https://raw.githubusercontent.com/johnjairod1986/pronogol/master/data/predictions_cache.json",
+        "https://raw.githubusercontent.com/johnjairod1986/pronogol/main/data/predictions_cache.json",
+    ]
+    for url in urls:
+        try:
+            print(f"Downloading predictions from {url}...")
+            r = requests.get(url, timeout=15)
+            if r.status_code == 200:
+                data = r.json()
+                if data.get("predictions"):
+                    os.makedirs(DATA_DIR, exist_ok=True)
+                    with open(cache_path, "w", encoding="utf-8") as f:
+                        json.dump(data, f, indent=2, ensure_ascii=False)
+                    print(f"Downloaded {len(data['predictions'])} predictions from GitHub!")
+                    return True
+        except Exception as e:
+            print(f"GitHub download failed: {e}")
+    
+    # Try auto-generate as last resort
+    try:
+        print("Trying to auto-generate predictions...")
+        from app.predictor import generate_predictions
+        result = generate_predictions()
+        print(f"Auto-generated {len(result.get('predictions', []))} predictions!")
+        return True
+    except Exception as e:
+        print(f"Auto-generation failed: {e}")
+    
+    print("WARNING: Could not load or generate predictions!")
+    return False
+
 @app.on_event("startup")
 async def startup():
     global supabase
@@ -144,6 +183,8 @@ async def startup():
         _write_db("users.json", {"next_id": 1, "users": {}})
     if not os.path.exists(_db_path("sessions.json")):
         _write_db("sessions.json", {"sessions": {}})
+    # Ensure predictions cache
+    _ensure_predictions_cache()
 
 # --- Email Auth ---
 @app.post("/api/v2/auth/signup")
@@ -497,6 +538,44 @@ PREDICTION_MARKETS = [
     {"id": "over_under_2.5", "name": "Más/Menos 2.5", "options": [">2.5", "<2.5"]},
     {"id": "over_under_3.5", "name": "Más/Menos 3.5", "options": [">3.5", "<3.5"]},
 ]
+
+@app.post("/api/v2/predictions/upload")
+async def upload_predictions(data: dict):
+    """Upload predictions data directly (requires secret key)."""
+    upload_key = data.get("key", "")
+    expected = os.getenv("PRONOGOL_UPLOAD_KEY", "clawbot2026")
+    if upload_key != expected:
+        raise HTTPException(status_code=403, detail="Invalid upload key")
+    
+    predictions = data.get("predictions", [])
+    if not predictions:
+        raise HTTPException(status_code=400, detail="No predictions data")
+    
+    cache = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "dates": {},
+        "predictions": predictions,
+        "count": len(predictions),
+        "total_matches_fetched": data.get("total_matches_fetched", len(predictions)),
+    }
+    
+    # Build dates index
+    for p in predictions:
+        d = p.get("date", "")
+        if d:
+            if d not in cache["dates"]:
+                cache["dates"][d] = {"count": 0, "leagues": []}
+            cache["dates"][d]["count"] += 1
+            if p.get("league", "") not in cache["dates"][d]["leagues"]:
+                cache["dates"][d]["leagues"].append(p["league"])
+    
+    os.makedirs(DATA_DIR, exist_ok=True)
+    cache_path = os.path.join(DATA_DIR, "predictions_cache.json")
+    with open(cache_path, "w", encoding="utf-8") as f:
+        json.dump(cache, f, indent=2, ensure_ascii=False)
+    
+    print(f"Uploaded {len(predictions)} predictions to cache!")
+    return {"ok": True, "count": len(predictions)}
 
 @app.get("/api/v2/predictions/markets")
 async def get_prediction_markets():
