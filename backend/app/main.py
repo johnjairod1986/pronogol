@@ -1039,6 +1039,432 @@ async def generate_predictions_now(authorization: Optional[str] = Header(None)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generando predicciones: {str(e)}")
 
+
+# ======================== PREDICTION RESULTS ========================
+@app.get("/api/v2/predictions/results")
+async def predictions_results(date: Optional[str] = None):
+    """Verify results of past predictions.
+    For each prediction where match_time has passed, check with API-Football.
+    Returns win/loss/pending for each prediction.
+    """
+    today = date or datetime.utcnow().strftime("%Y-%m-%d")
+    
+    # Load predictions
+    predictions_file = os.path.join(DATA_DIR, "predictions_cache.json")
+    if not os.path.exists(predictions_file):
+        return {"date": today, "predictions": [], "message": "No hay predicciones cacheadas"}
+    
+    with open(predictions_file, encoding='utf-8') as f:
+        cache = json.load(f)
+    
+    all_predictions = cache.get("predictions", [])
+    
+    # Filter by date if specified
+    if date:
+        preds_for_date = [p for p in all_predictions if p.get("date") == date]
+    else:
+        preds_for_date = all_predictions
+    
+    bogota_tz = timezone(timedelta(hours=-5))
+    now_ts = int(datetime.now(bogota_tz).timestamp())
+    
+    # Load results cache
+    results_cache_path = os.path.join(DATA_DIR, "results_cache.json")
+    results_cache = {}
+    if os.path.exists(results_cache_path):
+        try:
+            with open(results_cache_path, encoding='utf-8') as f:
+                results_cache = json.load(f)
+        except:
+            results_cache = {}
+    
+    results = []
+    predictions_to_check = [p for p in preds_for_date if p.get("match_time", 0) <= now_ts]
+    predictions_to_skip = [p for p in preds_for_date if p.get("match_time", 0) > now_ts]
+    
+    # Skip fixtures that haven't started yet
+    for p in predictions_to_skip:
+        mid = str(p.get("match_id", ""))
+        results.append({
+            "match_id": mid,
+            "home_team": p.get("home_team", ""),
+            "away_team": p.get("away_team", ""),
+            "match_time": p.get("match_time", 0),
+            "date": p.get("date", ""),
+            "league": p.get("league", ""),
+            "status": "scheduled",
+            "markets": p.get("markets", {}),
+            "best_pick": p.get("best_pick", {}),
+            "home_score": None,
+            "away_score": None,
+            "results": {k: "pending" for k in p.get("markets", {})},
+            "result": "pending"
+        })
+    
+    # Check each finished fixture
+    changed = False
+    for p in predictions_to_check:
+        mid = str(p.get("match_id", ""))
+        
+        # Check if already cached
+        cached = results_cache.get(mid)
+        if cached and cached.get("api_result") == "done":
+            results.append(cached.get("data", {}))
+            continue
+        
+        # Call API-Football to get fixture data
+        try:
+            api_key = os.environ.get("API_FOOTBALL_KEY", "b79676c9916a6b82de0f91fe3aceb46d")
+            api_url = "https://v3.football.api-sports.io"
+            headers = {"x-apisports-key": api_key}
+            r = requests.get(f"{api_url}/fixtures?id={mid}", headers=headers, timeout=10)
+            data = r.json()
+            
+            fixture_data = None
+            for resp in data.get("response", []):
+                fixture_data = resp
+                break
+            
+            if fixture_data:
+                goals = fixture_data.get("goals", {})
+                home_score = goals.get("home")
+                away_score = goals.get("away")
+                status_long = fixture_data.get("fixture", {}).get("status", {}).get("long", "scheduled")
+                status_short = fixture_data.get("fixture", {}).get("status", {}).get("short", "")
+                
+                # Check if match is finished
+                is_finished = status_short in ("FT", "AET", "PEN", "AWD", "WO")
+                
+                if is_finished or (status_long == "Match Finished"):
+                    markets_results = {}
+                    home_score = int(home_score) if home_score is not None else 0
+                    away_score = int(away_score) if away_score is not None else 0
+                    total_goals = home_score + away_score
+                    
+                    for mkt_name, mkt_data in p.get("markets", {}).items():
+                        pred_val = mkt_data.get("prediction", "")
+                        if not pred_val:
+                            markets_results[mkt_name] = "pending"
+                            continue
+                        
+                        if mkt_name == "match_winner":
+                            if home_score > away_score:
+                                actual = "1"
+                            elif home_score == away_score:
+                                actual = "X"
+                            else:
+                                actual = "2"
+                            markets_results[mkt_name] = "win" if pred_val == actual else "loss"
+                            
+                        elif mkt_name == "double_chance":
+                            if home_score > away_score:
+                                actual = "1"
+                            elif home_score == away_score:
+                                actual = "X"
+                            else:
+                                actual = "2"
+                            if pred_val == "1X":
+                                markets_results[mkt_name] = "win" if actual in ("1", "X") else "loss"
+                            elif pred_val == "12":
+                                markets_results[mkt_name] = "win" if actual in ("1", "2") else "loss"
+                            elif pred_val == "X2":
+                                markets_results[mkt_name] = "win" if actual in ("X", "2") else "loss"
+                            else:
+                                markets_results[mkt_name] = "pending"
+                                
+                        elif mkt_name == "btts":
+                            both_scored = home_score > 0 and away_score > 0
+                            if pred_val == "Si":
+                                markets_results[mkt_name] = "win" if both_scored else "loss"
+                            elif pred_val == "No":
+                                markets_results[mkt_name] = "win" if not both_scored else "loss"
+                            else:
+                                markets_results[mkt_name] = "pending"
+                                
+                        elif mkt_name in ("over_under_1.5", "over_under_2.5"):
+                            threshold = 1.5 if mkt_name == "over_under_1.5" else 2.5
+                            if pred_val.startswith(">"):
+                                markets_results[mkt_name] = "win" if total_goals > threshold else "loss"
+                            elif pred_val.startswith("<"):
+                                markets_results[mkt_name] = "win" if total_goals < threshold else "loss"
+                            else:
+                                markets_results[mkt_name] = "pending"
+                    
+                    # Determine overall best_pick result
+                    bp = p.get("best_pick", {})
+                    bp_market = bp.get("market", "")
+                    overall_result = "pending"
+                    if bp_market and bp_market in markets_results:
+                        overall_result = markets_results[bp_market]
+                    elif markets_results:
+                        # Use first market
+                        first_win = [v for v in markets_results.values() if v != "pending"]
+                        overall_result = first_win[0] if first_win else "pending"
+                    
+                    entry = {
+                        "match_id": mid,
+                        "home_team": p.get("home_team", ""),
+                        "away_team": p.get("away_team", ""),
+                        "match_time": p.get("match_time", 0),
+                        "date": p.get("date", ""),
+                        "league": p.get("league", ""),
+                        "status": "finished",
+                        "markets": p.get("markets", {}),
+                        "best_pick": p.get("best_pick", {}),
+                        "home_score": home_score,
+                        "away_score": away_score,
+                        "results": markets_results,
+                        "result": overall_result
+                    }
+                    
+                    results.append(entry)
+                    
+                    # Cache the result
+                    results_cache[mid] = {
+                        "api_result": "done",
+                        "data": entry,
+                        "cached_at": datetime.utcnow().isoformat()
+                    }
+                    changed = True
+                else:
+                    # Match started but not finished
+                    entry = {
+                        "match_id": mid,
+                        "home_team": p.get("home_team", ""),
+                        "away_team": p.get("away_team", ""),
+                        "match_time": p.get("match_time", 0),
+                        "date": p.get("date", ""),
+                        "league": p.get("league", ""),
+                        "status": "live",
+                        "markets": p.get("markets", {}),
+                        "best_pick": p.get("best_pick", {}),
+                        "home_score": home_score if home_score is not None else 0,
+                        "away_score": away_score if away_score is not None else 0,
+                        "results": {k: "pending" for k in p.get("markets", {})},
+                        "result": "pending"
+                    }
+                    results.append(entry)
+            else:
+                # Fixture not found on API, mark as pending
+                entry = {
+                    "match_id": mid,
+                    "home_team": p.get("home_team", ""),
+                    "away_team": p.get("away_team", ""),
+                    "match_time": p.get("match_time", 0),
+                    "date": p.get("date", ""),
+                    "league": p.get("league", ""),
+                    "status": "unknown",
+                    "markets": p.get("markets", {}),
+                    "best_pick": p.get("best_pick", {}),
+                    "home_score": None,
+                    "away_score": None,
+                    "results": {k: "pending" for k in p.get("markets", {})},
+                    "result": "pending"
+                }
+                results.append(entry)
+        except Exception as e:
+            print(f"Error checking fixture {mid}: {e}")
+            entry = {
+                "match_id": mid,
+                "home_team": p.get("home_team", ""),
+                "away_team": p.get("away_team", ""),
+                "match_time": p.get("match_time", 0),
+                "date": p.get("date", ""),
+                "league": p.get("league", ""),
+                "status": "error",
+                "markets": p.get("markets", {}),
+                "best_pick": p.get("best_pick", {}),
+                "home_score": None,
+                "away_score": None,
+                "results": {k: "pending" for k in p.get("markets", {})},
+                "result": "error",
+                "error": str(e)
+            }
+            results.append(entry)
+    
+    # Save results cache if changed
+    if changed:
+        try:
+            with open(results_cache_path, "w", encoding="utf-8") as f:
+                json.dump(results_cache, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            print(f"Error saving results cache: {e}")
+    
+    # Count stats
+    wins = sum(1 for r in results if r.get("result") == "win")
+    losses = sum(1 for r in results if r.get("result") == "loss")
+    pending = sum(1 for r in results if r.get("result") == "pending")
+    
+    return {
+        "date": today,
+        "total": len(results),
+        "wins": wins,
+        "losses": losses,
+        "pending": pending,
+        "predictions": results
+    }
+
+
+# ======================== COMBO CALCULATOR ========================
+class ComboSelection(BaseModel):
+    match_id: str
+    market: str
+    prediction: str
+    bookmaker_odd: float
+
+class ComboRequest(BaseModel):
+    selections: list[ComboSelection]
+
+@app.post("/api/v2/combo/calculate")
+async def combo_calculate(data: ComboRequest):
+    """Calculate combined probability and edge for a parlay.
+    Returns statistical analysis - NOT gambling advice.
+    """
+    if not data.selections or len(data.selections) < 2:
+        raise HTTPException(status_code=400, detail="Se requieren al menos 2 selecciones")
+    
+    # Load predictions cache
+    predictions_file = os.path.join(DATA_DIR, "predictions_cache.json")
+    if not os.path.exists(predictions_file):
+        raise HTTPException(status_code=404, detail="No hay predicciones cargadas")
+    
+    with open(predictions_file, encoding='utf-8') as f:
+        cache = json.load(f)
+    
+    all_preds = cache.get("predictions", [])
+    preds_by_id = {p.get("match_id", ""): p for p in all_preds}
+    
+    detail = []
+    combined_prob = 1.0
+    combined_odd = 1.0
+    errors = []
+    
+    for sel in data.selections:
+        match = preds_by_id.get(sel.match_id)
+        if not match:
+            errors.append(f"Partido {sel.match_id} no encontrado")
+            continue
+        
+        mkt_data = match.get("markets", {}).get(sel.market)
+        if not mkt_data:
+            errors.append(f"Mercado '{sel.market}' no encontrado para partido {sel.match_id}")
+            continue
+        
+        # Get probability for the specific prediction
+        prob = 0
+        
+        if sel.market == "match_winner":
+            if sel.prediction == "1":
+                prob = mkt_data.get("home_pct", 0)
+            elif sel.prediction == "X":
+                prob = mkt_data.get("draw_pct", 0)
+            elif sel.prediction == "2":
+                prob = mkt_data.get("away_pct", 0)
+        elif sel.market == "double_chance":
+            if sel.prediction == "1X":
+                prob = mkt_data.get("1X_pct", 0)
+            elif sel.prediction == "12":
+                prob = mkt_data.get("12_pct", 0)
+            elif sel.prediction == "X2":
+                prob = mkt_data.get("X2_pct", 0)
+        elif sel.market == "btts":
+            if sel.prediction == "Si":
+                prob = mkt_data.get("yes_pct", 0)
+            elif sel.prediction == "No":
+                prob = mkt_data.get("no_pct", 0)
+        elif sel.market == "over_under_1.5":
+            if sel.prediction == ">1.5":
+                prob = mkt_data.get("over_pct", 0)
+            elif sel.prediction == "<1.5":
+                prob = mkt_data.get("under_pct", 0)
+        elif sel.market == "over_under_2.5":
+            if sel.prediction == ">2.5":
+                prob = mkt_data.get("over_pct", 0)
+            elif sel.prediction == "<2.5":
+                prob = mkt_data.get("under_pct", 0)
+        
+        prob_decimal = prob / 100.0
+        
+        detail.append({
+            "match_id": sel.match_id,
+            "home_team": match.get("home_team", ""),
+            "away_team": match.get("away_team", ""),
+            "market": sel.market,
+            "prediction": sel.prediction,
+            "probabilidad": prob,
+            "bookmaker_odd": sel.bookmaker_odd,
+            "odd_justa": round(1.0 / prob_decimal, 2) if prob_decimal > 0 else 0
+        })
+        
+        combined_prob *= prob_decimal
+        combined_odd *= sel.bookmaker_odd
+    
+    if not detail:
+        raise HTTPException(status_code=400, detail="No se pudieron procesar las selecciones: " + "; ".join(errors))
+    
+    # Calculate fair odds
+    fair_odd = 1.0 / combined_prob if combined_prob > 0 else 0
+    
+    # Calculate edge: (prob_combinada / (1 / odd_combinada_casa)) - 1
+    # More simply: edge = (combined_prob * combined_odd) - 1
+    edge = (combined_prob * combined_odd) - 1
+    edge_pct = edge * 100
+    
+    if edge_pct > 5:
+        recomendacion = "value"
+    elif edge_pct >= -5:
+        recomendacion = "fair"
+    else:
+        recomendacion = "no_value"
+    
+    return {
+        "probabilidad": round(combined_prob * 100, 1),
+        "odd_justa": round(fair_odd, 2),
+        "odd_casa": round(combined_odd, 2),
+        "ventaja": f"{'+' if edge_pct >= 0 else ''}{round(edge_pct, 1)}%",
+        "recomendacion": recomendacion,
+        "selecciones": detail,
+        "nota": len(errors) if errors else None,
+        "errores": errors if errors else None,
+        "disclaimer": "ESTADÍSTICA INFORMATIVA - NO RECOMENDACIÓN DE APUESTA. PronoGol es una herramienta de análisis estadístico. Los pronósticos no garantizan resultados. El usuario asume toda responsabilidad. Prohibido para menores de 18 años."
+    }
+
+
+# ======================== RESULTS CACHE STATUS ========================
+@app.get("/api/v2/predictions/results/stats")
+async def results_stats():
+    """Get summary stats of verified results."""
+    results_cache_path = os.path.join(DATA_DIR, "results_cache.json")
+    if not os.path.exists(results_cache_path):
+        return {"total": 0, "wins": 0, "losses": 0, "pending": 0}
+    
+    try:
+        with open(results_cache_path, encoding='utf-8') as f:
+            cache = json.load(f)
+        
+        wins = 0
+        losses = 0
+        pending = 0
+        for mid, entry in cache.items():
+            data = entry.get("data", {})
+            r = data.get("result", "pending")
+            if r == "win":
+                wins += 1
+            elif r == "loss":
+                losses += 1
+            else:
+                pending += 1
+        
+        return {
+            "total": len(cache),
+            "wins": wins,
+            "losses": losses,
+            "pending": pending,
+            "accuracy": round(wins / (wins + losses) * 100, 1) if (wins + losses) > 0 else 0
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
 # Serve frontend static files
 WEB_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "apps", "web")
 
