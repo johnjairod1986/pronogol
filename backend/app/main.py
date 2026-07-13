@@ -1,10 +1,18 @@
 """PronoGol - Backend API v2"""
-import os, json, uuid, secrets, hashlib, hmac, time, requests
+import os, json, uuid, secrets, hashlib, hmac, time, requests, smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta, timezone
 from typing import Optional
-from fastapi import FastAPI, HTTPException, Header
+import time
+from collections import defaultdict
+from fastapi import Request, Response
+from fastapi.responses import JSONResponse
+from fastapi import FastAPI, HTTPException, Header, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.staticfiles import StaticFiles
+import time
 from pydantic import BaseModel
 from supabase import create_client, Client
 from dotenv import load_dotenv
@@ -12,11 +20,192 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI(title="PronoGol API", description="API de pronosticos de futbol con IA", version="2.0.0")
+# ======================== RATE LIMITING ========================
+class RateLimiter:
+    """Simple in-memory rate limiter."""
+    def __init__(self):
+        self.requests = defaultdict(list)
+    
+    def is_allowed(self, key: str, max_requests: int = 60, window_seconds: int = 60) -> bool:
+        now = time.time()
+        window_start = now - window_seconds
+        # Clean old entries
+        self.requests[key] = [t for t in self.requests[key] if t > window_start]
+        if len(self.requests[key]) >= max_requests:
+            return False
+        self.requests[key].append(now)
+        return True
+
+rate_limiter = RateLimiter()
+
+# ===================== SECURITY HEADERS =======================
+SECURITY_HEADERS = {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "X-XSS-Protection": "1; mode=block",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+}
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    for header, value in SECURITY_HEADERS.items():
+        response.headers[header] = value
+    return response
+
+@app.middleware("http")
+async def rate_limit_middleware(request: Request, call_next):
+    # Skip rate limiting for static files and health check
+    path = request.url.path
+    if path in ("/health", "/", "/favicon.ico") or path.startswith("/static/"):
+        return await call_next(request)
+    
+    # Get client IP
+    client_ip = request.client.host if request.client else "unknown"
+    
+    # Different limits for different endpoints
+    if path.startswith("/api/v2/predictions"):
+        max_req = 100  # 100 req/min for predictions
+    elif path.startswith("/api/v2/auth"):
+        max_req = 20   # 20 req/min for auth
+    elif path.startswith("/api/v2/admin"):
+        max_req = 30   # 30 req/min for admin
+    else:
+        max_req = 60   # 60 req/min default
+    
+    if not rate_limiter.is_allowed(client_ip, max_requests=max_req, window_seconds=60):
+        return JSONResponse(
+            status_code=429,
+            content={"detail": "Demasiadas solicitudes. Intenta de nuevo en 60 segundos."},
+            headers={"Retry-After": "60", "X-RateLimit-Limit": str(max_req)},
+        )
+    
+    # Add cache headers for predictions
+    response = await call_next(request)
+    if path.startswith("/api/v2/predictions"):
+        response.headers["Cache-Control"] = "public, max-age=300, s-maxage=300"
+        response.headers["X-Cache-TTL"] = "300"
+    elif path.startswith("/api/v2/matches"):
+        response.headers["Cache-Control"] = "public, max-age=600, s-maxage=600"
+    elif path.startswith("/api/v2/auth/me"):
+        response.headers["Cache-Control"] = "private, no-cache"
+    
+    return response
+
+# ==================== REQUEST LOGGING =========================
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    start = time.time()
+    response = await call_next(request)
+    elapsed = time.time() - start
+    print(f"[{start:.0f}] {request.method} {request.url.path} -> {response.status_code} ({elapsed:.2f}s)")
+    return response
+
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 supabase: Client | None = None
 DATA_DIR = os.environ.get("PRONOGOL_DATA_DIR", os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "..", "data"))
+
+# --- SMTP Email Config ---
+SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.hostinger.com")
+SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
+SMTP_USER = os.environ.get("SMTP_USER", "bienvenida@pronogol.app")
+SMTP_PASS = os.environ.get("SMTP_PASS", "@2013zX08dani@")
+SMTP_FROM = os.environ.get("SMTP_FROM", "PronoGol <bienvenida@pronogol.app>")
+
+def send_welcome_email(to_email: str, user_name: str):
+    """Send welcome email to newly registered user."""
+    try:
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = "Bienvenido a PronoGol!"
+        msg["From"] = SMTP_FROM
+        msg["To"] = to_email
+        
+        # Plain text version
+        text = f"""Hola {user_name}!
+
+Bienvenido a PronoGol 🎯
+
+Te has registrado exitosamente en nuestra plataforma de analisis estadistico y pronosticos deportivos.
+
+Que te ofrece PronoGol?
+• Pronosticos generados por inteligencia artificial basados en datos historicos
+• Analisis detallado de partidos de futbol
+• Estadisticas y tendencias actualizadas
+
+Importante: PronoGol es una herramienta informativa y de entretenimiento.
+No somos una casa de apuestas ni recomendamos apostar.
+
+Gracias por confiar en nosotros!
+
+El equipo de PronoGol
+https://pronogol.app"""
+
+        # HTML version
+        html = f"""<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#0b0b1a;font-family:'Inter',Arial,sans-serif">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0b0b1a;padding:30px 15px">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;background:#111128;border-radius:16px;border:1px solid rgba(45,215,191,0.15)">
+<tr><td style="padding:40px 30px 30px;text-align:center">
+<h1 style="margin:0;font-size:28px;font-weight:800;background:linear-gradient(135deg,#00ff87,#60efff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">⚽ PronoGol</h1>
+<p style="color:#5a6380;font-size:14px;margin:8px 0 0">Analisis deportivo con IA</p>
+</td></tr>
+<tr><td style="padding:0 30px 20px;text-align:center">
+<h2 style="color:#e8e8f0;font-size:22px;margin:0 0 10px">Bienvenido, {user_name}! 🎯</h2>
+<p style="color:#c8c8e0;font-size:15px;line-height:1.6;margin:0 0 20px">Te has registrado exitosamente en PronoGol. Ahora puedes acceder a pronosticos generados por inteligencia artificial, analisis detallados de partidos y estadisticas actualizadas.</p>
+</td></tr>
+<tr><td style="padding:0 30px 20px">
+<table width="100%" cellpadding="15" cellspacing="0" style="background:rgba(45,215,191,0.06);border-radius:12px;border:1px solid rgba(45,215,191,0.1)">
+<tr><td>
+<p style="color:#2dd4bf;font-size:14px;font-weight:700;margin:0 0 8px">Que encontraras en PronoGol?</p>
+<p style="color:#c8c8e0;font-size:13px;line-height:1.5;margin:0">🤖 Pronosticos con IA basados en datos historicos<br>📊 Analisis estadistico de cada partido<br>📈 Tendencias y estadisticas actualizadas<br>⚽ Cobertura del Mundial 2026 y mas ligas</p>
+</td></tr>
+</table>
+</td></tr>
+<tr><td style="padding:0 30px 20px;text-align:center">
+<a href="https://pronogol.app" style="display:inline-block;padding:14px 40px;background:linear-gradient(135deg,#2dd4bf,#22d3ee);color:#0a0e1a;text-decoration:none;border-radius:12px;font-size:15px;font-weight:700">Ir a PronoGol</a>
+</td></tr>
+<tr><td style="padding:0 30px 30px">
+<p style="color:#5a6380;font-size:11px;line-height:1.5;margin:0;text-align:center">
+PronoGol es una herramienta de contenido informativo y analisis deportivo.<br>
+No somos una casa de apuestas. No recomendamos apostar. Prohibido para menores de 18 anos.<br><br>
+<a href="https://pronogol.app/terminos.html" style="color:#2dd4bf;text-decoration:none">Terminos</a> ·
+<a href="https://pronogol.app/privacidad.html" style="color:#2dd4bf;text-decoration:none">Privacidad</a> ·
+<a href="https://pronogol.app/habeas-data.html" style="color:#2dd4bf;text-decoration:none">Habeas Data</a>
+</p>
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>"""
+
+        msg.attach(MIMEText(text, "plain"))
+        msg.attach(MIMEText(html, "html"))
+
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+
+        server = smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15)
+        server.ehlo()
+        server.starttls(context=ctx)
+        server.ehlo()
+        server.login(SMTP_USER, SMTP_PASS)
+        server.sendmail(SMTP_USER, [to_email], msg.as_string())
+        server.quit()
+
+        print(f"WELCOME EMAIL SENT to {to_email}")
+        return True
+    except Exception as e:
+        print(f"WELCOME EMAIL FAILED for {to_email}: {e}")
+        return False
 
 # --- Models ---
 class GoogleAuth(BaseModel):
@@ -33,6 +222,27 @@ class EmailLogin(BaseModel):
     email: str
     password: str
 
+
+class RegisterRequest(BaseModel):
+    email: str
+    name: str
+    phone: str = ""
+    age_confirmed: bool = False
+    terms_accepted: bool = False
+
+
+class ProfileUpdate(BaseModel):
+    phone: str = ""
+    city: str = ""
+    birth_date: str = ""
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str = ""
+    new_password: str = ""
+
 class UserInfo(BaseModel):
     id: int
     email: str
@@ -42,6 +252,31 @@ class UserInfo(BaseModel):
     is_premium: bool = False
 
 # --- Password helpers ---
+def send_reset_email(to_email, user_name, reset_link):
+    """Send password reset email."""
+    try:
+        import smtplib
+        from email.mime.text import MIMEText
+        html_body = '<!DOCTYPE html>\n<html><head><meta charset="UTF-8"><style>\nbody{font-family:Arial,sans-serif;background:#0a0e1a;color:#e0e0e0;margin:0;padding:0}\n.container{max-width:600px;margin:auto;padding:20px}\n.header{text-align:center;padding:30px 0}\n.header h1{color:#00e5a0;font-size:28px;margin:0}\n.content{background:#12162a;border-radius:12px;padding:30px;border:1px solid #1e2740}\n.reset-btn{display:inline-block;padding:14px 32px;margin:20px 0;\n  background:linear-gradient(135deg,#00e5a0,#00c4f4);color:#0a0e1a;\n  text-decoration:none;border-radius:8px;font-weight:700;font-size:16px}\n.footer{text-align:center;padding:20px;color:#666;font-size:12px}\n</style></head><body>\n<div class="container">\n<div class="header"><h1>PronoGol</h1></div>\n<div class="content">\n<h2>Hola NAME_PLACEHOLDER,</h2>\n<p>Recibimos una solicitud para restablecer tu contraseña.</p>\n<p>Haz clic en el botón de abajo para crear una nueva contraseña. Este enlace expira en 1 hora.</p>\n<div style="text-align:center">\n<a href="LINK_PLACEHOLDER" class="reset-btn">Restablecer Contraseña</a>\n</div>\n<p style="margin-top:20px;font-size:13px;color:#999">Si no solicitaste esto, ignora este correo.</p>\n</div>\n<div class="footer">\n<p>PronoGol - Pronósticos deportivos con IA</p>\n<p><a href="https://pronogol.app" style="color:#00e5a0">pronogol.app</a></p>\n</div>\n</div></body></html>'
+        html_body = html_body.replace("NAME_PLACEHOLDER", user_name).replace("LINK_PLACEHOLDER", reset_link)
+        msg = MIMEText(html_body, 'html')
+        msg['Subject'] = 'Restablece tu contrasena - PronoGol'
+        msg['From'] = 'bienvenida@pronogol.app'
+        msg['To'] = to_email
+        import ssl
+        context = ssl.create_default_context()
+        context.check_hostname = False
+        context.verify_mode = ssl.CERT_NONE
+        with smtplib.SMTP('smtp.hostinger.com', 587, timeout=30) as server:
+            server.ehlo()
+            server.starttls(context=context)
+            server.ehlo()
+            server.login('bienvenida@pronogol.app', '@2013zX08dani@')
+            server.send_message(msg)
+    except Exception as e:
+        import logging
+        logging.error(f"Reset email send failed: {e}")
+
 def _hash_password(password: str) -> tuple:
     salt = secrets.token_hex(32)
     pwd_hash = hashlib.pbkdf2_hmac('sha256', password.encode(), salt.encode(), 100000).hex()
@@ -227,7 +462,7 @@ async def signup(data: EmailSignup):
     
     token = _create_session(uid)
     user["id"] = uid
-    return {"token": token, "user": _user_response(user)}
+    return {"ok": True, "token": token, "user": _user_response(user)}
 
 @app.post("/api/v2/auth/login")
 async def login(data: EmailLogin):
@@ -257,9 +492,58 @@ async def login(data: EmailLogin):
     _write_db("users.json", db)
     
     token = _create_session(found["id"])
-    return {"token": token, "user": _user_response(found)}
+    return {"ok": True, "token": token, "user": _user_response(found)}
 
-# --- Google Auth ---
+
+
+# --- Email-only Register (free, no password) ---
+@app.post("/api/v2/auth/register")
+async def email_register(data: RegisterRequest):
+    """Register a new user with just email (no password)."""
+    if not data.email or "@" not in data.email or "." not in data.email.split("@")[-1]:
+        raise HTTPException(status_code=400, detail="Email invalido")
+    if not data.name or len(data.name.strip()) < 2:
+        raise HTTPException(status_code=400, detail="Nombre requerido")
+    if not data.age_confirmed:
+        raise HTTPException(status_code=400, detail="Debes confirmar que eres mayor de 18 anos")
+    if not data.terms_accepted:
+        raise HTTPException(status_code=400, detail="Debes aceptar los terminos y condiciones")
+    
+    db = _read_db("users.json")
+    users = db["users"]
+    
+    for uid, u in users.items():
+        if u.get("email") == data.email.strip().lower():
+            raise HTTPException(status_code=409, detail="Este email ya esta registrado")
+    
+    uid = db["next_id"]
+    db["next_id"] = uid + 1
+    
+    user = {
+        "id": uid,
+        "email": data.email.strip().lower(),
+        "name": data.name.strip(),
+        "phone": data.phone.strip() if data.phone else "",
+        "age_confirmed": True,
+        "terms_accepted": True,
+        "auth_method": "email_only",
+        "role": "user",
+        "premium_until": None,
+        "created_at": datetime.utcnow().isoformat(),
+        "ip": "",
+    }
+    users[str(uid)] = user
+    _write_db("users.json", db)
+    
+    print("NEW REGISTRATION:", user.get("name",""), "<" + user.get("email","") + ">", "phone:", user.get("phone",""))
+    
+    # Send welcome email (synchronous)
+    try:
+        send_welcome_email(user["email"], user.get("name", ""))
+    except Exception:
+        pass
+    
+    return {"ok": True, "user_id": uid, "email": user["email"]}# --- Google Auth ---
 def _verify_google_token(credential: str, client_id: str) -> Optional[dict]:
     """Verify Google ID token and return user info."""
     try:
@@ -348,7 +632,7 @@ async def auth_google(data: GoogleAuth):
     
     # Create session
     token = _create_session(user["id"])
-    return {"token": token, "user": _user_response(user)}
+    return {"ok": True, "token": token, "user": _user_response(user)}
 
 @app.get("/api/v2/auth/me")
 async def get_me(authorization: Optional[str] = Header(None)):
@@ -388,6 +672,137 @@ async def logout(authorization: Optional[str] = Header(None)):
         del sessions_db["sessions"][token]
         _write_db("sessions.json", sessions_db)
     return {"ok": True}
+
+# --- User Profile ---
+@app.get("/api/v2/user/profile")
+async def get_user_profile(authorization: Optional[str] = Header(None)):
+    """Get authenticated user profile with optional fields."""
+    user = _require_role(authorization)
+    db = _read_db("users.json")
+    uid = str(user["id"])
+    u = db["users"].get(uid, {})
+    return {
+        "id": user["id"],
+        "email": u.get("email", ""),
+        "name": u.get("name", ""),
+        "phone": u.get("phone", ""),
+        "city": u.get("city", ""),
+        "birth_date": u.get("birth_date", ""),
+        "auth_method": u.get("auth_method", "email"),
+        "role": u.get("role", "user"),
+        "created_at": u.get("created_at", ""),
+    }
+
+@app.put("/api/v2/user/profile")
+async def update_user_profile(data: ProfileUpdate, authorization: Optional[str] = Header(None)):
+    """Update user profile fields."""
+    user = _require_role(authorization)
+    db = _read_db("users.json")
+    uid = str(user["id"])
+    if uid not in db["users"]:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    for key in ("phone", "city", "birth_date"):
+        val = getattr(data, key, "")
+        if val:
+            db["users"][uid][key] = val.strip()
+    _write_db("users.json", db)
+    return {"ok": True}
+
+# --- Forgot Password ---
+@app.post("/api/v2/auth/forgot-password")
+async def forgot_password(data: ForgotPasswordRequest):
+    """Send password reset email if user exists."""
+    db = _read_db("users.json")
+    for uid, u in db["users"].items():
+        if u.get("email", "").lower() == data.email.strip().lower():
+
+            # Generate reset token
+            reset_token = _make_token()
+            db["users"][uid]["reset_token"] = reset_token
+            db["users"][uid]["reset_expires"] = (datetime.utcnow() + timedelta(hours=1)).isoformat()
+            _write_db("users.json", db)
+            try:
+                reset_link = f"https://pronogol.app/reset-password?token={reset_token}"
+                send_reset_email(data.email, u.get("name", "Usuario"), reset_link)
+            except Exception as e:
+                import logging
+                logging.error(f"Failed to send reset email to {data.email}: {e}")
+            found = True
+
+            break
+    else:
+        found = False
+        print(f"FORGOT DEBUG: found=False (no match)")  # DEBUG
+    # Return token so frontend can show password fields immediately
+    if found:
+        return {"ok": True, "reset_token": reset_token}
+    return {"ok": True}
+
+# --- Change Password (authenticated) ---
+@app.post("/api/v2/auth/change-password")
+async def change_password(data: ChangePasswordRequest, authorization: Optional[str] = Header(None)):
+    """Change password for authenticated user."""
+    user = _require_role(authorization)
+    db = _read_db("users.json")
+    uid = str(user["id"])
+    u = db["users"].get(uid, {})
+    if not u:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    
+    # If user has existing password, verify current
+    if u.get("password_salt") and u.get("password_hash"):
+        if not data.current_password:
+            raise HTTPException(status_code=400, detail="Debes proporcionar tu contraseña actual")
+        if not _verify_password(data.current_password, u["password_salt"], u["password_hash"]):
+            raise HTTPException(status_code=401, detail="Contraseña actual incorrecta")
+    
+    if len(data.new_password) < 6:
+        raise HTTPException(status_code=400, detail="La nueva contraseña debe tener al menos 6 caracteres")
+    
+    salt, pwd_hash = _hash_password(data.new_password)
+    db["users"][uid]["password_salt"] = salt
+    db["users"][uid]["password_hash"] = pwd_hash
+    _write_db("users.json", db)
+    return {"ok": True}
+
+
+@app.post("/api/v2/auth/reset-password")
+async def reset_password(data: dict):
+    """Reset password using reset token (from email link)."""
+    token = data.get("token", "")
+    new_password = data.get("new_password", "")
+    
+    if not token or len(token) < 10:
+        raise HTTPException(status_code=400, detail="Token invalido")
+    if len(new_password) < 6:
+        raise HTTPException(status_code=400, detail="La contrasena debe tener al menos 6 caracteres")
+    
+    db = _read_db("users.json")
+    found_uid = None
+    for uid, u in db["users"].items():
+        if u.get("reset_token") == token:
+            expires = u.get("reset_expires", "")
+            if expires:
+                try:
+                    exp = datetime.fromisoformat(expires)
+                    if exp < datetime.utcnow():
+                        raise HTTPException(status_code=400, detail="El token ha expirado. Solicita un nuevo restablecimiento.")
+                except:
+                    pass
+            found_uid = uid
+            break
+    
+    if not found_uid:
+        raise HTTPException(status_code=400, detail="Token invalido o ya utilizado")
+    
+    salt, pwd_hash = _hash_password(new_password)
+    db["users"][found_uid]["password_salt"] = salt
+    db["users"][found_uid]["password_hash"] = pwd_hash
+    db["users"][found_uid].pop("reset_token", None)
+    db["users"][found_uid].pop("reset_expires", None)
+    _write_db("users.json", db)
+    
+    return {"ok": True, "message": "Contrasena restablecida exitosamente"}
 
 @app.get("/api/v2/premium/status")
 async def premium_status():

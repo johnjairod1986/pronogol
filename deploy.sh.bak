@@ -1,0 +1,39 @@
+#!/bin/bash
+# 🚀 PronoGol Deploy Script
+set -e
+
+echo "📥 Pulling latest code..."
+cd /docker/pronogol-repo
+git pull origin master
+
+echo "🔨 Updating frontend..."
+cp apps/web/index.html /docker/pronogol-web/
+cp apps/web/nginx.conf /docker/pronogol-web/
+cp apps/web/Dockerfile /docker/pronogol-web/
+
+echo "🔨 Updating backend..."
+cp backend/app/main.py /docker/pronogol/app/
+cp backend/requirements.txt /docker/pronogol/
+cp backend/Dockerfile /docker/pronogol/
+
+echo "🐳 Rebuilding frontend container..."
+cd /docker/pronogol-web
+docker build -t pronogol-web:latest .
+docker stop n8n-pronogol-web-1 2>/dev/null || true
+docker rm n8n-pronogol-web-1 2>/dev/null || true
+docker run -d --name n8n-pronogol-web-1 \
+  --label "traefik.enable=true" \
+  --label "traefik.http.routers.pronogol-web.rule=Host(\`pronogol.app\`)" \
+  --label "traefik.http.routers.pronogol-web.tls=true" \
+  --label "traefik.http.routers.pronogol-web.tls.certresolver=letsencrypt" \
+  --label "traefik.http.services.pronogol-web.loadbalancer.server.port=3000" \
+  --label "traefik.docker.network=n8n_default" \
+  --network n8n_default \
+  --restart unless-stopped \
+  pronogol-web:latest
+
+sleep 2
+
+echo "✅ Verifying..."
+curl -s -o /dev/null -w "Frontend: %{http_code}\n" https://pronogol.app/
+echo "🎉 Deploy complete!"

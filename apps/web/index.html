@@ -187,6 +187,28 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 .filter-btn{padding:6px 16px;border-radius:50px;border:1px solid var(--border2);background:transparent;color:var(--text3);font-size:12px;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
 .filter-btn:hover,.filter-btn.active{background:var(--green-bg);color:var(--green);border-color:rgba(0,229,160,.3);font-weight:600}
 
+/* ===== CALENDAR ===== */
+.calendar-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px}
+.calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.calendar-header .month-year{font-size:15px;font-weight:700}
+.calendar-nav-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s}
+.calendar-nav-btn:hover{border-color:var(--accent);color:var(--text)}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
+.calendar-day-header{font-size:10px;color:var(--text3);padding:4px 0;font-weight:600;text-transform:uppercase}
+.calendar-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:8px;cursor:pointer;transition:all .15s;position:relative;font-weight:500}
+.calendar-day:hover{background:var(--bg3)}
+.calendar-day.other-month{color:var(--text3);opacity:.3}
+.calendar-day.today{font-weight:800;color:var(--accent2)}
+.calendar-day.has-preds::after{content:'';position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.calendar-day.selected{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000;font-weight:700}
+.calendar-day.selected::after{background:#000}
+.calendar-day.today.has-preds::after{background:var(--accent2);width:5px;height:5px}
+.calendar-day.empty{pointer-events:none}
+.calendar-footer{display:flex;justify-content:center;margin-top:10px;gap:6px}
+.calendar-date-chip{padding:5px 12px;border-radius:50px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:11px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.calendar-date-chip:hover{border-color:var(--accent);color:var(--text)}
+.calendar-date-chip.active{background:var(--green-bg);color:var(--green);border-color:rgba(0,229,160,.3);font-weight:600}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:600px){
   .nav{padding:0 10px}
@@ -262,7 +284,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
     <div class="nav-item active" onclick="showView('dashboard')">Partidos</div>
     <div class="nav-item" onclick="showView('combos')">Combos</div>
     <div class="nav-item" id="adminNav" onclick="showView('admin')" style="display:none">Admin</div>
-    <div class="nav-user" onclick="showView('profile')">
+    <div class="nav-user" onclick="if(currentUser){showView('profile')}else{showLogin()}">
       <img id="navAvatar" class="nav-avatar" src="" alt="">
       <span id="navName" style="font-size:12px"></span>
       <span id="navPremium" class="nav-badge" style="display:none">PRO</span>
@@ -288,7 +310,15 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
       <div class="stat-pill"><div class="num" id="statHighConf">0</div><div class="lbl">Alta Confianza</div></div>
     </div>
 
-    <div class="date-nav" id="dateNav"></div>
+    <div class="calendar-wrap" id="calendarWrap">
+      <div class="calendar-header">
+        <button class="calendar-nav-btn" onclick="calendarMonth(-1)">◀</button>
+        <span class="month-year" id="calendarMonthYear">Julio 2026</span>
+        <button class="calendar-nav-btn" onclick="calendarMonth(1)">▶</button>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+      <div class="calendar-footer" id="calendarFooter"></div>
+    </div>
     <div class="filter-bar" id="filterBar">
       <button class="filter-btn active" data-filter="all">⚡ Todos</button>
       <button class="filter-btn" data-filter="high">🔥 Alta confianza</button>
@@ -484,10 +514,21 @@ function enterApp() {
 }
 
 function updateNav() {
-  if (!currentUser) return;
-  document.getElementById('navAvatar').src = currentUser.avatar_url || '';
-  document.getElementById('navName').textContent = currentUser.name || 'Usuario';
+  const avatar = document.getElementById('navAvatar');
+  const name = document.getElementById('navName');
   const pb = document.getElementById('navPremium');
+  if (!currentUser) {
+    avatar.style.display = 'none';
+    name.textContent = 'Iniciar Sesión';
+    name.style.color = 'var(--accent)';
+    name.style.cursor = 'pointer';
+    pb.style.display = 'none';
+    return;
+  }
+  avatar.style.display = '';
+  avatar.src = currentUser.avatar_url || '';
+  name.textContent = currentUser.name || 'Usuario';
+  name.style.color = '';
   pb.style.display = currentUser.is_premium ? 'inline' : 'none';
   document.getElementById('adminNav').style.display = currentUser.role === 'admin' ? '' : 'none';
 }
@@ -504,28 +545,135 @@ function showView(view) {
   if (view === 'dashboard') loadPredictions();
 }
 
-// ===== DATE NAV =====
-function buildDateNav() {
+// ===== CALENDAR =====
+let calendarMonthOffset = 0;
+let daysWithPreds = {}; // "2026-07-09" -> count
+
+function buildCalendar() {
   const dates = Object.keys(predictionsByDate).sort();
-  if (!dates.length) return '';
-  const nav = document.getElementById('dateNav');
-  nav.innerHTML = '';
-  const today = new Date().toISOString().slice(0,10);
-  selectedDate = selectedDate || today;
+  if (!dates.length) return;
   
+  const today = new Date();
+  const todayStr = today.toISOString().slice(0,10);
+  selectedDate = selectedDate || todayStr;
+  
+  // Build daysWithPreds lookup
+  daysWithPreds = {};
+  dates.forEach(d => { daysWithPreds[d] = predictionsByDate[d].length; });
+  
+  // Set month offset to current month if not set
+  if (calendarMonthOffset === 0) {
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+  }
+  
+  renderCalendar();
+  renderCalendarFooter(dates);
+}
+
+function renderCalendar() {
+  const today = new Date();
+  const todayStr = today.toISOString().slice(0,10);
+  
+  // Calculate month/year
+  const d = new Date();
+  d.setDate(1);
+  d.setMonth(d.getMonth() + calendarMonthOffset);
+  const year = d.getFullYear();
+  const month = d.getMonth();
+  
+  const MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  document.getElementById('calendarMonthYear').textContent = `${MONTHS[month]} ${year}`;
+  
+  // First day of month (0=Sun, 1=Mon, ...)
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  // Days in previous month for filler
+  const prevMonthDays = new Date(year, month, 0).getDate();
+  
+  const grid = document.getElementById('calendarGrid');
+  grid.innerHTML = '';
+  
+  // Day headers (Mon-Sun)
+  const DAY_HEADERS = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
+  DAY_HEADERS.forEach(h => {
+    const el = document.createElement('div');
+    el.className = 'calendar-day-header';
+    el.textContent = h;
+    grid.appendChild(el);
+  });
+  
+  // Convert Sunday=0 -> Monday=0 logic
+  // firstDay (0=Sun) -> firstDayIdx (Mon=0, Sun=6)
+  const firstDayIdx = firstDay === 0 ? 6 : firstDay - 1;
+  
+  // Fill empty cells before day 1
+  for (let i = 0; i < firstDayIdx; i++) {
+    const prevDay = prevMonthDays - firstDayIdx + i + 1;
+    const el = document.createElement('div');
+    el.className = 'calendar-day other-month';
+    el.textContent = prevDay;
+    grid.appendChild(el);
+  }
+  
+  // Fill days of month
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const isToday = dateStr === todayStr;
+    const isSelected = dateStr === selectedDate;
+    const hasPreds = dateStr in daysWithPreds;
+    
+    const el = document.createElement('div');
+    el.className = 'calendar-day';
+    if (isToday) el.classList.add('today');
+    if (isSelected) el.classList.add('selected');
+    if (hasPreds) el.classList.add('has-preds');
+    el.textContent = day;
+    el.title = hasPreds ? `${daysWithPreds[dateStr]} predicciones` : '';
+    el.onclick = () => {
+      selectedDate = dateStr;
+      renderCalendar();
+      renderPredictions();
+      // Scroll to predictions
+      document.querySelector('.filter-bar')?.scrollIntoView({behavior:'smooth',block:'start'});
+    };
+    grid.appendChild(el);
+  }
+  
+  // Remaining empty cells to fill the grid
+  const totalCells = firstDayIdx + daysInMonth;
+  const remaining = 7 - (totalCells % 7);
+  if (remaining < 7) {
+    for (let day = 1; day <= remaining; day++) {
+      const el = document.createElement('div');
+      el.className = 'calendar-day other-month';
+      el.textContent = day;
+      grid.appendChild(el);
+    }
+  }
+}
+
+function renderCalendarFooter(dates) {
+  const footer = document.getElementById('calendarFooter');
+  footer.innerHTML = '';
+  // Show date chips for available dates
   dates.forEach(d => {
     const dt = new Date(d + 'T12:00:00');
-    const isToday = d === today;
-    const dayName = DAYS[dt.getDay()];
     const dayNum = dt.getDate();
-    const isWeekend = dt.getDay() === 0 || dt.getDay() === 6;
+    const monthNum = dt.getMonth() + 1;
+    const dayName = DAYS[dt.getDay()].slice(0,3);
     const isActive = d === selectedDate;
-    const chip = document.createElement('button');
-    chip.className = `date-chip${isActive?' active':''}${isToday?' today':''}${isWeekend?' weekend':''}`;
-    chip.innerHTML = `${dayNum} <span class="day-name">${isToday?'Hoy':dayName}</span>`;
-    chip.onclick = () => { selectedDate = d; renderPredictions(); };
-    nav.appendChild(chip);
+    const chip = document.createElement('span');
+    chip.className = `calendar-date-chip${isActive?' active':''}`;
+    chip.textContent = `${dayNum} ${dayName}`;
+    chip.onclick = () => { selectedDate = d; renderCalendar(); renderPredictions(); };
+    footer.appendChild(chip);
   });
+}
+
+function calendarMonth(delta) {
+  calendarMonthOffset += delta;
+  renderCalendar();
 }
 
 // ===== LOAD PREDICTIONS =====
@@ -553,7 +701,7 @@ async function loadPredictions() {
     const genDate = data.generated_at ? new Date(data.generated_at).toLocaleString('es-CO') : 'Hoy';
     document.getElementById('predictionsDate').textContent = `🔄 ${genDate}`;
     
-    buildDateNav();
+    buildCalendar();
     renderPredictions();
   } catch(e) {
     container.innerHTML = `<div class="empty-state"><div class="icon">📭</div><p>No hay predicciones disponibles. Vuelve más tarde.</p><p style="font-size:12px;color:var(--text3);margin-top:8px">${e.message}</p></div>`;
@@ -796,12 +944,12 @@ async function init() {
     clearSession();
   }
   
-  // Show login after loading
+  // Show predictions immediately (guest mode), login is optional
   setTimeout(() => {
     document.getElementById('loadingScreen').classList.add('hidden');
     setTimeout(() => {
       document.getElementById('loadingScreen').style.display = 'none';
-      showLogin();
+      enterApp(); // Enter app as guest - no login required
     }, 600);
   }, 2800);
 }
