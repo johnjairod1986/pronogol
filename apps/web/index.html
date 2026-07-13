@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>PronoGol 🦀 - Pronósticos IA de Fútbol</title>
+<title>PronoGol ð¦ - PronÃ³sticos IA de FÃºtbol</title>
 <!-- Google Sign-In removed, using email-only login -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -362,7 +362,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 .ls-item.sel{border-color:var(--accent);background:var(--green-bg)}
 .ls-item .ls-cb{width:14px;height:14px;border-radius:3px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
 .ls-item.sel .ls-cb{background:var(--accent);border-color:var(--accent)}
-.ls-item.sel .ls-cb::after{content:'✓';color:#000;font-size:10px;font-weight:700}
+.ls-item.sel .ls-cb::after{content:'â';color:#000;font-size:10px;font-weight:700}
 
 </style>
   <script src="https://accounts.google.com/gsi/client" async defer onerror="console.error(&#39;GSI script failed to load&#39;)"></script>
@@ -378,20 +378,20 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
   </video>
   <div class="intro-vid-overlay"></div>
   <div class="ls-content">
-    <div class="loading-orb"><div class="loading-orb-inner">🦀</div></div>
+    <div class="loading-orb"><div class="loading-orb-inner">ð¦</div></div>
     <div class="loading-title">PronoGol</div>
     <div class="loading-sub">Analizando datos con IA...</div>
     <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
     <div class="loading-phase" id="loadPhase">Iniciando sistema...</div>
     <div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>
-    <div class="loading-tag">Powered by <span>Clawbot AI</span> 🦀</div>
+    <div class="loading-tag">Powered by <span>Clawbot AI</span> ð¦</div>
   </div>
 </div>
 
 <!-- ===== LOGIN SCREEN ===== -->
 <div id="loginScreen">
   <div class="login-card">
-    <div class="login-icon">⚽</div>
+    <div class="login-icon">â½</div>
     <div class="login-title">PronoGol</div>
     <div class="login-sub">Pronosticos inteligentes de futbol con IA</div>
     
@@ -406,15 +406,15 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
     </div>
     
     <!-- Email/Password login -->
-    <input id="loginEmail" class="login-input" type="email" placeholder="Correo electrónico" autocomplete="email">
+    <input id="loginEmail" class="login-input" type="email" placeholder="Correo electrÃ³nico" autocomplete="email">
     <div style="position:relative;width:100%">
-      <input id="loginPassword" class="login-input" type="password" placeholder="Contraseña" autocomplete="current-password" style="padding-right:45px">
+      <input id="loginPassword" class="login-input" type="password" placeholder="ContraseÃ±a" autocomplete="current-password" style="padding-right:45px">
       <span onclick="toggleLoginPass()" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text3);font-size:13px" id="loginPassToggle">Mostrar</span>
     </div>
-    <button onclick="handleEmailLogin()" class="login-btn" id="loginBtn">Iniciar Sesión</button>
+    <button onclick="handleEmailLogin()" class="login-btn" id="loginBtn">Iniciar SesiÃ³n</button>
     <div style="display:flex;justify-content:space-between;margin-bottom:16px">
       <span class="login-link" onclick="showRegForm()">Crear cuenta</span>
-      <span class="login-link" onclick="showForgotPassModal()">¿Olvidaste tu contraseña?</span>
+      <span class="login-link" onclick="showForgotPassModal()">Â¿Olvidaste tu contraseÃ±a?</span>
     </div>
     <div id="loginError" class="login-error"></div>
   </div>
@@ -423,7 +423,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 <!-- ===== NAV ===== -->
 <nav id="nav" class="nav">
   <div class="nav-inner">
-    <div class="nav-logo" onclick="showView('dashboard')">🦀 PronoGol<small>BETA</small></div>
+    <div class="nav-logo" onclick="showView('dashboard')">ð¦ PronoGol<small>BETA</small></div>
     <div class="nav-item active" onclick="showView('dashboard')">Partidos</div>
     <div class="nav-item" onclick="showView('combos')">Combos</div>
     <div class="nav-item" id="adminNav" onclick="showView('admin')" style="display:none">Admin</div>
@@ -442,11 +442,11 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
   <div id="viewDashboard" class="view">
     <div class="page-header" style="margin-bottom:4px">
       <div>
-        <h1>📊 Pronósticos</h1>
+        <h1>ð PronÃ³sticos</h1>
         <div class="sub"><span id="predictionsDate">Cargando...</span></div>
       </div>
       <div class="header-actions">
-        <button class="filter-btn" onclick="openComboPanel()" style="background:var(--accent);color:#000;border-color:var(--accent);font-weight:700">🎯 Combo</button>
+        <button class="filter-btn" onclick="openComboPanel()" style="background:var(--accent);color:#000;border-color:var(--accent);font-weight:700">ð¯ Combo</button>
       </div>
     </div>
 
@@ -458,12 +458,12 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
   <!-- Combos -->
   <div id="viewCombos" class="view hidden">
     <div class="page-header">
-      <h1>🎯 Arma tu Combinada</h1>
+      <h1>ð¯ Arma tu Combinada</h1>
       <div class="sub">Selecciona m&iacute;nimo 2 predicciones y calcula tu ventaja estad&iacute;stica</div>
     </div>
     <div style="margin-bottom:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px">
       <div style="font-size:12px;color:var(--text2);line-height:1.5">
-        <strong style="color:var(--orange);">⚠️ Importante:</strong> Esta herramienta calcula la <strong>ventaja estad&iacute;stica</strong> basada en nuestros modelos de IA vs las cuotas del mercado.
+        <strong style="color:var(--orange);">â ï¸ Importante:</strong> Esta herramienta calcula la <strong>ventaja estad&iacute;stica</strong> basada en nuestros modelos de IA vs las cuotas del mercado.
         PronoGol es una herramienta <strong>informativa y de entretenimiento</strong>. No recomendamos apostar.
       </div>
     </div>
@@ -472,7 +472,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
     </div>
     <div id="combosList" style="margin-bottom:12px;max-height:400px;overflow-y:auto"></div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:600;margin-bottom:8px">📋 Selecciones: <span id="comboCount">0</span></div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:8px">ð Selecciones: <span id="comboCount">0</span></div>
       <div id="comboSelections" style="font-size:12px;color:var(--text2);min-height:40px"></div>
       <div id="comboResult" class="combo-result"></div>
       <button id="comboCalcBtn" class="combo-calc-btn" onclick="calculateCombo()" disabled>Calcular Combinada</button>
@@ -481,11 +481,11 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 
   <!-- Admin -->
   <div id="viewAdmin" class="view hidden">
-    <div class="page-header"><h1>⚙️ Admin</h1></div>
+    <div class="page-header"><h1>âï¸ Admin</h1></div>
     <div id="adminAuth">
       <p style="color:var(--text2);margin-bottom:16px">Panel de administracion</p>
       <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px">
-        <div style="font-size:14px;font-weight:600;margin-bottom:8px">🔗 Codigo de Afiliado</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:8px">ð Codigo de Afiliado</div>
         <div style="display:flex;gap:8px;align-items:center">
           <input id="affCodeInput" style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px" placeholder="Tu codigo (ej: JOHN2026)">
           <button class="login-btn" style="padding:8px 16px;font-size:13px" onclick="saveAffCode()">Guardar</button>
@@ -493,7 +493,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
         <div style="margin-top:8px;font-size:12px;color:var(--text3)">Comision actual: <span id="affPctDisplay">0%</span></div>
       </div>
       <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px">
-        <div style="font-size:14px;font-weight:600;margin-bottom:8px">👥 Grupo de Trabajo</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:8px">ð¥ Grupo de Trabajo</div>
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
           <input id="groupNameInput" style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid var(--border2);background:var(--card);color:var(--text);font-size:13px" placeholder="Nombre del grupo">
           <button class="login-btn" style="padding:8px 16px;font-size:13px" onclick="createGroup()">Crear</button>
@@ -502,15 +502,15 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
       </div>
     </div>
     <div id="adminNotAuth" style="display:none;text-align:center;padding:40px 0">
-      <div style="font-size:48px;margin-bottom:16px">🔒</div>
+      <div style="font-size:48px;margin-bottom:16px">ð</div>
       <p style="color:var(--text2)">Acceso solo para administradores</p>
     </div>
   </div>
 
   <!-- Profile -->
   <div id="viewProfile" class="view hidden">
-    <div class="page-header"><h1>👤 Mi Perfil</h1></div>
-    <div id="profileContainer"><div class="empty-state"><div class="icon">🦀</div><p>Cargando...</p></div></div>
+    <div class="page-header"><h1>ð¤ Mi Perfil</h1></div>
+    <div id="profileContainer"><div class="empty-state"><div class="icon">ð¦</div><p>Cargando...</p></div></div>
   </div>
 </div>
 
@@ -545,7 +545,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
         <div class="mht" id="modalTeams">Equipo A vs Equipo B</div>
         <div class="mhsub" id="modalInfo">Liga | Fecha</div>
       </div>
-      <button class="modal-close-btn" onclick="closeModal()">✕</button>
+      <button class="modal-close-btn" onclick="closeModal()">â</button>
     </div>
     <div class="modal-body" id="modalBody"></div>
   </div>
@@ -557,16 +557,16 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
     <div class="modal-handle"></div>
     <div class="modal-header" style="border:none;padding:0;margin-bottom:16px">
       <div class="modal-header-teams">
-        <div class="mht">¿Olvidaste tu contraseña?</div>
+        <div class="mht">Â¿Olvidaste tu contraseÃ±a?</div>
         <div class="mhsub">Ingresa tu correo y te enviaremos instrucciones</div>
       </div>
     </div>
     <div class="modal-body" style="padding:0">
-      <input id="forgotEmail" class="login-input" type="email" placeholder="Tu correo electrónico" autocomplete="email">
-      <p style="font-size:12px;color:var(--text3);margin:8px 0 0;text-align:left">Te enviaremos un enlace para restablecer tu contraseña.</p>
+      <input id="forgotEmail" class="login-input" type="email" placeholder="Tu correo electrÃ³nico" autocomplete="email">
+      <p style="font-size:12px;color:var(--text3);margin:8px 0 0;text-align:left">Te enviaremos un enlace para restablecer tu contraseÃ±a.</p>
       <div id="forgotStatus" class="login-error" style="color:var(--accent);margin-bottom:8px"></div>
       <button onclick="handleForgotPassword()" class="login-btn" id="forgotBtn">Enviar instrucciones</button>
-      <span class="login-link" onclick="document.getElementById('forgotPassModal').style.display='none'" style="display:block;margin-top:12px">Volver al inicio de sesión</span>
+      <span class="login-link" onclick="document.getElementById('forgotPassModal').style.display='none'" style="display:block;margin-top:12px">Volver al inicio de sesiÃ³n</span>
     </div>
   </div>
 </div>
@@ -579,7 +579,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 // ===== CONFIG =====
 const API = window.location.port === '8000' ? '' : '';
 const GOOGLE_CLIENT_ID = '129696195917-j0pcbo1u0ptnakldpmo68timkn3a387l.apps.googleusercontent.com';
-const DAYS = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const DAYS = ['Dom','Lun','Mar','MiÃ©','Jue','Vie','SÃ¡b'];
 const MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 const COLORS = {green:'#00e5a0', green2:'rgba(0,229,160,.15)', red:'#ff4757', red2:'rgba(255,71,87,.15)', orange:'#ff9f43', blue:'#4d7cff', purple:'#a855f7'};
 let allPredictions = [];
@@ -591,11 +591,11 @@ let currentUser = null;
 // ===== LOADING =====
 const phases = [
   'Iniciando sistema...',
-  'Conectando con IA 🧠',
-  'Analizando datos de fútbol ⚽',
-  'Calculando probabilidades 📊',
-  'Generando pronósticos 🎯',
-  '¡Listo! 🔥'
+  'Conectando con IA ð§ ',
+  'Analizando datos de fÃºtbol â½',
+  'Calculando probabilidades ð',
+  'Generando pronÃ³sticos ð¯',
+  'Â¡Listo! ð¥'
 ];
 function animateLoading() {
   phases.forEach((p, i) => {
@@ -796,7 +796,7 @@ function updateNav() {
   const pb = document.getElementById('navPremium');
   if (!currentUser) {
     avatar.style.display = 'none';
-    name.textContent = 'Iniciar Sesión';
+    name.textContent = 'Iniciar SesiÃ³n';
     name.style.color = 'var(--accent)';
     name.style.cursor = 'pointer';
     pb.style.display = 'none';
@@ -841,7 +841,7 @@ async function handleEmailLogin() {
   var password = document.getElementById('loginPassword').value;
   var btn = document.getElementById('loginBtn');
   var err = document.getElementById('loginError');
-  if(!email||!password){err.textContent='Ingresa correo y contraseña';err.style.display='block';return;}
+  if(!email||!password){err.textContent='Ingresa correo y contraseÃ±a';err.style.display='block';return;}
   btn.disabled=true;btn.textContent='Iniciando...';
   try {
     var r = await fetch('/api/v2/auth/login', {
@@ -849,14 +849,14 @@ async function handleEmailLogin() {
       body:JSON.stringify({email:email.toLowerCase(),password:password})
     });
     var d = await r.json();
-    if(!r.ok){throw new Error(d.detail||'Error al iniciar sesión');}
+    if(!r.ok){throw new Error(d.detail||'Error al iniciar sesiÃ³n');}
     saveSession({token:d.token,email:d.user.email,name:d.user.name,
       avatar_url:d.user.avatar_url||'',is_premium:d.user.is_premium||false,
       role:d.user.role||'user'});
     enterApp();
   } catch(e) {
     err.textContent=e.message;err.style.display='block';
-    btn.disabled=false;btn.textContent='Iniciar Sesión';
+    btn.disabled=false;btn.textContent='Iniciar SesiÃ³n';
     setTimeout(function(){err.style.display='none';},4000);
   }
 }
@@ -879,11 +879,11 @@ async function handleForgotPassword() {
       body:JSON.stringify({email:email.toLowerCase()})
     });
     var d = await r.json();
-    status.textContent='Revisa tu correo. Te hemos enviado un enlace para restablecer tu contraseña.';status.style.display='block';status.style.color='var(--accent)';
+    status.textContent='Revisa tu correo. Te hemos enviado un enlace para restablecer tu contraseÃ±a.';status.style.display='block';status.style.color='var(--accent)';
     btn.textContent='Enviado';
     setTimeout(function(){document.getElementById('forgotPassModal').style.display='none';},3500);
   } catch(e) {
-    status.textContent='Error de conexión. Intenta de nuevo.';status.style.display='block';status.style.color='var(--red)';
+    status.textContent='Error de conexiÃ³n. Intenta de nuevo.';status.style.display='block';status.style.color='var(--red)';
   }
   btn.disabled=false;
   if(btn.textContent==='Enviado') btn.textContent='Enviar instrucciones';
@@ -898,8 +898,8 @@ async function handleRegister(e) {
   var btn = document.getElementById('regSubmitBtn');
   var status = document.getElementById('regStatus');
   if(!email||!name||!pass){status.textContent='Completa todos los campos';status.style.display='block';return;}
-  if(pass!==confirmPass){status.textContent='Las contraseñas no coinciden';status.style.display='block';return;}
-  if(pass.length<6){status.textContent='La contraseña debe tener al menos 6 caracteres';status.style.display='block';return;}
+  if(pass!==confirmPass){status.textContent='Las contraseÃ±as no coinciden';status.style.display='block';return;}
+  if(pass.length<6){status.textContent='La contraseÃ±a debe tener al menos 6 caracteres';status.style.display='block';return;}
   btn.disabled=true;btn.textContent='Registrando...';
   try {
     var r = await fetch('/api/v2/auth/signup', {
@@ -949,21 +949,21 @@ function renderProfileCard(c, isP) {
     '</div>',
     '<hr style="border:none;border-top:1px solid var(--border);margin:0 0 16px">',
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">',
-      '<div><label style="font-size:12px;color:var(--text3);display:block;margin-bottom:4px">Teléfono</label><input id="pfPhone" class="login-input" value="'+phone+'" placeholder="+57 300..." style="font-size:13px;padding:10px 12px;margin:0"></div>',
-      '<div><label style="font-size:12px;color:var(--text3);display:block;margin-bottom:4px">Ciudad</label><input id="pfCity" class="login-input" value="'+city+'" placeholder="Bogotá" style="font-size:13px;padding:10px 12px;margin:0"></div>',
+      '<div><label style="font-size:12px;color:var(--text3);display:block;margin-bottom:4px">TelÃ©fono</label><input id="pfPhone" class="login-input" value="'+phone+'" placeholder="+57 300..." style="font-size:13px;padding:10px 12px;margin:0"></div>',
+      '<div><label style="font-size:12px;color:var(--text3);display:block;margin-bottom:4px">Ciudad</label><input id="pfCity" class="login-input" value="'+city+'" placeholder="BogotÃ¡" style="font-size:13px;padding:10px 12px;margin:0"></div>',
       '<div style="grid-column:1/3"><label style="font-size:12px;color:var(--text3);display:block;margin-bottom:4px">Fecha de nacimiento</label><input id="pfBirth" class="login-input" type="date" value="'+birth+'" style="font-size:13px;padding:10px 12px;margin:0"></div>',
     '</div>',
     '<button onclick="saveProfile()" class="login-btn" id="pfSaveBtn" style="margin-bottom:12px">Guardar cambios</button>',
     '<div id="pfStatus" class="login-error" style="margin-bottom:12px;display:none"></div>',
     '<hr style="border:none;border-top:1px solid var(--border);margin:0 0 16px">',
-    '<div style="margin-bottom:12px"><label style="font-size:14px;font-weight:600;color:var(--text);display:block;margin-bottom:8px">Cambiar contraseña</label>',
-      '<input id="cpCurrent" class="login-input" type="password" placeholder="Contraseña actual" style="font-size:13px;padding:10px 12px;margin:0 0 8px">',
-      '<input id="cpNew" class="login-input" type="password" placeholder="Nueva contraseña" style="font-size:13px;padding:10px 12px;margin:0 0 8px">',
-      '<button onclick="changePassword()" class="login-btn" id="cpBtn" style="margin-bottom:8px">Cambiar contraseña</button>',
+    '<div style="margin-bottom:12px"><label style="font-size:14px;font-weight:600;color:var(--text);display:block;margin-bottom:8px">Cambiar contraseÃ±a</label>',
+      '<input id="cpCurrent" class="login-input" type="password" placeholder="ContraseÃ±a actual" style="font-size:13px;padding:10px 12px;margin:0 0 8px">',
+      '<input id="cpNew" class="login-input" type="password" placeholder="Nueva contraseÃ±a" style="font-size:13px;padding:10px 12px;margin:0 0 8px">',
+      '<button onclick="changePassword()" class="login-btn" id="cpBtn" style="margin-bottom:8px">Cambiar contraseÃ±a</button>',
       '<div id="cpStatus" class="login-error" style="display:none"></div>',
     '</div>',
     '<hr style="border:none;border-top:1px solid var(--border);margin:0 0 16px">',
-    '<button onclick="logout()" class="logout-btn" style="width:100%;padding:14px;border:1px solid rgba(255,80,80,.3);border-radius:12px;background:rgba(255,80,80,.1);color:#ff5050;font-size:15px;font-weight:600;cursor:pointer">Cerrar Sesión</button>'
+    '<button onclick="logout()" class="logout-btn" style="width:100%;padding:14px;border:1px solid rgba(255,80,80,.3);border-radius:12px;background:rgba(255,80,80,.1);color:#ff5050;font-size:15px;font-weight:600;cursor:pointer">Cerrar SesiÃ³n</button>'
   ].join('');
 }
 
@@ -1000,13 +1000,13 @@ async function changePassword() {
     });
     var d = await r.json();
     if(!r.ok){throw new Error(d.detail||'Error');}
-    st.textContent='Contraseña actualizada';st.style.display='block';st.style.color='var(--accent)';
+    st.textContent='ContraseÃ±a actualizada';st.style.display='block';st.style.color='var(--accent)';
     document.getElementById('cpCurrent').value='';
     document.getElementById('cpNew').value='';
   } catch(e) {
     st.textContent=e.message;st.style.display='block';st.style.color='var(--red)';
   }
-  btn.disabled=false;btn.textContent='Cambiar contraseña';
+  btn.disabled=false;btn.textContent='Cambiar contraseÃ±a';
   setTimeout(function(){st.style.display='none';},3000);
 }
 function buildCalendar() {
@@ -1084,7 +1084,7 @@ function updStats(){
 }
 
 // ===== LOAD PREDICTIONS =====
-async function loadPredictions() {
+async async function loadPredictions() {
   const container = document.getElementById('predictionsContainer');
   showSkeleton();
   
@@ -1126,7 +1126,7 @@ function renderPredictions() {
   const container = document.getElementById('predictionsContainer');
   const matches = filteredPreds();
   if (!matches.length) {
-    container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>No hay partidos para esta fecha</p></div>';
+    container.innerHTML = '<div class="empty-state"><div class="icon">ð­</div><p>No hay partidos para esta fecha</p></div>';
     return;
   }
   
@@ -1156,7 +1156,7 @@ function renderPredictions() {
     
     html += `<div class="league-group">
       <div class="league-header">
-        <span class="league-icon-placeholder">⚽</span>
+        <span class="league-icon-placeholder">â½</span>
         <span class="league-name">${league}</span>
         <span class="league-count">${mlist.length}</span>
       </div>`;
@@ -1238,7 +1238,7 @@ function openMatchDetail(matchId){if(!isSubscribed()&&typeof isSubscribed==='fun
       <img src="${m.away_logo||''}" width="18" height="18" style="border-radius:50%;object-fit:contain" onerror="this.style.display='none'">
       ${m.away_team||'Visita'}
     </span>`;
-  document.getElementById('modalInfo').textContent = `${m.league} | ${dateStr} · ${timeStr}`;
+  document.getElementById('modalInfo').textContent = `${m.league} | ${dateStr} Â· ${timeStr}`;
   
   // Modal body
   let body = '';
@@ -1247,10 +1247,10 @@ function openMatchDetail(matchId){if(!isSubscribed()&&typeof isSubscribed==='fun
   const bp = m.best_pick || {};
   if (bp.market) {
     body += `<div class="best-pick-banner">
-      <div class="best-pick-icon">🔥</div>
+      <div class="best-pick-icon">ð¥</div>
       <div class="best-pick-text">
         <div class="bp-title">Mejor Pick: ${bp.prediction}</div>
-        <div class="bp-sub">${bp.market.replace(/_/g,' ').toUpperCase()} · Confianza ${bp.confidence}/10</div>
+        <div class="bp-sub">${bp.market.replace(/_/g,' ').toUpperCase()} Â· Confianza ${bp.confidence}/10</div>
       </div>
       <div class="best-pick-confidence">${bp.confidence}</div>
     </div>`;
@@ -1258,7 +1258,7 @@ function openMatchDetail(matchId){if(!isSubscribed()&&typeof isSubscribed==='fun
   
   // xG
   if (m.total_xg) {
-    body += `<div style="margin-bottom:12px"><span class="xg-badge">📊 xG Total: <span>${m.total_xg.toFixed(2)}</span></span></div>`;
+    body += `<div style="margin-bottom:12px"><span class="xg-badge">ð xG Total: <span>${m.total_xg.toFixed(2)}</span></span></div>`;
   }
   
   // Markets
@@ -1274,11 +1274,11 @@ function openMatchDetail(matchId){if(!isSubscribed()&&typeof isSubscribed==='fun
         vals: [mkt.home_pct||0, mkt.draw_pct||0, mkt.away_pct||0]},
       double_chance: {name:'Doble Oportunidad', labels:['1 o X','1 o 2','X o 2'], opts:['1X','12','X2'],
         vals: [mkt['1X_pct']||0, mkt['12_pct']||0, mkt['X2_pct']||0]},
-      btts: {name:'Ambos Anotan (BTTS)', labels:['Sí','No'], opts:['Si','No'],
+      btts: {name:'Ambos Anotan (BTTS)', labels:['SÃ­','No'], opts:['Si','No'],
         vals: [mkt.yes_pct||0, mkt.no_pct||0]},
-      'over_under_1.5': {name:'Más / Menos 1.5 Goles', labels:['Over 1.5','Under 1.5'], opts:['>1.5','<1.5'],
+      'over_under_1.5': {name:'MÃ¡s / Menos 1.5 Goles', labels:['Over 1.5','Under 1.5'], opts:['>1.5','<1.5'],
         vals: [mkt.over_pct||0, mkt.under_pct||0]},
-      'over_under_2.5': {name:'Más / Menos 2.5 Goles', labels:['Over 2.5','Under 2.5'], opts:['>2.5','<2.5'],
+      'over_under_2.5': {name:'MÃ¡s / Menos 2.5 Goles', labels:['Over 2.5','Under 2.5'], opts:['>2.5','<2.5'],
         vals: [mkt.over_pct||0, mkt.under_pct||0]}
     };
     
@@ -1294,7 +1294,7 @@ function openMatchDetail(matchId){if(!isSubscribed()&&typeof isSubscribed==='fun
     body += `<div class="pred-market">
       <div class="pred-market-header">
         <span class="pred-market-name">${info.name}</span>
-        <span class="pred-market-pick ${predIdx>=0?'selected':'not-selected'}">${mkt.prediction||'—'}</span>
+        <span class="pred-market-pick ${predIdx>=0?'selected':'not-selected'}">${mkt.prediction||'â'}</span>
       </div>
       <div class="pred-bar-wrap">`;
     info.vals.forEach((v, i) => {
@@ -1582,7 +1582,7 @@ function showLiveMatches() {
     return m.status && (m.status.includes('Live') || m.status.includes('1st') || m.status.includes('2nd'));
   });
   if (!live.length) {
-    c.innerHTML = '<div class="empty-state"><div class="icon">📡</div><p>No hay partidos en vivo ahora</p></div>';
+    c.innerHTML = '<div class="empty-state"><div class="icon">ð¡</div><p>No hay partidos en vivo ahora</p></div>';
     return;
   }
   // Reuse renderPredictions for live matches
@@ -1596,7 +1596,7 @@ function showLiveMatches() {
   selectedDate = savedSelectedDate;
 }
 
-function showToast(msg, emoji = '✅') {
+function showToast(msg, emoji = 'â') {
   const t = document.getElementById('toast');
   t.innerHTML = `<span style="margin-right:8px">${emoji}</span>${msg}`;
   t.classList.add('show');
@@ -1647,7 +1647,7 @@ let comboSelections = [];
 function initComboPanel() {
   const body = document.getElementById('comboPanelBody');
   if (!allPredictions.length) {
-    body.innerHTML = '<div class="combo-empty-state"><div style="font-size:32px;margin-bottom:8px">📭</div><p>No hay predicciones disponibles</p></div>';
+    body.innerHTML = '<div class="combo-empty-state"><div style="font-size:32px;margin-bottom:8px">ð­</div><p>No hay predicciones disponibles</p></div>';
     return;
   }
   let html = '';
@@ -1764,7 +1764,7 @@ function updateComboUI() {
       const m = allPredictions.find(p => p.match_id === s.match_id);
       const name = m ? `${m.home_team} vs ${m.away_team}` : s.match_id;
       return `<div style="background:var(--bg3);padding:4px 8px;border-radius:4px;margin:2px 0;font-size:11px">
-        <span style="color:var(--accent)">✓</span> ${name}
+        <span style="color:var(--accent)">â</span> ${name}
         <span style="color:var(--text3)">| ${s.market.replace(/_/g,' ')} ${s.prediction} @ ${s.bookmaker_odd.toFixed(2)}</span>
       </div>`;
     }).join('');
@@ -1787,7 +1787,7 @@ async function calculateComboPanel() {
     const resultDiv = document.getElementById('comboPanelResult');
     const mktNames = {match_winner:'1X2',double_chance:'DC',btts:'BTTS',over_under_1.5:'O/U1.5',over_under_2.5:'O/U2.5'};
     
-    const recLabel = res.recomendacion === 'value' ? '✅ VALOR DETECTADO' : res.recomendacion === 'fair' ? '⚖️ NEUTRAL' : '❌ SIN VALOR';
+    const recLabel = res.recomendacion === 'value' ? 'â VALOR DETECTADO' : res.recomendacion === 'fair' ? 'âï¸ NEUTRAL' : 'â SIN VALOR';
     const recClass = res.recomendacion;
     
     resultDiv.innerHTML = `
@@ -1843,7 +1843,7 @@ function filterComboList() {
 }
 
 // ===== RESULTS LOADING (for badges) =====
-async function loadResults() {
+async async function loadResults() {
   const today = selectedDate || new Date().toISOString().slice(0,10);
   try {
     const res = await api(`/api/v2/predictions/results?date=${today}`);
@@ -1942,40 +1942,40 @@ loadPredictions = async function() {
           <label style="display:block;color:var(--text3);font-size:12px;margin-bottom:4px">Nombre completo *</label>
           <input id="regName" type="text" required style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:14px;outline:none;box-sizing:border-box" placeholder="Tu nombre">
           
-          <input id="regPassword" type="password" required minlength="6" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:14px;outline:none;box-sizing:border-box;margin-top:6px" placeholder="Crea una contraseña (mín. 6 caracteres)">
-          <input id="regConfirmPass" type="password" required minlength="6" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:14px;outline:none;box-sizing:border-box;margin-top:6px" placeholder="Confirmar contraseña">
-          <div style="text-align:left;font-size:11px;color:var(--text3);margin-bottom:4px">Mínimo 6 caracteres</div>
+          <input id="regPassword" type="password" required minlength="6" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:14px;outline:none;box-sizing:border-box;margin-top:6px" placeholder="Crea una contraseÃ±a (mÃ­n. 6 caracteres)">
+          <input id="regConfirmPass" type="password" required minlength="6" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:14px;outline:none;box-sizing:border-box;margin-top:6px" placeholder="Confirmar contraseÃ±a">
+          <div style="text-align:left;font-size:11px;color:var(--text3);margin-bottom:4px">MÃ­nimo 6 caracteres</div>
         </div>
         <div style="margin-bottom:14px">
           <label style="display:block;color:var(--text3);font-size:12px;margin-bottom:4px">Celular <span style="color:var(--text3);font-size:11px">(opcional)</span></label>
           <div style="display:flex;gap:8px">
             <select id="regCountryCode" style="width:110px;padding:12px 8px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:13px;outline:none">
-              <option value="+57">🇨🇴 +57</option>
-              <option value="+54">🇦🇷 +54</option>
-              <option value="+55">🇧🇷 +55</option>
-              <option value="+52">🇲🇽 +52</option>
-              <option value="+1">🇺🇸 +1</option>
-              <option value="+34">🇪🇸 +34</option>
-              <option value="+58">🇻🇪 +58</option>
-              <option value="+56">🇨🇱 +56</option>
-              <option value="+51">🇵🇪 +51</option>
-              <option value="+593">🇪🇨 +593</option>
-              <option value="+591">🇧🇴 +591</option>
-              <option value="+595">🇵🇾 +595</option>
-              <option value="+598">🇺🇾 +598</option>
-              <option value="+502">🇬🇹 +502</option>
-              <option value="+503">🇸🇻 +503</option>
-              <option value="+504">🇭🇳 +504</option>
-              <option value="+505">🇳🇮 +505</option>
-              <option value="+506">🇨🇷 +506</option>
-              <option value="+507">🇵🇦 +507</option>
-              <option value="+809">🇩🇴 +809</option>
-              <option value="+33">🇫🇷 +33</option>
-              <option value="+49">🇩🇪 +49</option>
-              <option value="+44">🇬🇧 +44</option>
-              <option value="+39">🇮🇹 +39</option>
-              <option value="+351">🇵🇹 +351</option>
-              <option value="+86">🇨🇳 +86</option>
+              <option value="+57">ð¨ð´ +57</option>
+              <option value="+54">ð¦ð· +54</option>
+              <option value="+55">ð§ð· +55</option>
+              <option value="+52">ð²ð½ +52</option>
+              <option value="+1">ðºð¸ +1</option>
+              <option value="+34">ðªð¸ +34</option>
+              <option value="+58">ð»ðª +58</option>
+              <option value="+56">ð¨ð± +56</option>
+              <option value="+51">ðµðª +51</option>
+              <option value="+593">ðªð¨ +593</option>
+              <option value="+591">ð§ð´ +591</option>
+              <option value="+595">ðµð¾ +595</option>
+              <option value="+598">ðºð¾ +598</option>
+              <option value="+502">ð¬ð¹ +502</option>
+              <option value="+503">ð¸ð» +503</option>
+              <option value="+504">ð­ð³ +504</option>
+              <option value="+505">ð³ð® +505</option>
+              <option value="+506">ð¨ð· +506</option>
+              <option value="+507">ðµð¦ +507</option>
+              <option value="+809">ð©ð´ +809</option>
+              <option value="+33">ð«ð· +33</option>
+              <option value="+49">ð©ðª +49</option>
+              <option value="+44">ð¬ð§ +44</option>
+              <option value="+39">ð®ð¹ +39</option>
+              <option value="+351">ðµð¹ +351</option>
+              <option value="+86">ð¨ð³ +86</option>
             </select>
             <input id="regPhone" type="tel" style="flex:1;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:14px;outline:none;box-sizing:border-box" placeholder="300 123 4567">
           </div>
@@ -1983,7 +1983,7 @@ loadPredictions = async function() {
         <div style="margin-bottom:10px">
           <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;font-size:13px;color:var(--text2)">
             <input id="regAge" type="checkbox" required style="margin-top:2px;accent-color:#2dd4bf">
-            <span>Declaro que soy <strong>mayor de 18 años</strong> *</span>
+            <span>Declaro que soy <strong>mayor de 18 aÃ±os</strong> *</span>
           </label>
         </div>
         <div style="margin-bottom:16px">
@@ -2003,26 +2003,26 @@ loadPredictions = async function() {
 <div style="padding:30px 15px 20px;text-align:center;border-top:1px solid rgba(255,255,255,0.05);margin-top:20px">
   <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;font-size:12px">
     <a href="/terminos.html" style="color:#5a6380;text-decoration:none" target="_blank">Terminos</a>
-    <span style="color:#3a4370">·</span>
+    <span style="color:#3a4370">Â·</span>
     <a href="/privacidad.html" style="color:#5a6380;text-decoration:none" target="_blank">Privacidad</a>
-    <span style="color:#3a4370">·</span>
+    <span style="color:#3a4370">Â·</span>
     <a href="/reembolsos.html" style="color:#5a6380;text-decoration:none" target="_blank">Reembolsos</a>
-    <span style="color:#3a4370">·</span>
+    <span style="color:#3a4370">Â·</span>
     <a href="/juego-responsable.html" style="color:#5a6380;text-decoration:none" target="_blank">Juego Responsable</a>
-    <span style="color:#3a4370">·</span>
+    <span style="color:#3a4370">Â·</span>
     <a href="/habeas-data.html" style="color:#5a6380;text-decoration:none" target="_blank">Habeas Data</a>
-    <span style="color:#3a4370">·</span>
+    <span style="color:#3a4370">Â·</span>
     <a href="/cookies.html" style="color:#5a6380;text-decoration:none" target="_blank">Cookies</a>
-    <span style="color:#3a4370">·</span>
+    <span style="color:#3a4370">Â·</span>
     <a href="/suscripcion.html" style="color:#5a6380;text-decoration:none" target="_blank">Suscripcion</a>
-    <span style="color:#3a4370">·</span>
+    <span style="color:#3a4370">Â·</span>
     <a href="/aclaracion-regulatoria.html" style="color:#5a6380;text-decoration:none" target="_blank">Aclaracion Regulatoria</a>
   </div>
   <p style="color:#3a4370;font-size:11px;margin-top:12px">PronoGol &copy; 2026. Contenido informativo. No somos casa de apuestas.</p>
 </div>
 <!-- ===== COMBO FLOATING BUTTON ===== -->
 <button id="comboFab" class="combo-fab" onclick="toggleComboPanel()" title="Arma tu Combinada">
-  🎯
+  ð¯
   <span class="badge" id="comboFabBadge" style="display:none">0</span>
 </button>
 
@@ -2030,12 +2030,12 @@ loadPredictions = async function() {
 <div id="comboOverlay" class="combo-overlay" onclick="toggleComboPanel()"></div>
 <div id="comboPanel" class="combo-panel">
   <div class="combo-panel-header">
-    <h2>🎯 Arma tu Combinada</h2>
+    <h2>ð¯ Arma tu Combinada</h2>
     <button class="combo-panel-close" onclick="toggleComboPanel()">&times;</button>
   </div>
   <div class="combo-panel-body" id="comboPanelBody">
     <div class="combo-empty-state">
-      <div style="font-size:32px;margin-bottom:8px">🎰</div>
+      <div style="font-size:32px;margin-bottom:8px">ð°</div>
       <p>Cargando predicciones...</p>
     </div>
   </div>
