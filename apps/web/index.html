@@ -354,24 +354,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 }
 
 /* ===== COMBO PANEL (v3) ===== */
-.combo-panel{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);z-index:200;transform:translateY(calc(100% - 44px));transition:transform .3s ease;border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.5)}
-.combo-panel.open{transform:translateY(0)}
-.combo-handle{width:40px;height:4px;border-radius:4px;background:var(--border2);margin:8px auto}
-.compo-panel-header{display:flex;align-items:center;justify-content:space-between;padding:4px 16px 12px;cursor:pointer}
-.compo-panel-title{font-size:14px;font-weight:700}
-.compo-panel-count{font-size:11px;color:var(--text3);background:var(--bg3);padding:2px 10px;border-radius:10px}
-.combo-body{padding:0 16px 20px;max-height:50vh;overflow-y:auto}
-.combo-sel-item{display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid var(--border);font-size:11px}
-.combo-sel-item .csi-btn{background:none;border:none;color:var(--red);font-size:14px;cursor:pointer;padding:2px}
-.combo-calc{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.combo-calc input{padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--input);color:var(--text);font-size:12px}
-.combo-calc button{padding:8px;border-radius:8px;border:none;background:var(--accent);color:#000;font-weight:700;font-size:12px;cursor:pointer;grid-column:1/3}
-.combo-result{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:8px;font-size:12px}
-.combo-result .cr-row{display:flex;justify-content:space-between;padding:3px 0}
-.combo-result .cr-row .cr-val{font-weight:700}
-.combo-result .cr-row .cr-pos{color:var(--green)}
-.combo-result .cr-row .cr-neg{color:var(--red)}
-.combo-disclaimer{font-size:9px;color:var(--text3);margin-top:8px;font-style:italic;text-align:center;border-top:1px solid var(--border);padding-top:8px}
 
 /* ===== LEAGUE SELECT MODAL ===== */
 .ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:40vh;overflow-y:auto}
@@ -1581,11 +1563,6 @@ function updateComboListSelection(matchId) {
   }
 }
 
-// Override calculateCombo for full view button
-async function calculateCombo() {
-  return calculateComboPanel();
-}
-
 // Show FAB when viewing dashboard
 function showView(view) {
   const fab = document.getElementById('comboFab');
@@ -1618,109 +1595,6 @@ function showLiveMatches() {
   document.querySelector('.date-tab.live-tab').classList.add('active');
   selectedDate = savedSelectedDate;
 }
-
-var savedSelectedDate = '';
-var comboSelections = [];
-
-function openComboPanel() {
-  var panel = document.getElementById('comboPanel');
-  panel.classList.toggle('open');
-}
-
-function closeComboPanel() {
-  document.getElementById('comboPanel').classList.remove('open');
-}
-
-function toggleComboSelect(mid, market, prediction, prob, ev) {
-  if (ev) ev.stopPropagation();
-  var idx = comboSelections.findIndex(function(s) { return s.match_id === mid && s.market === market; });
-  if (idx >= 0) {
-    comboSelections.splice(idx, 1);
-  } else {
-    comboSelections.push({match_id: mid, market: market, prediction: prediction, probability: prob, odd: 1.5});
-  }
-  updateComboPanel();
-}
-
-function updateComboPanel() {
-  var c = document.getElementById('comboCount');
-  if (c) c.textContent = comboSelections.length + ' selec.';
-  var b = document.getElementById('comboBody');
-  if (!b) return;
-  if (!comboSelections.length) {
-    b.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:12px">Haz clic en un mercado de cualquier partido para agregarlo al combo</div>';
-    return;
-  }
-  var h = '';
-  comboSelections.forEach(function(s, i) {
-    var match = allPredictions.find(function(m) { return m.match_id === s.match_id; });
-    h += '<div class="combo-sel-item">'
-      + '<button class="csi-btn" onclick="removeComboSel(' + i + ')">✕</button>'
-      + '<span style="flex:1">' + (match?s.home_team:'?') + ' vs ' + (match?s.away_team:'?') + '</span>'
-      + '<span style="font-weight:600;color:var(--accent)">' + s.prediction + '</span>'
-      + '<span style="color:var(--text3);font-size:10px">' + Math.round(s.probability) + '%</span>'
-      + '<input style="width:50px;padding:4px;border-radius:4px;border:1px solid var(--border);background:var(--input);color:var(--text);font-size:11px;text-align:center" type="number" step="0.01" min="1" value="' + s.odd + '" onchange="updateComboOdd(' + i + ',this.value)">'
-      + '</div>';
-  });
-  h += '<div class="combo-calc">'
-    + '<input id="comboStake" type="number" step="1000" min="1000" value="10000" placeholder="Monto">'
-    + '<button onclick="calculateCombo()">Calcular</button>'
-    + '</div>'
-    + '<div id="comboResult"></div>';
-  b.innerHTML = h;
-}
-
-function removeComboSel(idx) {
-  comboSelections.splice(idx, 1);
-  updateComboPanel();
-}
-
-function updateComboOdd(idx, val) {
-  comboSelections[idx].odd = parseFloat(val) || 1.5;
-}
-
-async function calculateCombo() {
-  if (!comboSelections.length) return;
-  var stake = parseFloat(document.getElementById('comboStake').value) || 10000;
-  var payload = {stake: stake, selections: comboSelections.map(function(s) {
-    return {match_id: s.match_id, market: s.market, prediction: s.prediction, bookmaker_odd: s.odd};
-  })};
-  try {
-    var r = await fetch('/api/v2/combo/calculate', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(payload)
-    });
-    var data = await r.json();
-    var resDiv = document.getElementById('comboResult');
-    var ventajaClass = data.ventaja > 0 ? 'cr-pos' : 'cr-neg';
-    var ventajaSign = data.ventaja > 0 ? '+' : '';
-    resDiv.innerHTML = '<div class="combo-result">'
-      + '<div class="cr-row"><span>Probabilidad real</span><span class="cr-val">' + data.probabilidad + '%</span></div>'
-      + '<div class="cr-row"><span>Cuota justa</span><span class="cr-val">' + data.odd_justa + '</span></div>'
-      + '<div class="cr-row"><span>Tu cuota combinada</span><span class="cr-val">' + data.odd_casa + '</span></div>'
-      + '<div class="cr-row"><span style="font-weight:700">Ventaja vs Casa</span><span class="cr-val ' + ventajaClass + '" style="font-weight:700">' + ventajaSign + data.ventaja + '%</span></div>'
-      + (data.recomendacion === 'value' ? '<div style="margin-top:8px;padding:8px;background:rgba(0,255,0,.1);border-radius:8px;text-align:center;font-size:12px;font-weight:600;color:#00ff00">✅ Valor positivo - La estadistica te favorece</div>' : '')
-      + (data.recomendacion === 'no_value' ? '<div style="margin-top:8px;padding:8px;background:rgba(255,50,50,.1);border-radius:8px;text-align:center;font-size:12px;font-weight:600;color:#ff4444">❌ Sin valor - La casa tiene ventaja</div>' : '')
-      + (data.recomendacion === 'fair' ? '<div style="margin-top:8px;padding:8px;background:rgba(255,165,0,.1);border-radius:8px;text-align:center;font-size:12px;font-weight:600;color:orange">⚠️ Valor justo - Sin ventaja clara</div>' : '')
-      + '<div class="combo-disclaimer">⚠️ ESTADÍSTICA INFORMATIVA - NO RECOMENDACIÓN DE APUESTA. Resultados pasados no garantizan futuros. Predicción con inteligencia artificial.</div>'
-      + '</div>';
-  } catch(e) {
-    document.getElementById('comboResult').innerHTML = '<div class="combo-result" style="color:var(--red);text-align:center">Error al calcular</div>';
-  }
-}
-
-// Override pickDate to show predictions view for live
-var originalPickDate = pickDate;
-pickDate = function(ds) {
-  selectedDate = ds;
-  document.getElementById('predictionsContainer').style.display = 'block';
-  document.getElementById('liveMatchesContainer').style.display = 'none';
-  renderDateNav();
-  renderPredictions();
-  var cm=document.getElementById('calModal');
-  if(cm&&cm.classList.contains('show')) renderCalMdlG();
-};
 
 function showToast(msg, emoji = '✅') {
   const t = document.getElementById('toast');
@@ -2176,16 +2050,6 @@ loadPredictions = async function() {
   </div>
 </div>
 
-  <!-- ===== COMBO PANEL ===== -->
-  <div class="combo-panel" id="comboPanel">
-    <div class="combo-handle"></div>
-    <div class="compo-panel-header" onclick="openComboPanel()">
-      <span class="compo-panel-title">🎯 Arma tu Combinada</span>
-      <span class="compo-panel-count" id="comboCount">0 selec.</span>
-    </div>
-    <div class="combo-body" id="comboBody">
-      <div style="text-align:center;padding:16px;color:var(--text3);font-size:12px">Haz clic en un mercado de cualquier partido para agregarlo al combo</div>
-    </div>
-  </div>
+  
 </body>
 </html>
