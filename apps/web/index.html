@@ -5,6 +5,9 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>PronoGol Ã°ÂÂ¦Â - PronÃÂ³sticos IA de FÃÂºtbol</title>
@@ -401,6 +404,41 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
   75% { transform: rotate(-15deg) scale(1.15); }
 }
 
+
+
+#loadingScreen.hidden {
+  opacity: 0.15 !important;
+  visibility: visible !important;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.8s ease;
+}
+#loadingScreen.hidden .ls-content {
+  transform: scale(0.6);
+  opacity: 0.6;
+}
+#loadingScreen.hidden .loading-sub,
+#loadingScreen.hidden .loading-bar-wrap,
+#loadingScreen.hidden .loading-dots,
+#loadingScreen.hidden .loading-tag {
+  display: none !important;
+}
+
+
+
+.crab-spin {
+  display: inline-block;
+  animation: crabDance 1.5s ease-in-out infinite;
+  font-size: 16px;
+  vertical-align: middle;
+}
+@keyframes crabDance {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(15deg) scale(1.15); }
+  50% { transform: rotate(0deg) scale(1); }
+  75% { transform: rotate(-15deg) scale(1.15); }
+}
+
 </style>
   <script src="https://accounts.google.com/gsi/client" async defer onerror="console.error(&#39;GSI script failed to load&#39;)"></script>
 </head>
@@ -460,7 +498,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 <!-- ===== NAV ===== -->
 <nav id="nav" class="nav">
   <div class="nav-inner">
-    <div class="nav-logo" onclick="showView('dashboard')">Ã°ÂÂ¦Â PronoGol<small>BETA</small> <span class="crab-spin" id="crabSpin">🦀</span></div>
+    <div class="nav-logo" onclick="showView('dashboard')">Ã°ÂÂ¦Â PronoGol<small>BETA</small> <span class="crab-spin" id="crabSpin">&#x1F980;</span> <span class="crab-spin" id="crabSpin">🦀</span></div>
     <div class="nav-item active" onclick="showView('dashboard')">Partidos</div>
     <div class="nav-item" onclick="showView('combos')">Combos</div>
     <div class="nav-item" id="adminNav" onclick="showView('admin')" style="display:none">Admin</div>
@@ -669,7 +707,7 @@ function clearSession() {
 function showLogin() {
   document.getElementById('loginScreen').style.display='flex';
   var ls=document.getElementById('loadingScreen');
-  if(ls){ls.classList.add('hidden');setTimeout(function(){ls.style.display='none';},600);}
+  if(ls){ls.classList.add('hidden');setTimeout(function(){ls.style.opacity='0.15';},600);}
   setTimeout(function(){
     renderGoogleBtn();
   }, 500);
@@ -801,13 +839,14 @@ function enterApp() {
   document.getElementById("loadingScreen").classList.add("js-loaded");
   document.getElementById('loadingScreen').classList.add('hidden');
   setTimeout(() => {
-    document.getElementById('loadingScreen').style.display = 'none';
+    document.getElementById('loadingScreen').style.opacity = '0.15';
+    document.getElementById('loadingScreen').style.pointerEvents = 'none';
+    document.getElementById('loadingScreen').style.zIndex = '-1';
   }, 600);
   hideLogin();
   showMain();
   updateNav();
   showView('dashboard');
-  loadPredictions();
 }
 
 function renderProfile() {
@@ -1671,7 +1710,7 @@ async function init() {
   setTimeout(function(){
     document.getElementById('loginScreen').style.display='flex';
     var ls=document.getElementById('loadingScreen');
-    if(ls){ls.classList.add('hidden');setTimeout(function(){ls.style.display='none';},600);}
+    if(ls){ls.classList.add('hidden');setTimeout(function(){ls.style.opacity='0.15';},600);}
     setTimeout(function(){renderGoogleBtn();}, 500);
   }, 4000);
 }
