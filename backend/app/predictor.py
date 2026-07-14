@@ -127,7 +127,7 @@ def generate_predictions_for_date(date_str=None):
     print(f"  Raw matches: {len(matches)}")
     
     predictions = []
-    for match in matches[:50]:
+    for match in matches:
         fixture = match.get("fixture", {})
         teams = match.get("teams", {})
         league = match.get("league", {})
