@@ -680,6 +680,11 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}b
 
 
 
+
+.mc-status{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;display:inline-block;line-height:1.4}
+.mc-status.ft{background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
+.mc-status.live{background:rgba(0,229,160,.15);color:var(--accent);border:1px solid rgba(0,229,160,.3);animation:pulse-live 1.5s ease-in-out infinite}
+@keyframes pulse-live{0%,100%{opacity:1}50%{opacity:.6}}
 </style>
 
   <script src="https://accounts.google.com/gsi/client" async defer onerror="console.error(&#39;GSI script failed to load&#39;)"></script>
@@ -1981,6 +1986,9 @@ function buildCalendar() {
   var todayStr = localY+'-'+localM+'-'+localD;
 
   selectedDate = selectedDate || todayStr;
+  if (!predictionsByDate[selectedDate] && dates.length) {
+    selectedDate = dates[0];
+  }
 
   daysWithPreds = {};
 
@@ -2293,8 +2301,15 @@ function renderPredictions() {
       const star = isFav ? '\u2605' : '\u2606';
       html += '<div class="league-group"><div class="league-header"><span class="league-icon-placeholder">\u26bd</span><span class="league-name">' + league + '</span><span class="league-count">' + mlist.length + '</span><button class="lfav' + (isFav?' f':'') + '" onclick="toggleFavLeague(\'' + league.replace(/'/g,"\\'") + '\',event)" title="Favorito">' + star + '</button></div>';
       mlist.forEach(m => {
-        const dt = new Date(m.match_time * 1000);
-        const timeStr = dt.toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit', hour12:false}).replace(':','');
+        var timeStr;
+        if (m.status == 'Match Finished') {
+          timeStr = '<span class="mc-status ft">FT</span>';
+        } else if (m.home_score !== null && m.away_score !== null) {
+          timeStr = '<span class="mc-status live">EN VIVO</span>';
+        } else {
+          var dt = new Date(m.match_time * 1000);
+          timeStr = dt.toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit', hour12:false}).replace(':','');
+        }
         const bp = m.best_pick || {};
         const bpMarket = bp.market ? {match_winner:'1X2',double_chance:'DC',btts:'BTTS','over_under_1.5':'O/U 1.5','over_under_2.5':'O/U 2.5'}[bp.market] || bp.market : '';
         const isHighConf = (bp.confidence || 0) >= 8;
@@ -3629,64 +3644,57 @@ async function loadResults() {
   // loadPredictions now also calls loadResults for result badges
 
 loadPredictions = async function() {
-
   const container = document.getElementById('predictionsContainer');
-
-  showSkeleton();
-
   
-
-  try {
-
-    const data = await api('/api/v2/predictions/today');
-
-    if (!data?.predictions) throw new Error('No data');
-
-    allPredictions = data.predictions;
-
-    
-
-    // Group by date
-
+  // Show cached data instantly if available
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem('preds_cache')||'null'); } catch(e){}
+  if (cached && Array.isArray(cached) && cached.length) {
+    allPredictions = cached;
     predictionsByDate = {};
-
     allPredictions.forEach(p => {
-
       const d = p.date;
-
       if (!predictionsByDate[d]) predictionsByDate[d] = [];
-
       predictionsByDate[d].push(p);
-
     });
-
-    
-
     buildCalendar();
     buildLeagueList();
-
-    // Fetch results for the current date
-
-    var allDates = Object.keys(predictionsByDate);
-
-    // fetchResultsForDate removed - function was not defined
-
     renderPredictions();
-
     setupPTR();
-
-    
-
-    // Also load results badges in background
-
-    setTimeout(loadResults, 500);
-
-  } catch(e) {
-
-    showEmpty();
-
+    // Fresh fetch in background will update later
+  } else {
+    showSkeleton();
   }
-
+  
+  // Fetch fresh data from API
+  try {
+    const data = await api('/api/v2/predictions/today');
+    if (!data?.predictions) throw new Error('No data');
+    allPredictions = data.predictions;
+    
+    // Cache for instant load next time
+    try {
+      localStorage.setItem('preds_cache', JSON.stringify(allPredictions));
+    } catch(e){}
+    
+    // Group by date
+    predictionsByDate = {};
+    allPredictions.forEach(p => {
+      const d = p.date;
+      if (!predictionsByDate[d]) predictionsByDate[d] = [];
+      predictionsByDate[d].push(p);
+    });
+    
+    buildCalendar();
+    buildLeagueList();
+    renderPredictions();
+    setupPTR();
+    
+    // Also load results badges in background
+    setTimeout(loadResults, 500);
+  } catch(e) {
+    if (!cached) showEmpty();
+  }
 };
 
 </script>
